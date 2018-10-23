@@ -58,6 +58,10 @@
     <beans:bean id="personService" class="com.nastinio.spring.service.PersonServiceImpl">
         <beans:property name="personDAO" ref="personDAO"></beans:property>
     </beans:bean>
+
+    <beans:bean id="setupService" class="com.nastinio.spring.service.SetupService">
+        <beans:property name="personDAO" ref="personDAO"></beans:property>
+    </beans:bean>
     <context:component-scan base-package="com.nastinio.spring" />
 
     <tx:annotation-driven transaction-manager="transactionManager"/>

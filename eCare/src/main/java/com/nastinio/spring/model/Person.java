@@ -6,51 +6,106 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.HashMap;
 
 /**
  * Entity bean with JPA annotations
  * Hibernate provides JPA implementation
- *
  */
 @Entity
-@Table(name="PERSON")
+@Table(name = "person")
 public class Person {
 
     @Id
-    @Column(name="id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public String id;
 
-    private String name;
+    private String password;
+    private String firstname;
+    private String lastname;
+    private String dob;
+    private String passport;
+    private String address;
+    private String email;
 
-    private String country;
+    //private HashMap<Integer,Contract>  listContracts;
 
-    public int getId() {
+    public Person(String id, String password) {
+        this.id = id;
+        this.password = password;
+    }
+
+    public Person(){}
+
+    @Override
+    public String toString() {
+        return "id = " + id + ", password = " + password + ", name = " + firstname + " " + lastname + ", dob = " +
+                dob + ", passport = " + passport + ", email = " + email;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getPassword() {
+        return password;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getCountry() {
-        return country;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    @Override
-    public String toString(){
-        return "id="+id+", name="+name+", country="+country;
+    public String getLastname() {
+        return lastname;
     }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public String getPassport() {
+        return passport;
+    }
+
+    public void setPassport(String passport) {
+        this.passport = passport;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }

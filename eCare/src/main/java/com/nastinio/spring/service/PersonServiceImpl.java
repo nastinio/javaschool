@@ -1,9 +1,8 @@
 package com.nastinio.spring.service;
 
-
-
 import java.util.List;
 
+import com.nastinio.spring.dao.PersonDAOImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,14 +38,15 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     @Transactional
-    public Person getPersonById(int id) {
+    public Person getPersonById(String id) {
         return this.personDAO.getPersonById(id);
     }
 
     @Override
     @Transactional
-    public void removePerson(int id) {
+    public void removePerson(String id) {
         this.personDAO.removePerson(id);
     }
+
 
 }

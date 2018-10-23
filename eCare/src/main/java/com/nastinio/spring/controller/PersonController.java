@@ -1,4 +1,4 @@
-package com.nastinio.spring;
+package com.nastinio.spring.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class PersonController {
     @RequestMapping(value= "/person/add", method = RequestMethod.POST)
     public String addPerson(@ModelAttribute("person") Person p){
 
-        if(p.getId() == 0){
+        if(p.getId() == null){
             //new person, add it
             this.personService.addPerson(p);
         }else{
@@ -51,17 +51,19 @@ public class PersonController {
     }
 
     @RequestMapping("/remove/{id}")
-    public String removePerson(@PathVariable("id") int id){
+    public String removePerson(@PathVariable("id") String id){
 
         this.personService.removePerson(id);
         return "redirect:/persons";
     }
 
     @RequestMapping("/edit/{id}")
-    public String editPerson(@PathVariable("id") int id, Model model){
+    public String editPerson(@PathVariable("id") String id, Model model){
         model.addAttribute("person", this.personService.getPersonById(id));
         model.addAttribute("listPersons", this.personService.listPersons());
         return "person";
     }
+
+
 
 }
