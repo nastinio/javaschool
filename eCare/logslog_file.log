@@ -1,0 +1,771 @@
+2018-10-29 16:20:09 INFO  ContextLoader:304 - Root WebApplicationContext: initialization started
+2018-10-29 16:20:09 INFO  AnnotationConfigWebApplicationContext:514 - Refreshing Root WebApplicationContext: startup date [Mon Oct 29 16:20:09 MSK 2018]; root of context hierarchy
+2018-10-29 16:20:09 INFO  AnnotationConfigWebApplicationContext:207 - Registering annotated classes: [class com.nastinio.spring.config.WebAppConfig]
+2018-10-29 16:20:11 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-10-29 16:20:11 WARN  AnnotationConfigWebApplicationContext:488 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'personController': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire method: public void com.nastinio.spring.controller.PersonController.setPersonService(com.nastinio.spring.service.PersonService); nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.nastinio.spring.service.PersonService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {}
+2018-10-29 16:20:12 ERROR ContextLoader:350 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'personController': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire method: public void com.nastinio.spring.controller.PersonController.setPersonService(com.nastinio.spring.service.PersonService); nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.nastinio.spring.service.PersonService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1208)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:762)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:443)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:107)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4898)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5363)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:145)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:755)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:731)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:717)
+	at org.apache.catalina.startup.HostConfig.manageApp(HostConfig.java:1730)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:300)
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:819)
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801)
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:485)
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:434)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:300)
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:819)
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801)
+	at javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1468)
+	at javax.management.remote.rmi.RMIConnectionImpl.access$300(RMIConnectionImpl.java:76)
+	at javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1309)
+	at javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1401)
+	at javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:829)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:357)
+	at sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:573)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:834)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:688)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:687)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire method: public void com.nastinio.spring.controller.PersonController.setPersonService(com.nastinio.spring.service.PersonService); nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.nastinio.spring.service.PersonService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:649)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	... 58 more
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.nastinio.spring.service.PersonService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1301)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1047)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:606)
+	... 60 more
+2018-10-29 16:22:17 INFO  ContextLoader:304 - Root WebApplicationContext: initialization started
+2018-10-29 16:22:17 INFO  XmlWebApplicationContext:514 - Refreshing Root WebApplicationContext: startup date [Mon Oct 29 16:22:17 MSK 2018]; root of context hierarchy
+2018-10-29 16:22:17 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/root-context.xml]
+2018-10-29 16:22:18 INFO  ContextLoader:344 - Root WebApplicationContext: initialization completed in 1495 ms
+2018-10-29 16:22:18 INFO  XmlWebApplicationContext:869 - Closing Root WebApplicationContext: startup date [Mon Oct 29 16:22:17 MSK 2018]; root of context hierarchy
+2018-10-29 16:27:33 INFO  ContextLoader:304 - Root WebApplicationContext: initialization started
+2018-10-29 16:27:34 INFO  XmlWebApplicationContext:514 - Refreshing Root WebApplicationContext: startup date [Mon Oct 29 16:27:34 MSK 2018]; root of context hierarchy
+2018-10-29 16:27:34 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/root-context.xml]
+2018-10-29 16:27:35 INFO  ContextLoader:344 - Root WebApplicationContext: initialization completed in 1292 ms
+2018-10-29 16:27:35 INFO  DispatcherServlet:485 - FrameworkServlet 'appServlet': initialization started
+2018-10-29 16:27:35 INFO  XmlWebApplicationContext:514 - Refreshing WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 16:27:35 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 16:27:35 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]
+2018-10-29 16:27:36 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-10-29 16:27:38 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/edit/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.editPerson(java.lang.String,org.springframework.ui.Model)
+2018-10-29 16:27:38 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/person/add],methods=[POST]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.addPerson(com.nastinio.spring.model.Person)
+2018-10-29 16:27:38 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/remove/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.removePerson(java.lang.String)
+2018-10-29 16:27:38 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/persons],methods=[GET]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.listPersons(org.springframework.ui.Model)
+2018-10-29 16:27:38 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/setup],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.main()
+2018-10-29 16:27:38 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/check-person]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.checkPerson(com.nastinio.spring.model.Person)
+2018-10-29 16:27:38 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 16:27:35 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 16:27:38 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 16:27:35 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 16:27:39 INFO  SimpleUrlHandlerMapping:314 - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2018-10-29 16:27:39 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2018-10-29 16:27:40 INFO  Version:54 - HHH000412: Hibernate Core {4.3.5.Final}
+2018-10-29 16:27:40 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2018-10-29 16:27:40 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2018-10-29 16:27:45 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2018-10-29 16:27:46 INFO  TransactionFactoryInitiator:62 - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2018-10-29 16:27:46 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-10-29 16:27:48 INFO  HibernateTransactionManager:360 - Using DataSource [org.apache.commons.dbcp.BasicDataSource@6af740f3] of Hibernate SessionFactory for HibernateTransactionManager
+2018-10-29 16:27:48 INFO  DispatcherServlet:504 - FrameworkServlet 'appServlet': initialization completed in 13466 ms
+2018-10-29 16:28:08 WARN  PageNotFound:1136 - No mapping found for HTTP request with URI [/favicon.ico] in DispatcherServlet with name 'appServlet'
+2018-10-29 16:28:45 INFO  PersonDAOImpl:55 - Person loaded successfully, Person details=id = 1, password = 1, name = Vasilii qwerty, dob = null, passport = null, email = null
+2018-10-29 17:08:02 INFO  XmlWebApplicationContext:869 - Closing WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 16:27:35 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:08:02 INFO  XmlWebApplicationContext:869 - Closing Root WebApplicationContext: startup date [Mon Oct 29 16:27:34 MSK 2018]; root of context hierarchy
+2018-10-29 17:08:34 INFO  ContextLoader:304 - Root WebApplicationContext: initialization started
+2018-10-29 17:08:34 INFO  XmlWebApplicationContext:514 - Refreshing Root WebApplicationContext: startup date [Mon Oct 29 17:08:34 MSK 2018]; root of context hierarchy
+2018-10-29 17:08:34 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/root-context.xml]
+2018-10-29 17:08:35 INFO  ContextLoader:344 - Root WebApplicationContext: initialization completed in 1155 ms
+2018-10-29 17:08:35 INFO  DispatcherServlet:485 - FrameworkServlet 'appServlet': initialization started
+2018-10-29 17:08:35 INFO  XmlWebApplicationContext:514 - Refreshing WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:08:35 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:08:35 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]
+2018-10-29 17:08:37 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-10-29 17:08:38 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/person/add],methods=[POST]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.addPerson(com.nastinio.spring.model.Person)
+2018-10-29 17:08:38 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/persons],methods=[GET]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.listPersons(org.springframework.ui.Model)
+2018-10-29 17:08:38 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/remove/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.removePerson(java.lang.String)
+2018-10-29 17:08:38 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/edit/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.editPerson(java.lang.String,org.springframework.ui.Model)
+2018-10-29 17:08:38 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/setup],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.main()
+2018-10-29 17:08:38 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/check-person]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.checkPerson(com.nastinio.spring.model.Person)
+2018-10-29 17:08:38 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:08:35 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:08:38 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:08:35 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:08:38 INFO  SimpleUrlHandlerMapping:314 - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2018-10-29 17:08:39 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2018-10-29 17:08:39 INFO  Version:54 - HHH000412: Hibernate Core {4.3.5.Final}
+2018-10-29 17:08:39 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2018-10-29 17:08:39 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2018-10-29 17:08:43 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2018-10-29 17:08:43 INFO  TransactionFactoryInitiator:62 - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2018-10-29 17:08:43 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-10-29 17:08:45 WARN  XmlWebApplicationContext:488 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'personService' defined in ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]: Initialization of bean failed; nested exception is org.springframework.beans.ConversionNotSupportedException: Failed to convert property value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+2018-10-29 17:08:45 ERROR DispatcherServlet:498 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'personService' defined in ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]: Initialization of bean failed; nested exception is org.springframework.beans.ConversionNotSupportedException: Failed to convert property value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:547)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:762)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:664)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:630)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:678)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:549)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:490)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:158)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1188)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1132)
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:1021)
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:5085)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5397)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:145)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:755)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:731)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:717)
+	at org.apache.catalina.startup.HostConfig.manageApp(HostConfig.java:1730)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:300)
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:819)
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801)
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:485)
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:434)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:300)
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:819)
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801)
+	at javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1468)
+	at javax.management.remote.rmi.RMIConnectionImpl.access$300(RMIConnectionImpl.java:76)
+	at javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1309)
+	at javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1401)
+	at javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:829)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:357)
+	at sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:573)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:834)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:688)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:687)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.springframework.beans.ConversionNotSupportedException: Failed to convert property value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+	at org.springframework.beans.BeanWrapperImpl.convertIfNecessary(BeanWrapperImpl.java:476)
+	at org.springframework.beans.BeanWrapperImpl.convertForProperty(BeanWrapperImpl.java:512)
+	at org.springframework.beans.BeanWrapperImpl.convertForProperty(BeanWrapperImpl.java:506)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.convertForProperty(AbstractAutowireCapableBeanFactory.java:1521)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1480)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1220)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	... 63 more
+Caused by: java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:287)
+	at org.springframework.beans.BeanWrapperImpl.convertIfNecessary(BeanWrapperImpl.java:461)
+	... 69 more
+2018-10-29 17:08:52 INFO  DispatcherServlet:485 - FrameworkServlet 'appServlet': initialization started
+2018-10-29 17:08:52 INFO  XmlWebApplicationContext:514 - Refreshing WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:08:52 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:08:52 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]
+2018-10-29 17:08:52 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-10-29 17:08:52 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/person/add],methods=[POST]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.addPerson(com.nastinio.spring.model.Person)
+2018-10-29 17:08:52 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/persons],methods=[GET]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.listPersons(org.springframework.ui.Model)
+2018-10-29 17:08:52 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/remove/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.removePerson(java.lang.String)
+2018-10-29 17:08:52 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/edit/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.editPerson(java.lang.String,org.springframework.ui.Model)
+2018-10-29 17:08:52 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/setup],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.main()
+2018-10-29 17:08:52 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/check-person]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.checkPerson(com.nastinio.spring.model.Person)
+2018-10-29 17:08:52 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:08:52 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:08:52 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:08:52 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:08:52 INFO  SimpleUrlHandlerMapping:314 - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2018-10-29 17:08:57 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2018-10-29 17:08:57 INFO  TransactionFactoryInitiator:62 - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2018-10-29 17:08:57 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-10-29 17:08:57 WARN  XmlWebApplicationContext:488 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'personService' defined in ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]: Initialization of bean failed; nested exception is org.springframework.beans.ConversionNotSupportedException: Failed to convert property value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+2018-10-29 17:08:57 ERROR DispatcherServlet:498 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'personService' defined in ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]: Initialization of bean failed; nested exception is org.springframework.beans.ConversionNotSupportedException: Failed to convert property value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:547)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:762)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:664)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:630)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:678)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:549)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:490)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:158)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1188)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1132)
+	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:811)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:135)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:94)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:80)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:620)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:502)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1152)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:684)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1539)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1495)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.springframework.beans.ConversionNotSupportedException: Failed to convert property value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+	at org.springframework.beans.BeanWrapperImpl.convertIfNecessary(BeanWrapperImpl.java:476)
+	at org.springframework.beans.BeanWrapperImpl.convertForProperty(BeanWrapperImpl.java:512)
+	at org.springframework.beans.BeanWrapperImpl.convertForProperty(BeanWrapperImpl.java:506)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.convertForProperty(AbstractAutowireCapableBeanFactory.java:1521)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1480)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1220)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	... 34 more
+Caused by: java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:287)
+	at org.springframework.beans.BeanWrapperImpl.convertIfNecessary(BeanWrapperImpl.java:461)
+	... 40 more
+2018-10-29 17:08:57 INFO  DispatcherServlet:485 - FrameworkServlet 'appServlet': initialization started
+2018-10-29 17:08:57 INFO  XmlWebApplicationContext:514 - Refreshing WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:08:57 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:08:57 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]
+2018-10-29 17:08:58 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-10-29 17:08:58 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/person/add],methods=[POST]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.addPerson(com.nastinio.spring.model.Person)
+2018-10-29 17:08:58 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/persons],methods=[GET]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.listPersons(org.springframework.ui.Model)
+2018-10-29 17:08:58 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/remove/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.removePerson(java.lang.String)
+2018-10-29 17:08:58 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/edit/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.editPerson(java.lang.String,org.springframework.ui.Model)
+2018-10-29 17:08:58 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/setup],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.main()
+2018-10-29 17:08:58 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/check-person]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.checkPerson(com.nastinio.spring.model.Person)
+2018-10-29 17:08:58 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:08:57 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:08:58 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:08:57 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:08:58 INFO  SimpleUrlHandlerMapping:314 - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2018-10-29 17:09:01 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2018-10-29 17:09:01 INFO  TransactionFactoryInitiator:62 - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2018-10-29 17:09:01 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-10-29 17:09:01 WARN  XmlWebApplicationContext:488 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'personService' defined in ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]: Initialization of bean failed; nested exception is org.springframework.beans.ConversionNotSupportedException: Failed to convert property value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+2018-10-29 17:09:01 ERROR DispatcherServlet:498 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'personService' defined in ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]: Initialization of bean failed; nested exception is org.springframework.beans.ConversionNotSupportedException: Failed to convert property value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:547)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:762)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:664)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:630)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:678)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:549)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:490)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:158)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1188)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1132)
+	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:811)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:135)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:94)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:80)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:620)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:502)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1152)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:684)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1539)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1495)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.springframework.beans.ConversionNotSupportedException: Failed to convert property value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+	at org.springframework.beans.BeanWrapperImpl.convertIfNecessary(BeanWrapperImpl.java:476)
+	at org.springframework.beans.BeanWrapperImpl.convertForProperty(BeanWrapperImpl.java:512)
+	at org.springframework.beans.BeanWrapperImpl.convertForProperty(BeanWrapperImpl.java:506)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.convertForProperty(AbstractAutowireCapableBeanFactory.java:1521)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1480)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1220)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	... 34 more
+Caused by: java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:287)
+	at org.springframework.beans.BeanWrapperImpl.convertIfNecessary(BeanWrapperImpl.java:461)
+	... 40 more
+2018-10-29 17:17:04 INFO  XmlWebApplicationContext:869 - Closing Root WebApplicationContext: startup date [Mon Oct 29 17:08:34 MSK 2018]; root of context hierarchy
+2018-10-29 17:17:22 INFO  ContextLoader:304 - Root WebApplicationContext: initialization started
+2018-10-29 17:17:23 INFO  XmlWebApplicationContext:514 - Refreshing Root WebApplicationContext: startup date [Mon Oct 29 17:17:23 MSK 2018]; root of context hierarchy
+2018-10-29 17:17:23 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/root-context.xml]
+2018-10-29 17:17:23 INFO  ContextLoader:344 - Root WebApplicationContext: initialization completed in 1244 ms
+2018-10-29 17:17:24 INFO  DispatcherServlet:485 - FrameworkServlet 'appServlet': initialization started
+2018-10-29 17:17:24 INFO  XmlWebApplicationContext:514 - Refreshing WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:17:24 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:17:24 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]
+2018-10-29 17:17:25 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-10-29 17:17:27 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/persons],methods=[GET]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.listPersons(org.springframework.ui.Model)
+2018-10-29 17:17:27 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/edit/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.editPerson(java.lang.String,org.springframework.ui.Model)
+2018-10-29 17:17:27 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/remove/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.removePerson(java.lang.String)
+2018-10-29 17:17:27 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/person/add],methods=[POST]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.addPerson(com.nastinio.spring.model.Person)
+2018-10-29 17:17:27 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/setup],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.main()
+2018-10-29 17:17:27 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/check-person]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.checkPerson(com.nastinio.spring.model.Person)
+2018-10-29 17:17:27 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:17:24 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:17:28 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:17:24 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:17:28 INFO  SimpleUrlHandlerMapping:314 - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2018-10-29 17:17:29 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2018-10-29 17:17:29 INFO  Version:54 - HHH000412: Hibernate Core {4.3.5.Final}
+2018-10-29 17:17:29 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2018-10-29 17:17:29 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2018-10-29 17:17:31 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2018-10-29 17:17:32 INFO  TransactionFactoryInitiator:62 - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2018-10-29 17:17:32 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-10-29 17:17:33 WARN  XmlWebApplicationContext:488 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'personService' defined in ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]: Initialization of bean failed; nested exception is org.springframework.beans.ConversionNotSupportedException: Failed to convert property value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+2018-10-29 17:17:34 ERROR DispatcherServlet:498 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'personService' defined in ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]: Initialization of bean failed; nested exception is org.springframework.beans.ConversionNotSupportedException: Failed to convert property value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:547)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:762)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:664)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:630)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:678)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:549)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:490)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:158)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1188)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1132)
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:1021)
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:5085)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5397)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:145)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:755)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:731)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:717)
+	at org.apache.catalina.startup.HostConfig.manageApp(HostConfig.java:1730)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:300)
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:819)
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801)
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:485)
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:434)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:300)
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:819)
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801)
+	at javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1468)
+	at javax.management.remote.rmi.RMIConnectionImpl.access$300(RMIConnectionImpl.java:76)
+	at javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1309)
+	at javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1401)
+	at javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:829)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:357)
+	at sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:573)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:834)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:688)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:687)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.springframework.beans.ConversionNotSupportedException: Failed to convert property value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+	at org.springframework.beans.BeanWrapperImpl.convertIfNecessary(BeanWrapperImpl.java:476)
+	at org.springframework.beans.BeanWrapperImpl.convertForProperty(BeanWrapperImpl.java:512)
+	at org.springframework.beans.BeanWrapperImpl.convertForProperty(BeanWrapperImpl.java:506)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.convertForProperty(AbstractAutowireCapableBeanFactory.java:1521)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1480)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1220)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	... 63 more
+Caused by: java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:287)
+	at org.springframework.beans.BeanWrapperImpl.convertIfNecessary(BeanWrapperImpl.java:461)
+	... 69 more
+2018-10-29 17:17:40 INFO  DispatcherServlet:485 - FrameworkServlet 'appServlet': initialization started
+2018-10-29 17:17:40 INFO  XmlWebApplicationContext:514 - Refreshing WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:17:40 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:17:40 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]
+2018-10-29 17:17:41 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-10-29 17:17:41 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/persons],methods=[GET]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.listPersons(org.springframework.ui.Model)
+2018-10-29 17:17:41 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/edit/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.editPerson(java.lang.String,org.springframework.ui.Model)
+2018-10-29 17:17:41 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/remove/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.removePerson(java.lang.String)
+2018-10-29 17:17:41 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/person/add],methods=[POST]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.addPerson(com.nastinio.spring.model.Person)
+2018-10-29 17:17:41 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/setup],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.main()
+2018-10-29 17:17:41 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/check-person]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.checkPerson(com.nastinio.spring.model.Person)
+2018-10-29 17:17:41 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:17:40 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:17:41 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:17:40 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:17:41 INFO  SimpleUrlHandlerMapping:314 - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2018-10-29 17:17:44 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2018-10-29 17:17:44 INFO  TransactionFactoryInitiator:62 - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2018-10-29 17:17:44 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-10-29 17:17:44 WARN  XmlWebApplicationContext:488 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'personService' defined in ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]: Initialization of bean failed; nested exception is org.springframework.beans.ConversionNotSupportedException: Failed to convert property value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+2018-10-29 17:17:44 ERROR DispatcherServlet:498 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'personService' defined in ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]: Initialization of bean failed; nested exception is org.springframework.beans.ConversionNotSupportedException: Failed to convert property value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:547)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:762)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:664)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:630)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:678)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:549)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:490)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:158)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1188)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1132)
+	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:811)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:135)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:94)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:80)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:620)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:502)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1152)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:684)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1539)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1495)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.springframework.beans.ConversionNotSupportedException: Failed to convert property value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+	at org.springframework.beans.BeanWrapperImpl.convertIfNecessary(BeanWrapperImpl.java:476)
+	at org.springframework.beans.BeanWrapperImpl.convertForProperty(BeanWrapperImpl.java:512)
+	at org.springframework.beans.BeanWrapperImpl.convertForProperty(BeanWrapperImpl.java:506)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.convertForProperty(AbstractAutowireCapableBeanFactory.java:1521)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1480)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1220)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	... 34 more
+Caused by: java.lang.IllegalStateException: Cannot convert value of type [com.nastinio.spring.dao.PersonDAOImpl] to required type [com.nastinio.spring.dao.PersonDAOInterface] for property 'personDAO': no matching editors or conversion strategy found
+	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:287)
+	at org.springframework.beans.BeanWrapperImpl.convertIfNecessary(BeanWrapperImpl.java:461)
+	... 40 more
+2018-10-29 17:46:41 INFO  XmlWebApplicationContext:869 - Closing Root WebApplicationContext: startup date [Mon Oct 29 17:17:23 MSK 2018]; root of context hierarchy
+2018-10-29 17:47:10 INFO  ContextLoader:304 - Root WebApplicationContext: initialization started
+2018-10-29 17:47:10 INFO  XmlWebApplicationContext:514 - Refreshing Root WebApplicationContext: startup date [Mon Oct 29 17:47:10 MSK 2018]; root of context hierarchy
+2018-10-29 17:47:10 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/root-context.xml]
+2018-10-29 17:47:11 INFO  ContextLoader:344 - Root WebApplicationContext: initialization completed in 1303 ms
+2018-10-29 17:47:11 INFO  DispatcherServlet:485 - FrameworkServlet 'appServlet': initialization started
+2018-10-29 17:47:11 INFO  XmlWebApplicationContext:514 - Refreshing WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:47:11 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:47:11 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]
+2018-10-29 17:47:13 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-10-29 17:47:14 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/person/add],methods=[POST]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.addPerson(com.nastinio.spring.model.Person)
+2018-10-29 17:47:14 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/persons],methods=[GET]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.listPersons(org.springframework.ui.Model)
+2018-10-29 17:47:14 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/edit/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.editPerson(java.lang.String,org.springframework.ui.Model)
+2018-10-29 17:47:14 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/remove/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.removePerson(java.lang.String)
+2018-10-29 17:47:14 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/setup],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.main()
+2018-10-29 17:47:14 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/check-person]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.checkPerson(com.nastinio.spring.model.Person)
+2018-10-29 17:47:15 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:47:11 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:47:15 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:47:11 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 17:47:15 INFO  SimpleUrlHandlerMapping:314 - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2018-10-29 17:47:16 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2018-10-29 17:47:16 INFO  Version:54 - HHH000412: Hibernate Core {4.3.5.Final}
+2018-10-29 17:47:16 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2018-10-29 17:47:16 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2018-10-29 17:47:18 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2018-10-29 17:47:19 INFO  TransactionFactoryInitiator:62 - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2018-10-29 17:47:19 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-10-29 17:47:22 INFO  HibernateTransactionManager:360 - Using DataSource [org.apache.commons.dbcp.BasicDataSource@79502610] of Hibernate SessionFactory for HibernateTransactionManager
+2018-10-29 17:47:22 INFO  DispatcherServlet:504 - FrameworkServlet 'appServlet': initialization completed in 10419 ms
+2018-10-29 19:39:15 INFO  XmlWebApplicationContext:869 - Closing WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 17:47:11 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 19:39:46 INFO  XmlWebApplicationContext:869 - Closing Root WebApplicationContext: startup date [Mon Oct 29 17:47:10 MSK 2018]; root of context hierarchy
+2018-10-29 22:18:23 INFO  ContextLoader:304 - Root WebApplicationContext: initialization started
+2018-10-29 22:18:23 INFO  XmlWebApplicationContext:514 - Refreshing Root WebApplicationContext: startup date [Mon Oct 29 22:18:23 MSK 2018]; root of context hierarchy
+2018-10-29 22:18:24 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/root-context.xml]
+2018-10-29 22:18:25 INFO  ContextLoader:344 - Root WebApplicationContext: initialization completed in 1910 ms
+2018-10-29 22:18:25 INFO  DispatcherServlet:485 - FrameworkServlet 'appServlet': initialization started
+2018-10-29 22:18:25 INFO  XmlWebApplicationContext:514 - Refreshing WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 22:18:25 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 22:18:25 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]
+2018-10-29 22:18:27 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-10-29 22:18:29 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/edit/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.editPerson(java.lang.String,org.springframework.ui.Model)
+2018-10-29 22:18:29 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/persons],methods=[GET]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.listPersons(org.springframework.ui.Model)
+2018-10-29 22:18:29 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/person/add],methods=[POST]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.addPerson(com.nastinio.spring.model.Person)
+2018-10-29 22:18:29 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/remove/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.removePerson(java.lang.String)
+2018-10-29 22:18:29 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/setup],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.main()
+2018-10-29 22:18:29 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/check-person]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.checkPerson(com.nastinio.spring.model.Person)
+2018-10-29 22:18:29 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 22:18:25 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 22:18:29 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 22:18:25 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 22:18:29 INFO  SimpleUrlHandlerMapping:314 - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2018-10-29 22:18:31 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2018-10-29 22:18:31 INFO  Version:54 - HHH000412: Hibernate Core {4.3.5.Final}
+2018-10-29 22:18:31 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2018-10-29 22:18:31 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2018-10-29 22:18:36 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2018-10-29 22:18:37 INFO  TransactionFactoryInitiator:62 - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2018-10-29 22:18:37 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-10-29 22:18:40 WARN  XmlWebApplicationContext:488 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'personController': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire method: public void com.nastinio.spring.controller.PersonController.setPersonService(com.nastinio.spring.service.PersonService); nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.nastinio.spring.service.PersonService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {}
+2018-10-29 22:18:40 ERROR DispatcherServlet:498 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'personController': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire method: public void com.nastinio.spring.controller.PersonController.setPersonService(com.nastinio.spring.service.PersonService); nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.nastinio.spring.service.PersonService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1208)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:762)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:664)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:630)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:678)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:549)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:490)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:158)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1188)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1132)
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:1021)
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:5085)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5397)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:145)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:755)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:731)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:717)
+	at org.apache.catalina.startup.HostConfig.manageApp(HostConfig.java:1730)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:300)
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:819)
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801)
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:485)
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:434)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:300)
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:819)
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801)
+	at javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1468)
+	at javax.management.remote.rmi.RMIConnectionImpl.access$300(RMIConnectionImpl.java:76)
+	at javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1309)
+	at javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1401)
+	at javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:829)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:357)
+	at sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:573)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:834)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:688)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:687)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire method: public void com.nastinio.spring.controller.PersonController.setPersonService(com.nastinio.spring.service.PersonService); nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.nastinio.spring.service.PersonService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:649)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	... 65 more
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.nastinio.spring.service.PersonService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1301)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1047)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:606)
+	... 67 more
+2018-10-29 22:18:50 INFO  DispatcherServlet:485 - FrameworkServlet 'appServlet': initialization started
+2018-10-29 22:18:50 INFO  XmlWebApplicationContext:514 - Refreshing WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 22:18:50 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 22:18:50 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]
+2018-10-29 22:18:51 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-10-29 22:18:51 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/edit/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.editPerson(java.lang.String,org.springframework.ui.Model)
+2018-10-29 22:18:51 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/persons],methods=[GET]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.listPersons(org.springframework.ui.Model)
+2018-10-29 22:18:51 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/person/add],methods=[POST]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.addPerson(com.nastinio.spring.model.Person)
+2018-10-29 22:18:51 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/remove/{id}]}" onto public java.lang.String com.nastinio.spring.controller.PersonController.removePerson(java.lang.String)
+2018-10-29 22:18:51 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/setup],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.main()
+2018-10-29 22:18:51 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/check-person]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.checkPerson(com.nastinio.spring.model.Person)
+2018-10-29 22:18:51 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 22:18:50 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 22:18:51 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 22:18:50 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 22:18:51 INFO  SimpleUrlHandlerMapping:314 - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2018-10-29 22:18:52 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2018-10-29 22:18:53 INFO  TransactionFactoryInitiator:62 - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2018-10-29 22:18:53 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-10-29 22:18:53 WARN  XmlWebApplicationContext:488 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'personController': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire method: public void com.nastinio.spring.controller.PersonController.setPersonService(com.nastinio.spring.service.PersonService); nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.nastinio.spring.service.PersonService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {}
+2018-10-29 22:18:53 ERROR DispatcherServlet:498 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'personController': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire method: public void com.nastinio.spring.controller.PersonController.setPersonService(com.nastinio.spring.service.PersonService); nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.nastinio.spring.service.PersonService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1208)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:762)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:664)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:630)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:678)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:549)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:490)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:158)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1188)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1132)
+	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:811)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:135)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:94)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:80)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:620)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:502)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1152)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:684)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1539)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1495)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire method: public void com.nastinio.spring.controller.PersonController.setPersonService(com.nastinio.spring.service.PersonService); nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.nastinio.spring.service.PersonService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:649)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	... 36 more
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.nastinio.spring.service.PersonService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1301)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1047)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:606)
+	... 38 more
+2018-10-29 22:21:05 INFO  XmlWebApplicationContext:869 - Closing Root WebApplicationContext: startup date [Mon Oct 29 22:18:23 MSK 2018]; root of context hierarchy
+2018-10-29 22:21:24 INFO  ContextLoader:304 - Root WebApplicationContext: initialization started
+2018-10-29 22:21:24 INFO  XmlWebApplicationContext:514 - Refreshing Root WebApplicationContext: startup date [Mon Oct 29 22:21:24 MSK 2018]; root of context hierarchy
+2018-10-29 22:21:24 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/root-context.xml]
+2018-10-29 22:21:25 INFO  ContextLoader:344 - Root WebApplicationContext: initialization completed in 1163 ms
+2018-10-29 22:21:25 INFO  DispatcherServlet:485 - FrameworkServlet 'appServlet': initialization started
+2018-10-29 22:21:25 INFO  XmlWebApplicationContext:514 - Refreshing WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 22:21:25 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 22:21:25 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]
+2018-10-29 22:21:27 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-10-29 22:21:28 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/setup],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.main()
+2018-10-29 22:21:28 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/check-person]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.checkPerson(com.nastinio.spring.model.Person)
+2018-10-29 22:21:28 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 22:21:25 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 22:21:29 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 22:21:25 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 22:21:29 INFO  SimpleUrlHandlerMapping:314 - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2018-10-29 22:21:30 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2018-10-29 22:21:30 INFO  Version:54 - HHH000412: Hibernate Core {4.3.5.Final}
+2018-10-29 22:21:30 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2018-10-29 22:21:30 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2018-10-29 22:21:32 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2018-10-29 22:21:32 INFO  TransactionFactoryInitiator:62 - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2018-10-29 22:21:32 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-10-29 22:21:34 INFO  HibernateTransactionManager:360 - Using DataSource [org.apache.commons.dbcp.BasicDataSource@10413fa3] of Hibernate SessionFactory for HibernateTransactionManager
+2018-10-29 22:21:34 INFO  DispatcherServlet:504 - FrameworkServlet 'appServlet': initialization completed in 8869 ms
+2018-10-29 22:21:54 INFO  PersonDAO:47 - Person loaded successfully, Person details=id = 1, password = 1, name = Vasilii qwerty, dob = null, passport = null, email = null
+2018-10-29 22:33:18 INFO  XmlWebApplicationContext:869 - Closing WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 22:21:25 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 22:33:18 INFO  XmlWebApplicationContext:869 - Closing Root WebApplicationContext: startup date [Mon Oct 29 22:21:24 MSK 2018]; root of context hierarchy
+2018-10-29 22:44:24 INFO  ContextLoader:304 - Root WebApplicationContext: initialization started
+2018-10-29 22:44:24 INFO  XmlWebApplicationContext:514 - Refreshing Root WebApplicationContext: startup date [Mon Oct 29 22:44:24 MSK 2018]; root of context hierarchy
+2018-10-29 22:44:24 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/root-context.xml]
+2018-10-29 22:44:25 INFO  ContextLoader:344 - Root WebApplicationContext: initialization completed in 1174 ms
+2018-10-29 22:44:25 INFO  DispatcherServlet:485 - FrameworkServlet 'appServlet': initialization started
+2018-10-29 22:44:25 INFO  XmlWebApplicationContext:514 - Refreshing WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 22:44:25 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 22:44:25 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]
+2018-10-29 22:44:27 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-10-29 22:44:28 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/setup],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.main()
+2018-10-29 22:44:28 INFO  RequestMappingHandlerMapping:218 - Mapped "{[/check-person]}" onto public org.springframework.web.servlet.ModelAndView com.nastinio.spring.controller.SetupController.checkPerson(com.nastinio.spring.model.Person)
+2018-10-29 22:44:28 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 22:44:25 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 22:44:29 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Mon Oct 29 22:44:25 MSK 2018]; parent: Root WebApplicationContext
+2018-10-29 22:44:29 INFO  SimpleUrlHandlerMapping:314 - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2018-10-29 22:44:30 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2018-10-29 22:44:30 INFO  Version:54 - HHH000412: Hibernate Core {4.3.5.Final}
+2018-10-29 22:44:30 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2018-10-29 22:44:30 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2018-10-29 22:44:32 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2018-10-29 22:44:32 INFO  TransactionFactoryInitiator:62 - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2018-10-29 22:44:32 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-10-29 22:44:34 INFO  HibernateTransactionManager:360 - Using DataSource [org.apache.commons.dbcp.BasicDataSource@6d92fd5f] of Hibernate SessionFactory for HibernateTransactionManager
+2018-10-29 22:44:34 INFO  DispatcherServlet:504 - FrameworkServlet 'appServlet': initialization completed in 8920 ms
+2018-10-29 22:44:49 INFO  PersonDAO:47 - Person loaded successfully, Person details=id = 1, password = 1, name = Vasilii qwerty, dob = null, passport = null, email = null

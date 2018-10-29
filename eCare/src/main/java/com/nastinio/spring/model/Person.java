@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import java.util.HashMap;
 
 /**
- * Entity bean with JPA annotations
+ * EntityDAO bean with JPA annotations
  * Hibernate provides JPA implementation
  */
 @Entity

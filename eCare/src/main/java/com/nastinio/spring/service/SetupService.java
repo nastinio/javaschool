@@ -1,7 +1,6 @@
 package com.nastinio.spring.service;
 
 import com.nastinio.spring.dao.PersonDAO;
-import com.nastinio.spring.dao.PersonDAOImpl;
 import com.nastinio.spring.model.Person;
 import org.springframework.stereotype.Service;
 

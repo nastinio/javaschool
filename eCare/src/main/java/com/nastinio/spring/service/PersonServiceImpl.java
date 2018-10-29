@@ -1,20 +1,20 @@
+/*
 package com.nastinio.spring.service;
 
 import java.util.List;
 
-import com.nastinio.spring.dao.PersonDAOImpl;
+import com.nastinio.spring.dao.PersonDAOInterface;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nastinio.spring.dao.PersonDAO;
 import com.nastinio.spring.model.Person;
 
 @Service
 public class PersonServiceImpl implements PersonService {
 
-    private PersonDAO personDAO;
+    private PersonDAOInterface personDAO;
 
-    public void setPersonDAO(PersonDAO personDAO) {
+    public void setPersonDAO(PersonDAOInterface personDAO) {
         this.personDAO = personDAO;
     }
 
@@ -50,3 +50,4 @@ public class PersonServiceImpl implements PersonService {
 
 
 }
+*/

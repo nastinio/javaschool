@@ -1,3 +1,4 @@
+/*
 package com.nastinio.spring.controller;
 
 
@@ -15,9 +16,11 @@ import com.nastinio.spring.service.PersonService;
 
 @Controller
 public class PersonController {
-    /*
+    */
+/*
     * controller class that will take care of client requests and uses service classes to perform database
-     * specific operations and then returns the view pages*/
+     * specific operations and then returns the view pages*//*
+
 
     private PersonService personService;
 
@@ -67,3 +70,4 @@ public class PersonController {
 
 
 }
+*/
