@@ -2,7 +2,7 @@ package com.nastinio.spring.dao;
 
 import java.util.List;
 
-public interface Crud<K, T> {
+public interface Crud<T> {
 
     public void add(T entity);
 
@@ -10,7 +10,7 @@ public interface Crud<K, T> {
 
     public List<T> getList();
 
-    public T getById(K id);
+    public T getById(Integer id);
 
-    public void remove(K id);
+    public void remove(Integer id);
 }

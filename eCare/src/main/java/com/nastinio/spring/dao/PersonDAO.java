@@ -1,26 +1,28 @@
 package com.nastinio.spring.dao;
 
-import java.util.List;
-
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.nastinio.spring.model.Person;
 
 @Repository
-public class PersonDAO {
+public class PersonDAO extends EntityDAO{
 
-    private static final Logger logger = LoggerFactory.getLogger(PersonDAO.class);
+    PersonDAO(){
+        super(Person.class);
+    }
+
+
+
+
+    /*private static final Logger logger = LoggerFactory.getLogger(PersonDAO.class);
     private SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sf) {
         this.sessionFactory = sf;
-    }
+    }*/
 
-    public void addPerson(Person p) {
+    /*public void addPerson(Person p) {
         Session session = this.sessionFactory.getCurrentSession();
         session.persist(p);
         logger.info("Person saved successfully, Person Details=" + p);
@@ -55,5 +57,5 @@ public class PersonDAO {
             session.delete(p);
         }
         logger.info("Person deleted successfully, person details=" + p);
-    }
+    }*/
 }

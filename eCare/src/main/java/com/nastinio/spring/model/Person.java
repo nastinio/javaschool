@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.HashMap;
 
 /**
  * EntityDAO bean with JPA annotations
@@ -19,7 +18,7 @@ public class Person {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public String id;
+    public Integer id;
 
     private String password;
     private String firstname;
@@ -31,7 +30,7 @@ public class Person {
 
     //private HashMap<Integer,Contract>  listContracts;
 
-    public Person(String id, String password) {
+    public Person(Integer id, String password) {
         this.id = id;
         this.password = password;
     }
@@ -44,11 +43,11 @@ public class Person {
                 dob + ", passport = " + passport + ", email = " + email;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

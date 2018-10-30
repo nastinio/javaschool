@@ -41,6 +41,7 @@
         <beans:property name="annotatedClasses">
             <beans:list>
                 <beans:value>com.nastinio.spring.model.Person</beans:value>
+                <beans:value>com.nastinio.spring.model.Manager</beans:value>
             </beans:list>
         </beans:property>
         <beans:property name="hibernateProperties">
@@ -52,22 +53,18 @@
         </beans:property>
     </beans:bean>
 
-    <!--<beans:bean id="personDAO" class="com.nastinio.spring.dao.PersonDAOInterface">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
-    </beans:bean>
-    <beans:bean id="personService" class="com.nastinio.spring.service.PersonServiceImpl">
-        &lt;!&ndash;<beans:property name="personDAO" ref="personDAO"></beans:property>&ndash;&gt;
-    </beans:bean>
-    <beans:bean id="setupService" class="com.nastinio.spring.service.SetupService">
-        <beans:property name="personDAO" ref="personDAO"></beans:property>
-    </beans:bean>-->
 
     <beans:bean id="personDAO" class="com.nastinio.spring.dao.PersonDAO">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="setupService" class="com.nastinio.spring.service.SetupService">
-        <beans:property name="personDAO" ref="personDAO"></beans:property>
+    <beans:bean id="managerDAO" class="com.nastinio.spring.dao.ManagerDAO">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
+    <beans:bean id="signinService" class="com.nastinio.spring.service.SigninService">
+        <beans:property name="personDAO" ref="personDAO"></beans:property>
+        <beans:property name="managerDAO" ref="managerDAO"></beans:property>
+    </beans:bean>
+
 
 
 
