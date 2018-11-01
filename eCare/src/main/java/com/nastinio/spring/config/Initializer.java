@@ -1,4 +1,3 @@
-/*
 package com.nastinio.spring.config;
 
 import org.springframework.context.ApplicationContext;
@@ -14,26 +13,19 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 public class Initializer implements WebApplicationInitializer {
-    //Аналог web.xml
 
-    // Указываем имя нашему Servlet Dispatcher для мапинга
-    private static final String DISPATCHER_SERVLET_NAME = "dispatcher";
+    public void onStartup(ServletContext container) throws ServletException {
 
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-
-        // Регистрируем в контексте конфигурационный класс
         ctx.register(WebAppConfig.class);
-        servletContext.addListener(new ContextLoaderListener(ctx));
+        ctx.setServletContext(container);
 
-        ctx.setServletContext(servletContext);
+        ServletRegistration.Dynamic servlet = container.addServlet(
+                "dispatcher", new DispatcherServlet(ctx));
 
-        ServletRegistration.Dynamic servlet = servletContext.addServlet(DISPATCHER_SERVLET_NAME,
-                new DispatcherServlet(ctx));
-        servlet.addMapping("/");
         servlet.setLoadOnStartup(1);
+        servlet.addMapping("/");
     }
 
+}
 
-}*/

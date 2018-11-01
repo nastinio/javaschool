@@ -5,6 +5,7 @@ import com.nastinio.spring.exceptions.DataExistenceException;
 import com.nastinio.spring.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,14 +16,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.nastinio.spring.model.Person;
 
 @Controller
+@RequestMapping("/")
+@ComponentScan("com.nastinio")
 public class PersonController {
 
+    @Autowired
+    PersonService personService;
 
-    private PersonService personService;
-
-    @Autowired(required=true)
-    @Qualifier(value="personService")
-    public void setPersonService(PersonService ps){
+    @Autowired(required = true)
+    @Qualifier(value = "personService")
+    public void setPersonService(PersonService ps) {
         this.personService = ps;
     }
 
@@ -34,13 +37,13 @@ public class PersonController {
     }
 
     //For add and update person both
-    @RequestMapping(value= "/person/add", method = RequestMethod.POST)
-    public String addPerson(@ModelAttribute("person") Person p){
+    @RequestMapping(value = "/person/add", method = RequestMethod.POST)
+    public String addPerson(@ModelAttribute("person") Person p) {
 
-        if(p.getId() == null){
+        if (p.getId() == null) {
             //new person, add it
             this.personService.addPerson(p);
-        }else{
+        } else {
             //existing person, call update
             this.personService.updatePerson(p);
         }
@@ -50,14 +53,14 @@ public class PersonController {
     }
 
     @RequestMapping("/remove/{id}")
-    public String removePerson(@PathVariable("id") Integer id){
+    public String removePerson(@PathVariable("id") Integer id) {
 
         this.personService.removePerson(id);
         return "redirect:/persons";
     }
 
     @RequestMapping("/edit/{id}")
-    public String editPerson(@PathVariable("id") Integer id, Model model){
+    public String editPerson(@PathVariable("id") Integer id, Model model) {
         try {
             model.addAttribute("person", this.personService.getPersonById(id));
             model.addAttribute("listPersons", this.personService.listPersons());
@@ -67,7 +70,6 @@ public class PersonController {
         }
 
     }
-
 
 
 }

@@ -6,6 +6,7 @@ import com.nastinio.spring.model.Person;
 import com.nastinio.spring.service.SigninService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,14 +18,17 @@ import javax.validation.Valid;
 
 
 @Controller
+@RequestMapping("/")
+@ComponentScan("com.nastinio")
 public class SigninController {
-    private SigninService signinService;
+    @Autowired
+    SigninService signinService;
 
-    @Autowired(required = true)
+    /*@Autowired(required = true)
     @Qualifier(value = "signinService")
     public void setSigninService(SigninService signinService) {
         this.signinService = signinService;
-    }
+    }*/
 
 
     /*First method on start application*/

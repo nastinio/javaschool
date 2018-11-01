@@ -25,7 +25,6 @@ public class Person {
     @Pattern(regexp = "^\\d+$", message = "Неверный формат логина")
     public Integer id;
 
-    //@NotNull(message="Введите пароль")
     private String password;
 
     private String firstname;
@@ -37,10 +36,10 @@ public class Person {
 
     //private HashMap<Integer,Contract>  listContracts;
 
-    public Person(Integer id, String password) {
+    /*public Person(Integer id, String password) {
         this.id = id;
         this.password = password;
-    }
+    }*/
 
     public Person(){}
 

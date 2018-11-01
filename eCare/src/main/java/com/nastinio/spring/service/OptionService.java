@@ -3,6 +3,7 @@ package com.nastinio.spring.service;
 import com.nastinio.spring.dao.OptionDAO;
 import com.nastinio.spring.exceptions.DataExistenceException;
 import com.nastinio.spring.model.Option;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,11 +11,12 @@ import java.util.List;
 
 @Service
 public class OptionService {
-    private OptionDAO optionDAO;
+    @Autowired
+    OptionDAO optionDAO;
 
-    public void setOptionDAO(OptionDAO optionDAO) {
+   /* public void setOptionDAO(OptionDAO optionDAO) {
         this.optionDAO = optionDAO;
-    }
+    }*/
 
 
     @Transactional

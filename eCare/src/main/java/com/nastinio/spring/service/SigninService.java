@@ -5,20 +5,25 @@ import com.nastinio.spring.dao.PersonDAO;
 import com.nastinio.spring.exceptions.DataExistenceException;
 import com.nastinio.spring.model.Manager;
 import com.nastinio.spring.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class SigninService {
-    private PersonDAO personDAO;
-    private ManagerDAO managerDAO;
 
-    public void setPersonDAO(PersonDAO personDAO) {
+    @Autowired
+    PersonDAO personDAO;
+
+    @Autowired
+    ManagerDAO managerDAO;
+
+   /* public void setPersonDAO(PersonDAO personDAO) {
         this.personDAO = personDAO;
     }
     public void setManagerDAO(ManagerDAO managerDAO) {
         this.managerDAO = managerDAO;
-    }
+    }*/
 
     public boolean isRegisteredPerson(Person personOuter){
         try{

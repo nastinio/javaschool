@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -18,9 +19,21 @@ public abstract class EntityDAO<T> implements Crud<T> {
      *
      * */
 
+    @Autowired
+    private SessionFactory sessionFactory;
+    /*public void setSessionFactory(SessionFactory sf) {
+        this.sessionFactory = sf;
+    }*/
+
+    protected Session getSession(){
+        return sessionFactory.getCurrentSession();
+    }
+
+
+
     private Class nameClass;
     protected static Logger logger;// = LoggerFactory.getLogger(EntityDAO.class);   // LoggerFactory.getLogger(PersonDAO.class);
-    protected SessionFactory sessionFactory;
+
 
     protected String nameClassHeir;
 
@@ -31,9 +44,6 @@ public abstract class EntityDAO<T> implements Crud<T> {
         logger = LoggerFactory.getLogger(nameClass);
     }
 
-    public void setSessionFactory(SessionFactory sf) {
-        this.sessionFactory = sf;
-    }
 
     @Override
     public void add(T entity) {
