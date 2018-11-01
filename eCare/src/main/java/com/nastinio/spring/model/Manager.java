@@ -1,6 +1,8 @@
 package com.nastinio.spring.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "manager")
@@ -8,8 +10,11 @@ public class Manager {
     @Id
     @Column(name = "id_manager")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(message="Введите логин")
+    @Pattern(regexp = "^\\d+$", message = "Неверный формат логина")
     public Integer id;
 
+    @NotNull(message="Введите пароль")
     private String password;
 
     public Manager(){}

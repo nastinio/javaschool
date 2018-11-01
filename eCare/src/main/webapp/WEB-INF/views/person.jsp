@@ -37,14 +37,77 @@
         </c:if>
         <tr>
             <td>
+                <form:label path="password">
+                    <spring:message text="Password"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="password" />
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <form:label path="firstname">
-                    <spring:message text="Name"/>
+                    <spring:message text="Firstname"/>
                 </form:label>
             </td>
             <td>
                 <form:input path="firstname" />
             </td>
         </tr>
+        <tr>
+            <td>
+                <form:label path="lastname">
+                    <spring:message text="Lastname"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="lastname" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <form:label path="dob">
+                    <spring:message text="DOB"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="dob" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form:label path="passport">
+                    <spring:message text="Passport"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="passport" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form:label path="address">
+                    <spring:message text="Address"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="address" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form:label path="email">
+                    <spring:message text="Email"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="email" />
+            </td>
+        </tr>
+
+
         <tr>
             <td colspan="2">
                 <c:if test="${!empty person.firstname}">
@@ -65,14 +128,26 @@
     <table class="tg">
         <tr>
             <th width="80">Person ID</th>
-            <th width="120">Person Name</th>
+            <th width="120">Person password</th>
+            <th width="120">Person FirstName</th>
+            <th width="120">Person LastName</th>
+            <th width="120">Person date of birthday</th>
+            <th width="120">Person passport</th>
+            <th width="120">Person Address</th>
+            <th width="120">Person email</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
         <c:forEach items="${listPersons}" var="person">
             <tr>
                 <td>${person.id}</td>
+                <td>${person.password}</td>
                 <td>${person.firstname}</td>
+                <td>${person.lastname}</td>
+                <td>${person.dob}</td>
+                <td>${person.passport}</td>
+                <td>${person.address}</td>
+                <td>${person.email}</td>
                 <td><a href="<c:url value='/edit/${person.id}' />" >Edit</a></td>
                 <td><a href="<c:url value='/remove/${person.id}' />" >Delete</a></td>
             </tr>

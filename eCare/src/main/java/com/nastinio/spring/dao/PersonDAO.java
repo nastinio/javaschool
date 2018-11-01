@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 import com.nastinio.spring.model.Person;
 
 @Repository
-public class PersonDAO extends EntityDAO{
+public class PersonDAO extends EntityDAO {
 
-    PersonDAO(){
+    PersonDAO() {
         super(Person.class);
     }
 

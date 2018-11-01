@@ -1,7 +1,8 @@
-/*
 package com.nastinio.spring.controller;
 
 
+import com.nastinio.spring.exceptions.DataExistenceException;
+import com.nastinio.spring.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -12,14 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.nastinio.spring.model.Person;
-import com.nastinio.spring.service.PersonService;
 
 @Controller
 public class PersonController {
-    */
-/*
-    * controller class that will take care of client requests and uses service classes to perform database
-     * specific operations and then returns the view pages*//*
 
 
     private PersonService personService;
@@ -54,20 +50,24 @@ public class PersonController {
     }
 
     @RequestMapping("/remove/{id}")
-    public String removePerson(@PathVariable("id") String id){
+    public String removePerson(@PathVariable("id") Integer id){
 
         this.personService.removePerson(id);
         return "redirect:/persons";
     }
 
     @RequestMapping("/edit/{id}")
-    public String editPerson(@PathVariable("id") String id, Model model){
-        model.addAttribute("person", this.personService.getPersonById(id));
-        model.addAttribute("listPersons", this.personService.listPersons());
-        return "person";
+    public String editPerson(@PathVariable("id") Integer id, Model model){
+        try {
+            model.addAttribute("person", this.personService.getPersonById(id));
+            model.addAttribute("listPersons", this.personService.listPersons());
+            return "person";
+        } catch (DataExistenceException e) {
+            return null;
+        }
+
     }
 
 
 
 }
-*/

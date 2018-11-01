@@ -21,6 +21,7 @@
                 <span class="heading">АВТОРИЗАЦИЯ</span>
                 <div class="form-group">
                     <spring:input path="id" type="login" class="form-control" id="inputLogin" placeholder="Login"/>
+
                     <i class="fa fa-user"></i>
                 </div>
                 <div class="form-group help">
@@ -30,14 +31,10 @@
                 </div>
                 <div class="form-group">
                     <a href="/signinAsManager">Войти как менеджер</a>
-                    <%--<div class="main-checkbox">
-                        <input type="checkbox" value="none" id="checkbox1" name="check"/>
-                        <label for="checkbox1"></label>
-                    </div>
-                    <span class="text">Запомнить</span>--%>
                     <spring:button type="submit" class="btn btn-default">ВХОД</spring:button>
                 </div>
             </spring:form>
+
         </div>
 
     </div><!-- /.row -->

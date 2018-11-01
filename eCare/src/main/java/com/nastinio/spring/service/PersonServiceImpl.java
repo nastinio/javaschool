@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nastinio.spring.model.Person;
 
 @Service
-public class PersonServiceImpl implements PersonService {
+public class PersonServiceImpl implements PersonServiceInterface {
 
     private PersonDAOInterface personDAO;
 

@@ -1,11 +1,14 @@
 package com.nastinio.spring.model;
 
+import javax.validation.constraints.NotNull;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 /**
  * EntityDAO bean with JPA annotations
@@ -18,9 +21,13 @@ public class Person {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(message="Введите логин")
+    @Pattern(regexp = "^\\d+$", message = "Неверный формат логина")
     public Integer id;
 
+    //@NotNull(message="Введите пароль")
     private String password;
+
     private String firstname;
     private String lastname;
     private String dob;

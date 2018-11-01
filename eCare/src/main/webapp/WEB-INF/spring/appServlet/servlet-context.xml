@@ -42,6 +42,7 @@
             <beans:list>
                 <beans:value>com.nastinio.spring.model.Person</beans:value>
                 <beans:value>com.nastinio.spring.model.Manager</beans:value>
+                <beans:value>com.nastinio.spring.model.Option</beans:value>
             </beans:list>
         </beans:property>
         <beans:property name="hibernateProperties">
@@ -66,6 +67,16 @@
     </beans:bean>
 
 
+    <beans:bean id="optionDAO" class="com.nastinio.spring.dao.OptionDAO">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="optionService" class="com.nastinio.spring.service.OptionService">
+        <beans:property name="optionDAO" ref="optionDAO"></beans:property>
+    </beans:bean>
+
+    <beans:bean id="personService" class="com.nastinio.spring.service.PersonService">
+        <beans:property name="personDAO" ref="personDAO"></beans:property>
+    </beans:bean>
 
 
 
