@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 
-
 @Configuration
 @EnableTransactionManagement
 @ComponentScan({ "com.nastinio" })

@@ -1,11 +1,11 @@
 package com.nastinio.spring.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "option")
+@Table(name = "option_cellular")
 public class Option {
 
     @Id
@@ -15,18 +15,34 @@ public class Option {
     @Pattern(regexp = "^\\d+$", message = "Неверный формат логина")*/
     public Integer id;
 
-    //@Column//(name = "`name`")
     private String name;
-
-    //@Column//(name = "`connection_cost_option`")
     private Float connectionCostOption;
-
-    //@Column//(name = "`cost_option`")
     private Float costOption;
+
+    @Transient
+    private OptionRules rule;
+
+    @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "options_jointly",
+            joinColumns = { @JoinColumn(name = "op1_id") },
+            inverseJoinColumns = { @JoinColumn(name = "op2_id") }
+    )
+    Set<Option> jointlyOptions = new HashSet<>();
+
+
+    @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "options_exclude",
+            joinColumns = { @JoinColumn(name = "op1_exclude_id") },
+            inverseJoinColumns = { @JoinColumn(name = "op2_exclude_id") }
+    )
+    Set<Option> excludeOptions = new HashSet<>();
+
 
     @Override
     public String toString() {
-        return "id = " + id + ", name = " + name;
+        return "id = " + id + ", name = " + name + ", costConnection = " + connectionCostOption + ", cost = " + costOption;
     }
 
     public Integer getId() {
@@ -59,5 +75,29 @@ public class Option {
 
     public void setCostOption(Float costOption) {
         this.costOption = costOption;
+    }
+
+    public Set<Option> getJointlyOptions() {
+        return jointlyOptions;
+    }
+
+    public void setJointlyOptions(Set<Option> jointlyOptions) {
+        this.jointlyOptions = jointlyOptions;
+    }
+
+    public Set<Option> getExcludeOptions() {
+        return excludeOptions;
+    }
+
+    public void setExcludeOptions(Set<Option> excludeOptions) {
+        this.excludeOptions = excludeOptions;
+    }
+
+    public OptionRules getRule() {
+        return rule;
+    }
+
+    public void setRule(OptionRules rule) {
+        this.rule = rule;
     }
 }

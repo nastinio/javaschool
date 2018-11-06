@@ -43,7 +43,7 @@
             <beans:list>
                 <beans:value>com.nastinio.spring.model.Person</beans:value>
                 <beans:value>com.nastinio.spring.model.Manager</beans:value>
-                <beans:value>com.nastinio.spring.model.Option</beans:value>
+                <beans:value>com.nastinio.spring.model.Optionnn</beans:value>
             </beans:list>
         </beans:property>
         <beans:property name="hibernateProperties">

@@ -1,7 +1,6 @@
 package com.nastinio.spring.dao;
 
 import com.nastinio.spring.exceptions.DataExistenceException;
-import com.nastinio.spring.model.Option;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -64,6 +63,7 @@ public abstract class EntityDAO<T> implements Crud<T> {
         Session session = this.sessionFactory.getCurrentSession();
         logger.info("Try get list all " + nameClassHeir);
         List<T> entitiesList = session.createQuery("from "+nameClassHeir).list();//session.createQuery("from Person").list();
+        logger.info("CreateQuery success");
         for (T currentEntity : entitiesList) {
             logger.info("List::" + currentEntity);
         }

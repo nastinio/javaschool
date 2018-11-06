@@ -8,13 +8,16 @@
     <packaging>war</packaging>
     <version>1.0.0-BUILD-SNAPSHOT</version>
     <properties>
-      <java-version>1.6</java-version>
+      <java-version>1.8</java-version>
       <org.springframework-version>4.0.3.RELEASE</org.springframework-version>
       <org.aspectj-version>1.7.4</org.aspectj-version>
       <org.slf4j-version>1.7.5</org.slf4j-version>
       <hibernate.version>4.3.5.Final</hibernate.version>
     </properties>
+
     <dependencies>
+
+
       <!-- Spring -->
       <dependency>
           <groupId>org.springframework</groupId>
@@ -213,25 +216,43 @@
       <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-web</artifactId>
-        <version>${spring.securiry}</version>
+        <version>4.2.8.RELEASE</version>
       </dependency>
 
       <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-core</artifactId>
-        <version>${spring.securiry}</version>
+        <version>4.2.8.RELEASE</version>
       </dependency>
 
       <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-config</artifactId>
-        <version>${spring.securiry}</version>
+        <version>4.2.8.RELEASE</version>
       </dependency>
 
       <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-taglibs</artifactId>
-        <version>${spring.securiry}</version>
+        <version>4.2.8.RELEASE</version>
+      </dependency>
+      <!--Common Java Annotations.
+        For this app it includes security annotation: @RolesAllowed; @DenyAll, @RunAs, @PermitAll
+         -->
+      <dependency>
+        <groupId>javax.annotation</groupId>
+        <artifactId>jsr250-api</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>annotations-api</artifactId>
+        <version>6.0.37</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.annotation</groupId>
+        <artifactId>jsr250-api</artifactId>
+        <version>1.0</version>
       </dependency>
 
 
@@ -257,8 +278,8 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>2.5.1</version>
           <configuration>
-            <source>1.6</source>
-            <target>1.6</target>
+            <source>7</source>
+            <target>7</target>
             <compilerArgument>-Xlint:all</compilerArgument>
             <showWarnings>true</showWarnings>
             <showDeprecation>true</showDeprecation>

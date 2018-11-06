@@ -23,11 +23,11 @@ public class PersonController {
     @Autowired
     PersonService personService;
 
-    @Autowired(required = true)
-    @Qualifier(value = "personService")
+    /*@Autowired(required = true)
+    @Qualifier(value = "optionService")
     public void setPersonService(PersonService ps) {
-        this.personService = ps;
-    }
+        this.optionService = ps;
+    }*/
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
     public String listPersons(Model model) {

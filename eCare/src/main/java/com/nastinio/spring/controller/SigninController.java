@@ -21,15 +21,9 @@ import javax.validation.Valid;
 @RequestMapping("/")
 @ComponentScan("com.nastinio")
 public class SigninController {
+
     @Autowired
     SigninService signinService;
-
-    /*@Autowired(required = true)
-    @Qualifier(value = "signinService")
-    public void setSigninService(SigninService signinService) {
-        this.signinService = signinService;
-    }*/
-
 
     /*First method on start application*/
     /*Попадаем сюда на старте приложения (см. параметры аннотации и настройки пути после деплоя) */

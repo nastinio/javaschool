@@ -18,10 +18,10 @@ public class Initializer implements WebApplicationInitializer {
 
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
         ctx.register(WebAppConfig.class);
+        //ctx.register(SecurityConfig.class);
         ctx.setServletContext(container);
 
-        ServletRegistration.Dynamic servlet = container.addServlet(
-                "dispatcher", new DispatcherServlet(ctx));
+        ServletRegistration.Dynamic servlet = container.addServlet("dispatcher", new DispatcherServlet(ctx));
 
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
