@@ -7,6 +7,7 @@ import com.nastinio.spring.model.Manager;
 import com.nastinio.spring.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -37,6 +38,13 @@ public class SigninService {
             return false;
         }
     }
+
+    @Transactional
+    public void doOnline(Integer id) throws DataExistenceException {
+        System.out.println("Очень тупой финт ушами");
+        this.personDAO.doOnline(id);
+    }
+
 
     public boolean isRegisteredManager(Manager managerOuter){
         try{

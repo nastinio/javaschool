@@ -29,8 +29,8 @@
                         <%--<a href="#" class="fa fa-question-circle"></a>--%>
                 </div>
                 <div class="form-group">
-                    <a href="/signin">Войти как пользователь</a>
-                    <%--<a href="/signin" role="button" class="btn btn-success btn-large">Войти как пользователь</a>--%>
+                    <a href="/online">Войти как пользователь</a>
+                    <%--<a href="/online" role="button" class="btn btn-success btn-large">Войти как пользователь</a>--%>
                     <%--<div class="main-checkbox">
                         <input type="checkbox" value="none" id="checkbox1" name="check"/>
                         <label for="checkbox1"></label>

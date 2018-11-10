@@ -1,6 +1,7 @@
 package com.nastinio.spring.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "contract")
@@ -9,41 +10,86 @@ public class Contract {
     @Id
     @Column(name = "id_contract")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
 
-    private String id_person_c;
-    private int id_tariff_c;
-    private String configuration;
+    private Integer id_person;
+    private int id_tariff;
+    private String number;
 
-    public String getId() {
+
+    public int isBlockedByPerson;
+    public int isBlockedByManager;
+
+
+    @Transient
+    public Tariff tariff;
+
+    public Tariff getTariff() {
+        return tariff;
+    }
+
+    public void setTariff(Tariff tariff) {
+        this.tariff = tariff;
+    }
+/*  @ManyToOne
+    @JoinColumn(name = "id")
+    private Person person;*/
+
+
+    public Contract() {
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getId_person_c() {
-        return id_person_c;
+    public Integer getId_person() {
+        return id_person;
     }
 
-    public void setId_person_c(String id_person_c) {
-        this.id_person_c = id_person_c;
+    public void setId_person(Integer id_person) {
+        this.id_person = id_person;
     }
 
-    public int getId_tariff_c() {
-        return id_tariff_c;
+    public int getId_tariff() {
+        return id_tariff;
     }
 
-    public void setId_tariff_c(int id_tariff_c) {
-        this.id_tariff_c = id_tariff_c;
+    public void setId_tariff(int id_tariff) {
+        this.id_tariff = id_tariff;
     }
 
-    public String getConfiguration() {
-        return configuration;
+    public String getNumber() {
+        return number;
     }
 
-    public void setConfiguration(String configuration) {
-        this.configuration = configuration;
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+
+    public int getIsBlockedByPerson() {
+        return isBlockedByPerson;
+    }
+
+    public void setIsBlockedByPerson(int isBlockedByPerson) {
+        this.isBlockedByPerson = isBlockedByPerson;
+    }
+
+    public int getIsBlockedByManager() {
+        return isBlockedByManager;
+    }
+
+    public void setIsBlockedByManager(int isBlockedByManager) {
+        this.isBlockedByManager = isBlockedByManager;
+    }
+
+    @Override
+    public String toString(){
+        return "Contract: id = "+id+", number = "+number+", id_tariff = "+id_tariff+", id_person = "+id_person+", isBlocked: byPerson = " + isBlockedByPerson+", byManager = "+isBlockedByManager;
     }
 }

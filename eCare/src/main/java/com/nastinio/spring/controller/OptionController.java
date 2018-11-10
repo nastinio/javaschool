@@ -55,10 +55,8 @@ public class OptionController {
             modelAndView.addObject("option", this.optionService.getById(id));
             modelAndView.addObject("listOptions", this.optionService.list());
 
-
             modelAndView.addObject("listJointlyOptions", this.optionService.getJointlyOptionsSet(id));
             modelAndView.addObject("listExcludeOptions", this.optionService.getExcludeOptionsSet(id));
-
             modelAndView.addObject("listOptionsWithoutRules", this.optionService.getOptionsWithoutRulesSet(id));
 
             modelAndView.setViewName("options/optionEdit");
@@ -81,7 +79,7 @@ public class OptionController {
     }
 
     @RequestMapping(value = "/option/create", method = RequestMethod.POST)
-    public String addPerson(@ModelAttribute("option") Option option) {
+    public String createUpdateOption(@ModelAttribute("option") Option option) {
 
         if (option.getId() == null) {
             //new person, add it
@@ -96,6 +94,20 @@ public class OptionController {
         return "redirect:/options/option/edit{"+id+"}";*/
 
     }
+
+    /*@RequestMapping("/option/edit/{id}/addJointlyOp{idJointly}")
+    public void addJointlyOption(@PathVariable("id") Integer id, @PathVariable("idJointly") Integer idJointly) {
+        System.out.println("Тыкнули на добавление зависимости между " + id + " и " + idJointly);
+        //Добавим обязательную опцию в бд и вернем на страницу редактирования в списке обязательных
+        OptionJointly optionJointly = new OptionJointly();
+        optionJointly.setOp1_id(id);
+        optionJointly.setOp2_id(idJointly);
+
+        this.optionService.insertOptionJointly(optionJointly);
+
+        editOption(id);
+
+    }*/
 
     /*@RequestMapping("/option/remove/{id}")
     public String removeOption(@PathVariable("id") Integer id) {

@@ -137,6 +137,7 @@
             <th width="120">Person email</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
+            <th width="60">More</th>
         </tr>
         <c:forEach items="${listPersons}" var="person">
             <tr>
@@ -148,8 +149,9 @@
                 <td>${person.passport}</td>
                 <td>${person.address}</td>
                 <td>${person.email}</td>
-                <td><a href="<c:url value='/edit/${person.id}' />" >Edit</a></td>
-                <td><a href="<c:url value='/remove/${person.id}' />" >Delete</a></td>
+                <td><a href="<c:url value='/person/edit/${person.id}' />" >Edit</a></td>
+                <td><a href="<c:url value='/person/remove/${person.id}' />" >Delete</a></td>
+                <td><a href="<c:url value='/person/${person.id}' />" >More</a></td>
             </tr>
         </c:forEach>
     </table>

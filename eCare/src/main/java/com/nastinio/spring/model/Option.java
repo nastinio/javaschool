@@ -40,6 +40,12 @@ public class Option {
     Set<Option> excludeOptions = new HashSet<>();
 
 
+   /* @ManyToOne
+    @JoinColumn(name="id_tariff", nullable=false)
+    private Tariff tariff;*/
+
+
+
     @Override
     public String toString() {
         return "id = " + id + ", name = " + name + ", costConnection = " + connectionCostOption + ", cost = " + costOption;
@@ -100,4 +106,5 @@ public class Option {
     public void setRule(OptionRules rule) {
         this.rule = rule;
     }
+
 }

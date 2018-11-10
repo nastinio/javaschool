@@ -3,6 +3,7 @@ package com.nastinio.spring.controller;
 
 import com.nastinio.spring.exceptions.DataExistenceException;
 import com.nastinio.spring.service.PersonService;
+import com.nastinio.spring.service.TariffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.nastinio.spring.model.Person;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
@@ -22,6 +24,9 @@ public class PersonController {
 
     @Autowired
     PersonService personService;
+
+    @Autowired
+    TariffService tariffService;
 
     /*@Autowired(required = true)
     @Qualifier(value = "optionService")
@@ -33,7 +38,7 @@ public class PersonController {
     public String listPersons(Model model) {
         model.addAttribute("person", new Person());
         model.addAttribute("listPersons", this.personService.listPersons());
-        return "person";
+        return "person/person";
     }
 
     //For add and update person both
@@ -48,28 +53,54 @@ public class PersonController {
             this.personService.updatePerson(p);
         }
 
-        return "redirect:/persons";
+        return "redirect:person/persons";
 
     }
 
-    @RequestMapping("/remove/{id}")
+    @RequestMapping("/person/remove/{id}")
     public String removePerson(@PathVariable("id") Integer id) {
 
         this.personService.removePerson(id);
-        return "redirect:/persons";
+        return "redirect:person/persons";
     }
 
-    @RequestMapping("/edit/{id}")
+    @RequestMapping("/person/edit/{id}")
     public String editPerson(@PathVariable("id") Integer id, Model model) {
         try {
             model.addAttribute("person", this.personService.getPersonById(id));
             model.addAttribute("listPersons", this.personService.listPersons());
-            return "person";
+            return "redirect:person/person";
         } catch (DataExistenceException e) {
             return null;
         }
 
     }
 
+
+    @RequestMapping("/person/${id}")
+    public ModelAndView showPerson(@PathVariable("id") Integer id) {
+        try {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("person", this.personService.getPersonById(id));
+            modelAndView.setViewName("person/personEdit");
+            return modelAndView;
+        } catch (DataExistenceException e) {
+            return null;
+        }
+    }
+
+
+    /*@RequestMapping("person/${id}/addContract")
+    public ModelAndView addContract(@PathVariable("id") Integer id) {
+        try {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("person", this.personService.getPersonById(id));
+            modelAndView.addObject("tariffSet",this.tariffService.getOptionSet(id));
+            modelAndView.setViewName("person/personEdit");
+            return modelAndView;
+        } catch (DataExistenceException e) {
+            return null;
+        }
+    }*/
 
 }

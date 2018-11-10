@@ -111,7 +111,9 @@
             </td>
         </tr>
     </table>
+
 </form:form>
+
 
 Add relationships between options <br>
 
@@ -165,6 +167,13 @@ Add relationships between options <br>
                 <td>${optionWithoutRule.connectionCostOption}</td>
                 <td>${optionWithoutRule.costOption}</td>
 
+
+                <%--<td>
+                    <form:form action="/option/edit/${option.id}/addJointlyOp${optionWithoutRule.id}">
+                        <input type="submit" value="<spring:message text="Make jointly"/>"/>
+
+                    </form:form>
+                </td>--%>
                 <td><input type="checkbox" name=${optionWithoutRule.id}</td>
                 <td><input type="checkbox" name=${optionWithoutRule.id}</td>
             </tr>
@@ -202,6 +211,7 @@ Add relationships between options <br>
 
     </table>
 </c:if>
+
 
 <br> Здесь будет информация о тарифах<br>
 

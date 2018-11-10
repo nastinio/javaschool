@@ -1,14 +1,12 @@
 package com.nastinio.spring.model;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * EntityDAO bean with JPA annotations
@@ -21,7 +19,7 @@ public class Person {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(message="Введите логин")
+    @NotNull(message = "Введите логин")
     @Pattern(regexp = "^\\d+$", message = "Неверный формат логина")
     public Integer id;
 
@@ -34,6 +32,41 @@ public class Person {
     private String address;
     private String email;
 
+    @Transient
+    private List<Contract> contractList;
+
+    public List<Contract> getContractList() {
+        return contractList;
+    }
+
+    public void setContractList(List<Contract> contractList) {
+        this.contractList = contractList;
+    }
+
+    /* @OneToMany(mappedBy = "person",fetch = FetchType.EAGER)
+    private Set<Contract> contractSet = new HashSet<>();*/
+
+
+    public Integer isOnline;
+
+    public boolean isOnline() {
+        return isOnline == 1;
+    }
+
+    public void setOnline(boolean online) {
+        if (online) {
+            isOnline = 1;
+        } else isOnline = 0;
+    }
+
+   /* public Set<Contract> getContractSet() {
+        return contractSet;
+    }
+
+    public void setContractSet(Set<Contract> contractSet) {
+        this.contractSet = contractSet;
+    }*/
+
     //private HashMap<Integer,Contract>  listContracts;
 
     /*public Person(Integer id, String password) {
@@ -41,12 +74,13 @@ public class Person {
         this.password = password;
     }*/
 
-    public Person(){}
+    public Person() {
+    }
 
     @Override
     public String toString() {
         return "id = " + id + ", password = " + password + ", name = " + firstname + " " + lastname + ", dob = " +
-                dob + ", passport = " + passport + ", email = " + email;
+                dob + ", passport = " + passport + ", email = " + email + ", isOnline = " + isOnline;
     }
 
     public Integer getId() {

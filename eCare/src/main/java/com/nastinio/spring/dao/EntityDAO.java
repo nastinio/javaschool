@@ -19,7 +19,7 @@ public abstract class EntityDAO<T> implements Crud<T> {
      * */
 
     @Autowired
-    private SessionFactory sessionFactory;
+    protected SessionFactory sessionFactory;
     /*public void setSessionFactory(SessionFactory sf) {
         this.sessionFactory = sf;
     }*/
@@ -53,14 +53,19 @@ public abstract class EntityDAO<T> implements Crud<T> {
 
     @Override
     public void update(T entity) {
+        System.out.println("Получили на обновление " + entity.toString());
         Session session = this.sessionFactory.getCurrentSession();
+        //Session session = this.sessionFactory.openSession();
+        //session.flush();
         session.update(entity);
         logger.info(nameClassHeir + " updated successfully. " + nameClassHeir + "  details=" + entity);
+        //session.close();
     }
 
     @Override
     public List<T> getList() {
-        Session session = this.sessionFactory.getCurrentSession();
+        //Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
         logger.info("Try get list all " + nameClassHeir);
         List<T> entitiesList = session.createQuery("from "+nameClassHeir).list();//session.createQuery("from Person").list();
         logger.info("CreateQuery success");
@@ -78,7 +83,7 @@ public abstract class EntityDAO<T> implements Crud<T> {
         Session session = this.sessionFactory.openSession();
         try {
             T entity = (T) session.load(nameClass, id);      //load(T.class, id);
-            logger.info(nameClass + " loaded successfully, " + nameClass + " details=" + entity);
+            logger.info(nameClassHeir + " loaded successfully, " + nameClassHeir + " details=" + entity);
             return entity;
         } catch (ObjectNotFoundException e) {
             logger.info("Person #" + id + "doesn't exist");

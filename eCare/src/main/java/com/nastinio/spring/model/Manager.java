@@ -17,6 +17,9 @@ public class Manager {
     @NotNull(message="Введите пароль")
     private String password;
 
+    @Transient
+    public boolean isSignin = false;
+
     public Manager(){}
 
     @Override
@@ -38,5 +41,13 @@ public class Manager {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isSignin() {
+        return isSignin;
+    }
+
+    public void setSignin(boolean signin) {
+        isSignin = signin;
     }
 }

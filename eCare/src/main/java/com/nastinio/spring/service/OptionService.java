@@ -18,6 +18,9 @@ public class OptionService {
     @Autowired
     OptionDAO optionDAO;
 
+    /*@Autowired
+    OptionsJointlyDAO optionsJointlyDAO;*/
+
 
     @Transactional
     public void add(Option option) {
@@ -100,4 +103,11 @@ public class OptionService {
 
         return optionsWithRulesSet;
     }
+
+
+    /*@Transactional
+    public void insertOptionJointly(OptionJointly optionJointly){
+        this.optionsJointlyDAO.add(optionJointly);
+
+    }*/
 }

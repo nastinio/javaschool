@@ -5,7 +5,6 @@ import com.nastinio.spring.model.Manager;
 import com.nastinio.spring.model.Person;
 import com.nastinio.spring.service.SigninService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -48,7 +47,7 @@ public class SigninController {
     то попадем вот сюда
      */
     @RequestMapping(value = "/check-person", method = RequestMethod.POST)
-    public ModelAndView checkPerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
+    public ModelAndView checkPerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) throws DataExistenceException {
         ModelAndView modelAndView = new ModelAndView();
 
         if (bindingResult.hasErrors()) {
@@ -58,15 +57,19 @@ public class SigninController {
             return modelAndView;
         }
         if (signinService.isRegisteredPerson(person)) {
-            try {
-                modelAndView.setViewName("person/ecarePerson");
+            signinService.doOnline(person.getId());
+            modelAndView.setViewName("redirect:/ecare/"+person.getId());
+            return modelAndView;
+            /*try {
                 modelAndView.addObject("person", signinService.getPersonById(person.getId()));
+                modelAndView.setViewName("redirect:/ecare");
+                person.setOnline(true);
                 return modelAndView;
             } catch (DataExistenceException e) {
                 modelAndView.setViewName("signin/signinPerson");
                 //modelAndView.addObject("errorMessage","Некорректные данные для входа");
                 return modelAndView;
-            }
+            }*/
 
         }
         modelAndView.setViewName("signin/signinPerson");
@@ -86,6 +89,7 @@ public class SigninController {
         }
         if (signinService.isRegisteredManager(manager)) {
             modelAndView.setViewName("redirect:/ecareManager");
+            manager.setSignin(true);
             modelAndView.addObject("manager", manager);
             return modelAndView;
         }
