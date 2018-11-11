@@ -1,6 +1,7 @@
 package com.nastinio.spring.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +18,9 @@ public class Tariff {
 
    /* @OneToMany(mappedBy="option")
     private Set<Option> optionSet;*/
+
+    @ManyToMany(mappedBy = "tariffSet",fetch = FetchType.EAGER)
+    private Set<Option> optionSet = new HashSet<>();
 
     @Transient
     public List<Option> optionList;
@@ -36,6 +40,15 @@ public class Tariff {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Set<Option> getOptionSet() {
+        return optionSet;
+    }
+
+    public void setOptionSet(Set<Option> optionSet) {
+        this.optionSet = optionSet;
+    }
+
 
     /*public Set<Option> getOptionSet() {
         return optionSet;

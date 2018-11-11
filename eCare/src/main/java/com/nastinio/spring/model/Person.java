@@ -77,6 +77,10 @@ public class Person {
     public Person() {
     }
 
+    public Person(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "id = " + id + ", password = " + password + ", name = " + firstname + " " + lastname + ", dob = " +

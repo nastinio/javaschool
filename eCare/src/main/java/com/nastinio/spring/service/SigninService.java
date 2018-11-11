@@ -41,8 +41,12 @@ public class SigninService {
 
     @Transactional
     public void doOnline(Integer id) throws DataExistenceException {
-        System.out.println("Очень тупой финт ушами");
         this.personDAO.doOnline(id);
+    }
+
+    @Transactional
+    public void doOffline(Integer id) throws DataExistenceException {
+        this.personDAO.doOffline(id);
     }
 
 

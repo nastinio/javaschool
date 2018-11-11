@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@Transactional
 public class OptionService {
 
     @Autowired
@@ -94,7 +95,6 @@ public class OptionService {
             }
 
 
-
         }
 
         /*for (Option temp : optionsWithRulesSet) {
@@ -105,9 +105,4 @@ public class OptionService {
     }
 
 
-    /*@Transactional
-    public void insertOptionJointly(OptionJointly optionJointly){
-        this.optionsJointlyDAO.add(optionJointly);
-
-    }*/
 }

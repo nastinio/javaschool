@@ -21,11 +21,11 @@ public class TariffService {
         return tariffDAO.getList();
     }
 
-    /*public List<Tariff> setListOptionForListTariff(List<Tariff> tariffList){
-        for(Tariff tariff:tariffList){
+    @Transactional
+    public Set<Option> getOptionsSet(Integer id) throws DataExistenceException {
+        return this.tariffDAO.getOptionSet(id);
+    }
 
-        }
-    }*/
 
 
 }

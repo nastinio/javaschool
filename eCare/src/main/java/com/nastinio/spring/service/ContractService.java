@@ -31,4 +31,8 @@ public class ContractService {
         this.contractDAO.update(contract);
     }
 
+    public Contract getById(Integer id) throws DataExistenceException {
+        return (Contract) this.contractDAO.getById(id);
+    }
+
 }

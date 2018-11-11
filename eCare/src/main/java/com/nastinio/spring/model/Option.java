@@ -40,7 +40,32 @@ public class Option {
     Set<Option> excludeOptions = new HashSet<>();
 
 
-   /* @ManyToOne
+    @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "option_tariff",
+            joinColumns = { @JoinColumn(name = "id_option") },
+            inverseJoinColumns = { @JoinColumn(name = "id_tariff") }
+    )
+    Set<Tariff> tariffSet = new HashSet<>();
+
+    @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "option_contract",
+            joinColumns = { @JoinColumn(name = "id_option") },
+            inverseJoinColumns = { @JoinColumn(name = "id_contract") }
+    )
+    Set<Tariff> contractSet = new HashSet<>();
+
+    public Set<Tariff> getTariffSet() {
+        return tariffSet;
+    }
+
+    public void setTariffSet(Set<Tariff> tariffSet) {
+        this.tariffSet = tariffSet;
+    }
+
+
+    /* @ManyToOne
     @JoinColumn(name="id_tariff", nullable=false)
     private Tariff tariff;*/
 
@@ -107,4 +132,11 @@ public class Option {
         this.rule = rule;
     }
 
+    public Set<Tariff> getContractSet() {
+        return contractSet;
+    }
+
+    public void setContractSet(Set<Tariff> contractSet) {
+        this.contractSet = contractSet;
+    }
 }

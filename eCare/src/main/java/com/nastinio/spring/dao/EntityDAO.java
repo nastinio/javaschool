@@ -1,12 +1,14 @@
 package com.nastinio.spring.dao;
 
 import com.nastinio.spring.exceptions.DataExistenceException;
+import com.nastinio.spring.model.OptionContract;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import sun.awt.image.IntegerComponentRaster;
 
 import java.util.List;
 
@@ -103,6 +105,7 @@ public abstract class EntityDAO<T> implements Crud<T> {
         }
         logger.info(nameClass + " deleted successfully. " + nameClass + "  details=" + entity);
     }
+
 
 
 }

@@ -1,7 +1,9 @@
 package com.nastinio.spring.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "contract")
@@ -35,6 +37,8 @@ public class Contract {
     @JoinColumn(name = "id")
     private Person person;*/
 
+    @ManyToMany(mappedBy = "contractSet",fetch = FetchType.EAGER)
+    private Set<Option> optionExtraSet = new HashSet<>();
 
     public Contract() {
     }
@@ -86,6 +90,14 @@ public class Contract {
 
     public void setIsBlockedByManager(int isBlockedByManager) {
         this.isBlockedByManager = isBlockedByManager;
+    }
+
+    public Set<Option> getOptionExtraSet() {
+        return optionExtraSet;
+    }
+
+    public void setOptionExtraSet(Set<Option> optionExtraSet) {
+        this.optionExtraSet = optionExtraSet;
     }
 
     @Override

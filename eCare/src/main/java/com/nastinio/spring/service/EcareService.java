@@ -60,6 +60,26 @@ public class EcareService {
         return setTariiffForListContract(listByIdPerson(idPerson));
     }
 
+    public List<Contract> getContractWithTariffAndOptionsList(Integer idPerson) throws DataExistenceException {
+        /*
+         * Возвращает список контрактов для пользователя с подцепленными тарифами
+         * к каждому тарифу подцепляет set опций
+         * */
+        return setTariiffForListContract(listByIdPerson(idPerson));
+    }
+
+    public Contract getTariffForContractByIdContract(Integer idContract) throws DataExistenceException {
+        /*
+        * Подцепит к контракту тариф
+        * */
+        Contract contract = (Contract) this.contractDAO.getById(idContract);
+        Tariff tariff = this.tariffDAO.getById(contract.getId_tariff());
+        contract.setTariff(tariff);
+        return contract;
+    }
+
+
+
 
 
 }
