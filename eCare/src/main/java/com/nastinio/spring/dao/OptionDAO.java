@@ -20,6 +20,9 @@ public class OptionDAO extends EntityDAO<Option> {
             return jointlyOptionsSet;
         } catch (DataExistenceException e) {
            super.logger.info("Option with id = " + id + " doesn't exist");
+           // TODO REturn null is bad))
+
+
            return null;
         }
     }

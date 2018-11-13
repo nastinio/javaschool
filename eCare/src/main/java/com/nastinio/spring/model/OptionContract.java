@@ -1,4 +1,3 @@
-/*
 package com.nastinio.spring.model;
 
 import javax.persistence.*;
@@ -7,7 +6,29 @@ import java.io.Serializable;
 @Entity
 @Table(name = "option_contract")
 public class OptionContract implements Serializable {
-    @Id
+
+    @EmbeddedId
+    private OptionContractId id;
+
+    public OptionContract() {
+    }
+
+    public OptionContractId getId() {
+        return id;
+    }
+
+    public void setId(OptionContractId id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "OptionContract{" +
+                "id=" + id.toString() +
+                '}';
+    }
+
+    /*@Id
     @Column(name = "id_option")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer idOption;
@@ -15,12 +36,11 @@ public class OptionContract implements Serializable {
     @Id
     @Column(name = "id_contract")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer idContract;
+    public Integer idContract;*/
 
-    public OptionContract() {
-    }
 
-    public OptionContract(Integer idOption, Integer idContract) {
+
+    /*public OptionContract(Integer idOption, Integer idContract) {
         this.idContract = idContract;
         this.idOption = idOption;
     }
@@ -39,6 +59,5 @@ public class OptionContract implements Serializable {
 
     public void setIdContract(Integer idContract) {
         this.idContract = idContract;
-    }
+    }*/
 }
-*/

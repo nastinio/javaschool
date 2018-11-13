@@ -45,6 +45,7 @@ public class PersonController {
     @RequestMapping(value = "/person/add", method = RequestMethod.POST)
     public String addPerson(@ModelAttribute("person") Person p) {
 
+        // TODO NPE!!
         if (p.getId() == null) {
             //new person, add it
             this.personService.addPerson(p);
@@ -53,7 +54,7 @@ public class PersonController {
             this.personService.updatePerson(p);
         }
 
-        return "redirect:person/persons";
+        return "redirect:/persons";
 
     }
 
@@ -61,18 +62,20 @@ public class PersonController {
     public String removePerson(@PathVariable("id") Integer id) {
 
         this.personService.removePerson(id);
-        return "redirect:person/persons";
+        return "redirect:/persons";
     }
 
     @RequestMapping("/person/edit/{id}")
-    public String editPerson(@PathVariable("id") Integer id, Model model) {
-        try {
-            model.addAttribute("person", this.personService.getPersonById(id));
-            model.addAttribute("listPersons", this.personService.listPersons());
-            return "redirect:person/person";
-        } catch (DataExistenceException e) {
-            return null;
-        }
+    public ModelAndView editPerson(@PathVariable("id") Integer id, Model model) throws DataExistenceException {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("person", this.personService.getPersonById(id));
+        modelAndView.addObject("listPersons", this.personService.listPersons());
+        modelAndView.setViewName("person/person");
+        return modelAndView;
+
+        //return "redirect:/persons";
+
 
     }
 

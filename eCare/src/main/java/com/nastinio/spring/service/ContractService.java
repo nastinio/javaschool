@@ -4,6 +4,7 @@ import com.nastinio.spring.dao.ContractDAO;
 import com.nastinio.spring.dao.TariffDAO;
 import com.nastinio.spring.exceptions.DataExistenceException;
 import com.nastinio.spring.model.Contract;
+import com.nastinio.spring.model.Person;
 import com.nastinio.spring.model.Tariff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,14 @@ public class ContractService {
 
     public Contract getById(Integer id) throws DataExistenceException {
         return (Contract) this.contractDAO.getById(id);
+    }
+
+    public List<Contract> list() {
+        return this.contractDAO.getList();
+    }
+
+    public void updateContract(Contract contract) {
+        this.contractDAO.update(contract);
     }
 
 }

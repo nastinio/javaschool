@@ -24,6 +24,7 @@ public class OptionController {
     @Autowired
     OptionService optionService;
 
+    // @GetMapping(value = "/options")
     @RequestMapping(value = "/options", method = RequestMethod.GET)
     public String listOptions(Model model) {
         model.addAttribute("listOptions", this.optionService.list());

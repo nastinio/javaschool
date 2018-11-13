@@ -19,6 +19,7 @@ public class Tariff {
    /* @OneToMany(mappedBy="option")
     private Set<Option> optionSet;*/
 
+    // Список всех опций в тарифе
     @ManyToMany(mappedBy = "tariffSet",fetch = FetchType.EAGER)
     private Set<Option> optionSet = new HashSet<>();
 
