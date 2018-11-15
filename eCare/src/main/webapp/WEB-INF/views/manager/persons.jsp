@@ -23,23 +23,42 @@
     <a class="btn btn-outline-primary" href="#">Выйти</a>
 </div>
 
+<a href="/ecare/manager/person-add">Добавить пользователя</a>
+
 <div class="container">
-    <p>
-    <h2>${option.name}</h2>
-    <a href="/ecare/manager/option-${option.id}-edit">Edit</a> <a href="/ecare/manager/option-${option.id}-remove">Remove</a>
-    </p>
-    <p>${option.description}</p>
-    <p><b>Стоимость услуги: </b> ${option.cost}</p>
-    <p><b>Стоимость подключения:</b> ${option.costConnection}</p>
+    <div class="card-deck mb-3 text-center">
+
+        <c:if test="${!empty personsList}">
+            <table class="table">
+                <tr>
+                    <th width="80">ID</th>
+                    <th width="120">FirstName</th>
+                    <th width="120">LastName</th>
+                    <th width="180">Date of birthday</th>
+                    <th width="120">Passport</th>
+                    <th width="120">Address</th>
+                    <th width="120">Email</th>
+                    <th width="60"></th>
+                </tr>
+                <c:forEach items="${personsList}" var="person">
+                    <tr>
+                        <td>${person.id}</td>
+                        <td>${person.firstname}</td>
+                        <td>${person.lastname}</td>
+                        <td>${person.dob}</td>
+                        <td>${person.passport}</td>
+                        <td>${person.address}</td>
+                        <td>${person.email}</td>
+                        <td><a href="<c:url value="/ecare/manager/person-${person.id}-more"/>">More</a></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:if>
+
+    </div>
+
 
 </div>
-<footer class="pt-4 my-md-5 pt-md-5 border-top">
-    <div class="row">
-        <div class="col-12 col-md">
-            <small class="d-block mb-3 text-muted">nastinio-2018</small>
-        </div>
-    </div>
-</footer>
 
 </body>
 </html>

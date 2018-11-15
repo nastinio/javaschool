@@ -98,7 +98,7 @@ public class PersonController {
         try {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.addObject("person", this.personService.getPersonById(id));
-            modelAndView.addObject("tariffSet",this.tariffService.getOptionSet(id));
+            modelAndView.addObject("tariffSet",this.personService.getOptionSet(id));
             modelAndView.setViewName("person/personEdit");
             return modelAndView;
         } catch (DataExistenceException e) {

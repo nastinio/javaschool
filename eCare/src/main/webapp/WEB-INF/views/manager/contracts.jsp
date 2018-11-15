@@ -24,22 +24,35 @@
 </div>
 
 <div class="container">
-    <p>
-    <h2>${option.name}</h2>
-    <a href="/ecare/manager/option-${option.id}-edit">Edit</a> <a href="/ecare/manager/option-${option.id}-remove">Remove</a>
-    </p>
-    <p>${option.description}</p>
-    <p><b>Стоимость услуги: </b> ${option.cost}</p>
-    <p><b>Стоимость подключения:</b> ${option.costConnection}</p>
+    <div class="card-deck mb-3 text-center">
+
+        <c:if test="${!empty contractsList}">
+            <table class="table">
+                <tr>
+                    <th width="80">ID</th>
+                    <th width="80">Number</th>
+                    <th width="120">Score</th>
+                    <th width="180">Тариф</th>
+                    <th width="180">Владелец</th>
+                    <th width="60"></th>
+                </tr>
+                <c:forEach items="${contractsList}" var="contract">
+                    <tr>
+                        <td>${contract.id}</td>
+                        <td>${contract.number}</td>
+                        <td>${contract.score}</td>
+                        <td><a href="<c:url value="/ecare/manager/tariff-${contract.tariffInContract.id}-more"/>">${contract.tariffInContract.name}</a></td>
+                        <td><a href="<c:url value="/ecare/manager/person-${contract.personInContract.id}-more"/>">${contract.personInContract.firstname} ${contract.personInContract.lastname}</a></td>
+                        <td><a href="<c:url value="/ecare/manager/contract-${contract.id}-more"/>">More</a></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:if>
+
+    </div>
+
 
 </div>
-<footer class="pt-4 my-md-5 pt-md-5 border-top">
-    <div class="row">
-        <div class="col-12 col-md">
-            <small class="d-block mb-3 text-muted">nastinio-2018</small>
-        </div>
-    </div>
-</footer>
 
 </body>
 </html>

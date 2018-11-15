@@ -25,7 +25,7 @@ public class PersonEcareController {
     ContractService contractService;
 
     @Autowired
-    TariffService tariffService;
+    TariffService personService;
 
     @Autowired
     EcareService ecareService;
@@ -78,7 +78,7 @@ public class PersonEcareController {
         //Берем все контракты для данного пользователя и каждому контракту задаем тариф
         modelAndView.addObject("contractSet", ecareService.getContractWithTariffList(id));
 
-        //modelAndView.addObject("optionSet", tariffService.getOptionsSet(1));
+        //modelAndView.addObject("optionSet", personService.getOptionsSet(1));
 
 
         modelAndView.setViewName("ecarePerson");
@@ -173,7 +173,7 @@ public class PersonEcareController {
         modelAndView.addObject("contract", this.ecareService.getTariffForContractByIdContract(idContract));
 
         //Передадим список всех тарифов с их опциями
-        modelAndView.addObject("allTariffList",this.tariffService.getTariffList());
+        modelAndView.addObject("allTariffList",this.personService.getTariffList());
 
         modelAndView.setViewName("ecareAllTariffs");
 

@@ -3,6 +3,7 @@ package com.nastinio.spring.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -30,7 +31,7 @@ public class Person {
     private String email;
 
     @OneToMany(mappedBy="personInContract")
-    private Set<Contract> contracts;
+    private Set<Contract> contracts = new HashSet<>();
 
     public Person() {
     }

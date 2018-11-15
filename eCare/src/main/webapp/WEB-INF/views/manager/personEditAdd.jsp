@@ -24,14 +24,14 @@
 </div>
 
 <div class="container">
-    <spring:form method="post" action="/ecare/manager/option-update" modelAttribute="option">
+    <spring:form method="post" action="/ecare/manager/person-update" modelAttribute="person">
 
-        <c:if test="${!empty option.id}">
+        <c:if test="${!empty person.id}">
             <div class="form-group row">
                 <label for="inputId" class="col-sm-2 col-form-label">ID</label>
                 <div class="col-sm-10">
                     <spring:input path="id" type="text" class="form-control" id="inputId"
-                                  readonly="true" disabled="true" placeholder="${option.id}"/>
+                                  readonly="true" disabled="true" placeholder="${person.id}"/>
                     <spring:hidden path="id"></spring:hidden>
                 </div>
             </div>
@@ -39,31 +39,51 @@
 
 
         <div class="form-group row">
-            <label for="inputName" class="col-sm-2 col-form-label">Наименование</label>
+            <label for="inputPassword" class="col-sm-2 col-form-label">Пароль</label>
             <div class="col-sm-10">
-                <spring:input path="name" type="text" class="form-control" id="inputName"
-                              placeholder="${option.name}"/>
+                <spring:input path="password" type="password" class="form-control" id="inputPassword"
+                              placeholder="${person.password}"/>
             </div>
         </div>
         <div class="form-group row">
-            <label for="inputCost" class="col-sm-2 col-form-label">Стоимость</label>
+            <label for="inputFirstname" class="col-sm-2 col-form-label">Имя</label>
             <div class="col-sm-10">
-                <spring:input path="cost" type="text" class="form-control" id="inputCost"
-                              placeholder="${option.cost}"/>
+                <spring:input path="firstname" type="text" class="form-control" id="inputFirstname"
+                              placeholder="${person.firstname}"/>
             </div>
         </div>
         <div class="form-group row">
-            <label for="inputCostConnection" class="col-sm-2 col-form-label">Стоимость подключения</label>
+            <label for="inputLastname" class="col-sm-2 col-form-label">Фамилия</label>
             <div class="col-sm-10">
-                <spring:input path="costConnection" type="text" class="form-control" id="inputCostConnection"
-                              placeholder="${option.costConnection}"/>
+                <spring:input path="lastname" type="text" class="form-control" id="inputLastname"
+                              placeholder="${person.lastname}"/>
             </div>
         </div>
         <div class="form-group row">
-            <label for="inputDescription" class="col-sm-2 col-form-label">Описание</label>
+            <label for="inputPassport" class="col-sm-2 col-form-label">Пасспорт</label>
             <div class="col-sm-10">
-                <spring:textarea path="description" type="text" class="form-control" id="inputDescription " rows="5"
-                                 placeholder="${option.description}"/>
+                <spring:input path="passport" type="text" class="form-control" id="inputPassport"
+                              placeholder="${person.passport}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputAddress" class="col-sm-2 col-form-label">Адрес</label>
+            <div class="col-sm-10">
+                <spring:input path="address" type="text" class="form-control" id="inputAddress"
+                              placeholder="${person.address}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+                <spring:input path="email" type="email" class="form-control" id="inputEmail"
+                              placeholder="${person.email}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputDob" class="col-sm-2 col-form-label">Дата рождения</label>
+            <div class="col-sm-10">
+                <spring:input path="dob" type="text" class="form-control" id="inputDob" placeholder="${person.dob}"/>
             </div>
         </div>
 

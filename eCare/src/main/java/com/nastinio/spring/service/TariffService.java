@@ -17,6 +17,9 @@ public class TariffService {
     @Autowired
     TariffDAO tariffDAO;
 
+    @Autowired
+    OptionCellularService optionCellularService;
+
     public Tariff getById(Integer id) throws DataExistenceException {
         return this.tariffDAO.getById(id);
     }
@@ -58,6 +61,32 @@ public class TariffService {
         }
 
     }
+
+    public void includeOptionInTariff(Integer idTariff, Integer idOption) throws DataExistenceException {
+        Tariff tariff = this.tariffDAO.getById(idTariff);
+        OptionCellular optionForInclude = this.optionCellularService.getById(idOption);
+
+        Set<OptionCellular> listOptionInTariff = tariff.getOptionsOnTariff();
+        if(!listOptionInTariff.contains(optionForInclude)){
+            listOptionInTariff.add(optionForInclude);
+            this.tariffDAO.update(tariff);
+        }else{
+            //TODO: обработчик, если опция в тарифе уже есть
+            System.out.println("Опция в тарифе уже есть");
+        }
+
+    }
+
+    /*public List<OptionCellular> getListAvailableOptionsForAdd(Integer idTariff) throws DataExistenceException {
+        Tariff tariff = this.tariffDAO.getById(idTariff);
+        Set<OptionCellular> optionSet = tariff.getOptionsOnTariff();
+
+        List<OptionCellular> listAllOptions = this.optionCellularService.getList();
+        for (OptionCellular option:listAllOptions){
+
+        }
+
+    }*/
 
 
 

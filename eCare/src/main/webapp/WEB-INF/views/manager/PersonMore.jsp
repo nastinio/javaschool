@@ -23,42 +23,48 @@
     <a class="btn btn-outline-primary" href="#">Выйти</a>
 </div>
 
-<a href="/ecare/manager/tariff-add">Добавить тариф</a>
-
 <div class="container">
-    <div class="card-deck mb-3 text-center">
+    <p>
+    <h2>${person.firstname} ${person.lastname}</h2>
+    <a href="/ecare/manager/person-${person.id}-edit">Edit</a> <a href="/ecare/manager/person-${person.id}-remove">Remove</a>
+    </p>
+    <p><b>Дата рождения: </b>${person.dob}</p>
+    <p><b>Email: </b>${person.email}</p>
+    <p><b>Адрес: </b>${person.address}</p>
+    <p><b>Пасторт: </b>${person.passport}</p>
 
-        <c:forEach items="${tariffsList}" var="tariff">
+    <%--Добавить контракт--%>
+    <a href="/ecare/manager/person-${person.id}/contract-add"
+       class="btn btn-lg btn-block btn-outline-primary" role="button">Добавить контракт</a>
+
+    <div class="card-deck mb-3 text-center">
+        <%--Все контракты пользователя--%>
+        <c:forEach items="${person.contracts}" var="contract">
             <div class="row">
                 <div class="col">
                     <div class="card mb-4 shadow-sm">
                         <div class="card-header">
-                            <h4 class="my-0 font-weight-normal">${tariff.name}</h4>
+                            <h4 class="my-0 font-weight-normal">${contract.number}</h4>
                         </div>
                         <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$${tariff.cost}
-                                <small class="text-muted">/ mo</small>
+                            <h1 class="card-title pricing-card-title">
+                                <small class="text-muted">Баланс</small>
+                                    ${contract.score}$
                             </h1>
                             <ul class="list-unstyled mt-3 mb-4">
-                                <li>-</li>
+                                <li>Тариф: ${contract.tariffInContract.name}</li>
                             </ul>
-                            <a href="/ecare/manager/tariff-${tariff.id}-more" class="btn btn-lg btn-block btn-outline-primary" role="button" aria-disabled="true">More</a>
+                            <a href="/ecare/manager/contract-${contract.id}-more"
+                               class="btn btn-lg btn-block btn-outline-primary" role="button"
+                               aria-disabled="true">More</a>
                         </div>
                     </div>
                 </div>
             </div>
         </c:forEach>
-
     </div>
 
 
-    <footer class="pt-4 my-md-5 pt-md-5 border-top">
-        <div class="row">
-            <div class="col-12 col-md">
-                <small class="d-block mb-3 text-muted">nastinio-2018</small>
-            </div>
-        </div>
-    </footer>
 </div>
 
 </body>

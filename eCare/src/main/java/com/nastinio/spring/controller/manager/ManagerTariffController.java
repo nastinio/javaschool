@@ -1,7 +1,8 @@
-package com.nastinio.spring.controller;
+package com.nastinio.spring.controller.manager;
 
 import com.nastinio.spring.exceptions.DataExistenceException;
 import com.nastinio.spring.model.Tariff;
+import com.nastinio.spring.service.OptionCellularService;
 import com.nastinio.spring.service.TariffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,13 +15,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @ComponentScan("com.nastinio")
-public class TempController {
+public class ManagerTariffController {
     @Autowired
     TariffService tariffService;
 
+    @Autowired
+    OptionCellularService optionCellularService;
+
     /*
-    * Управление тарифами
-    * */
+     * Управление тарифами
+     * */
     @RequestMapping(value = "/ecare/manager/all-tariffs", method = RequestMethod.GET)
     public ModelAndView managerAllTariffs() {
         ModelAndView modelAndView = new ModelAndView();
@@ -35,6 +39,7 @@ public class TempController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("manager/tariffMore");
         modelAndView.addObject("tariff",this.tariffService.getById(idTariff));
+        modelAndView.addObject("listOptions",this.optionCellularService.getList());
 
         return modelAndView;
     }
@@ -85,20 +90,10 @@ public class TempController {
         return "redirect:/ecare/manager/tariff-"+idTariff+"-more";
     }
 
+    @RequestMapping(value = "/ecare/manager/tariff-{idTariff}/option-{idOption}-activate", method = RequestMethod.GET)
+    public String managerTariffActivateOption(@PathVariable("idTariff") Integer idTariff,@PathVariable("idOption") Integer idOption) throws DataExistenceException {
+        this.tariffService.includeOptionInTariff(idTariff,idOption);
 
-
-
-
-
-    /*
-     * Управление пользователями
-     * */
-    @RequestMapping(value = "/ecare/manager/all-persons", method = RequestMethod.GET)
-    public void managerAllPersons() {
-
+        return "redirect:/ecare/manager/tariff-"+idTariff+"-more";
     }
-
-
-
-
 }

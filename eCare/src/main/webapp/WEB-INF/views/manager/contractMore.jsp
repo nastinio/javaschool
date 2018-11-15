@@ -25,44 +25,15 @@
 
 <div class="container">
     <p>
-    <h2>${tariff.name}</h2>
-    <a href="/ecare/manager/tariff-${tariff.id}-edit">Edit</a> <a href="/ecare/manager/tariff-${tariff.id}-remove">Remove</a>
+    <h2><a href="/ecare/manager/person-${contract.personInContract.id}-more">${contract.personInContract.firstname} ${contract.personInContract.lastname}</a></h2>
+    <h1>${contract.number}</h1>
+    <a href="#">Edit</a> <a href="/ecare/manager/person-${person.id}-remove">Remove</a>
     </p>
-    <p>${tariff.description}</p>
-    <h5>Стоимость тарифа: ${tariff.cost}</h5>
 
-    <%--Подключенные к тарифу опции--%>
-    <c:if test="${!empty tariff.optionsOnTariff}">
-        <div class="container">
-            <div class="card-deck mb-3 text-center">
-                <c:forEach items="${tariff.optionsOnTariff}" var="option">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card mb-4 shadow-sm">
-                                <div class="card-header">
-                                    <h4 class="my-0 font-weight-normal">${option.name}</h4>
-                                </div>
-                                <div class="card-body">
-                                    <h1 class="card-title pricing-card-title">$${option.cost}
-                                        <small class="text-muted">/ mo</small>
-                                    </h1>
-                                    <ul class="list-unstyled mt-3 mb-4">
-                                        <li>$${option.costConnection} стоимость подключения</li>
-                                    </ul>
-                                    <a href="/ecare/manager/tariff-${tariff.id}/option-${option.id}-disable"
-                                       class="btn btn-lg btn-block btn-outline-primary" role="button"
-                                       aria-disabled="true">Отключить</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </c:forEach>
-            </div>
-        </div>
-    </c:if>
+    <h5>Тариф: <a href="/ecare/manager/tariff-${contract.tariffInContract.id}-more">${contract.tariffInContract.name}</a></h5>
+    <p>${contract.tariffInContract.description}</p>
 
-    <h5>Добавить опции</h5>
-    <c:if test="${!empty listOptions}">
+    <c:if test="${!empty contract.tariffInContract.optionsOnTariff}">
         <table class="table">
             <tr>
                 <th width="80">ID</th>
@@ -71,17 +42,47 @@
                 <th width="280">Стоимость подключения</th>
                 <th width="60"></th>
             </tr>
-            <c:forEach items="${listOptions}" var="option">
+            <c:forEach items="${contract.tariffInContract.optionsOnTariff}" var="option">
                 <tr>
                     <td>${option.id}</td>
                     <td>${option.name}</td>
                     <td>${option.cost}</td>
                     <td>${option.costConnection}</td>
-                    <td><a href="<c:url value="/ecare/manager/tariff-${tariff.id}/option-${option.id}-activate"/>">Подключить</a></td>
+                    <td><a href="<c:url value="/ecare/manager/option-${option.id}-more"/>">More</a></td>
                 </tr>
             </c:forEach>
         </table>
     </c:if>
+
+
+
+    <h5>Дополнительные опции</h5>
+
+    <div class="container">
+        <div class="card-deck mb-3 text-center">
+            <c:forEach items="${contract.optionsOnContract}" var="option">
+                <div class="row">
+                    <div class="col">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">${option.name}</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">$${option.cost}
+                                    <small class="text-muted">/ mo</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>$${option.costConnection} стоимость подключения</li>
+                                </ul>
+                                <a href="/ecare/manager/contract-${contract.id}/extraoption-${option.id}-disable" class="btn btn-lg btn-block btn-outline-primary" role="button"
+                                   aria-disabled="true">Отключить</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
 
 
 </div>

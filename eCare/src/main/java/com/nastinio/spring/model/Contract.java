@@ -19,12 +19,6 @@ public class Contract {
     @Column(name = "score")
     private Integer score;
 
-    @Column(name = "id_person")
-    private Integer id_person;
-
-    @Column(name = "id_tariff")
-    private Integer id_tariff;
-
     @Column(name = "is_blocked_person")
     public int isBlockedByPerson;
 
@@ -32,11 +26,11 @@ public class Contract {
     public int isBlockedByManager;
 
     @ManyToOne
-    @JoinColumn(name="id_tariff_contract", nullable=false)
+    @JoinColumn(name="id_tariff", nullable=false)
     private Tariff tariffInContract;
 
     @ManyToOne
-    @JoinColumn(name="id_person_contract", nullable=false)
+    @JoinColumn(name="id_person", nullable=false)
     private Person personInContract;
 
     @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
@@ -56,8 +50,6 @@ public class Contract {
                 "id=" + id +
                 ", number='" + number + '\'' +
                 ", score=" + score +
-                ", id_person=" + id_person +
-                ", id_tariff=" + id_tariff +
                 ", isBlockedByPerson=" + isBlockedByPerson +
                 ", isBlockedByManager=" + isBlockedByManager +
                 ", tariffInContract=" + tariffInContract +
@@ -87,22 +79,6 @@ public class Contract {
 
     public void setScore(Integer score) {
         this.score = score;
-    }
-
-    public Integer getId_person() {
-        return id_person;
-    }
-
-    public void setId_person(Integer id_person) {
-        this.id_person = id_person;
-    }
-
-    public Integer getId_tariff() {
-        return id_tariff;
-    }
-
-    public void setId_tariff(Integer id_tariff) {
-        this.id_tariff = id_tariff;
     }
 
     public int getIsBlockedByPerson() {

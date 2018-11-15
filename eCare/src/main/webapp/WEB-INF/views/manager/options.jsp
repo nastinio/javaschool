@@ -16,6 +16,7 @@
         <a class="p-2 text-dark" href="/ecare/manager/all-options">Опции</a>
         <a class="p-2 text-dark" href="/ecare/manager/all-tariffs">Тарифы</a>
         <a class="p-2 text-dark" href="/ecare/manager/all-persons">Клиенты</a>
+        <a class="p-2 text-dark" href="/ecare/manager/all-contracts">Контракты</a>
     </nav>
     <h5 class="my-0 mr-md-auto font-weight-normal"></h5>
     <a class="p-2 text-dark" href="#">Manager</a>

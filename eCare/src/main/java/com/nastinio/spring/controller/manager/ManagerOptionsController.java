@@ -1,4 +1,4 @@
-package com.nastinio.spring.controller;
+package com.nastinio.spring.controller.manager;
 
 import com.nastinio.spring.exceptions.DataExistenceException;
 import com.nastinio.spring.model.OptionCellular;
