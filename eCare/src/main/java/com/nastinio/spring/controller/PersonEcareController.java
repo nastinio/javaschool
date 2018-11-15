@@ -1,9 +1,7 @@
+/*
 package com.nastinio.spring.controller;
 
-import com.nastinio.spring.dao.OptionContractDAO;
 import com.nastinio.spring.exceptions.DataExistenceException;
-import com.nastinio.spring.model.OptionContract;
-import com.nastinio.spring.model.OptionContractId;
 import com.nastinio.spring.model.Person;
 import com.nastinio.spring.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,21 +33,21 @@ public class PersonEcareController {
     @Autowired
     OptionService optionService;
 
-    @Autowired
-    OptionContractDAO optionContractDAO;
 
 
     @RequestMapping(value = "/ecare/{id}/info", method = RequestMethod.GET)
     public ModelAndView showEcareInfo(@PathVariable("id") Integer id) throws DataExistenceException {
-        Person person = personService.getPersonById(id);
+        Person person = personService.getById(id);
 
         ModelAndView modelAndView = new ModelAndView();
 
         //А ля security
-        if (!person.isOnline()) {
+        */
+/*if (!person.isOnline()) {
             modelAndView.setViewName("redirect:/signin");
             return modelAndView;
-        }
+        }*//*
+
 
         modelAndView.addObject("person", person);
 
@@ -61,7 +59,7 @@ public class PersonEcareController {
 
     @RequestMapping(value = "/ecare/{id}/contracts", method = RequestMethod.GET)
     public ModelAndView showEcareContracts(@PathVariable("id") Integer id) throws DataExistenceException {
-        Person person = personService.getPersonById(id);
+        Person person = personService.getById(id);
         Person cutPerson = new Person(person.getId());
         cutPerson.setFirstname(person.getFirstname());
         cutPerson.setLastname(person.getLastname());
@@ -69,10 +67,12 @@ public class PersonEcareController {
         ModelAndView modelAndView = new ModelAndView();
 
         //А ля security
-        if (!person.isOnline()) {
+        */
+/*if (!person.isOnline()) {
             modelAndView.setViewName("redirect:/signin");
             return modelAndView;
-        }
+        }*//*
+
 
         modelAndView.addObject("person", cutPerson);
         //Берем все контракты для данного пользователя и каждому контракту задаем тариф
@@ -89,7 +89,7 @@ public class PersonEcareController {
     @RequestMapping(value = "/ecare/{id}/edit", method = RequestMethod.POST)
     public ModelAndView editEcare(@ModelAttribute("person") Person person) throws DataExistenceException {
         System.out.println("Получили для обновления: " + person.toString());
-        personService.updatePerson(person);
+        personService.update(person);
 
         ModelAndView modelAndView = new ModelAndView();
         //modelAndView.addObject("person", person);
@@ -114,15 +114,17 @@ public class PersonEcareController {
 
     @RequestMapping(value = "/ecare/{idPerson}/contract/{idContract}/more", method = RequestMethod.GET)
     public ModelAndView contractDetails(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
-        Person person = personService.getPersonById(idPerson);
+        Person person = personService.getById(idPerson);
 
         ModelAndView modelAndView = new ModelAndView();
 
         //А ля security
-        /*if (!person.isOnline()) {
+        */
+/*if (!person.isOnline()) {
             modelAndView.setViewName("redirect:/signin");
             return modelAndView;
-        }*/
+        }*//*
+
 
         modelAndView.addObject("person", person);
         //Передадим контракт с подцепленным тарифом
@@ -133,15 +135,19 @@ public class PersonEcareController {
     }
 
 
-    /*Отключение дополнительной опции в контракте*/
+    */
+/*Отключение дополнительной опции в контракте*//*
+
     @RequestMapping(value = "/ecare/{idPerson}/contract/{idContract}/disableExtraOption/{idOption}")
     public String disableExtraOption(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract,
                                      @PathVariable("idOption") Integer idOption) throws DataExistenceException {
         //TODO:Удалим строку из таблицы `option_contract`
-        /*System.out.println("Найдем OptionContract");
+        */
+/*System.out.println("Найдем OptionContract");
         OptionContract optionContract = this.optionContractDAO.getById(new OptionContractId(idOption,idContract));
         System.out.println(optionContract.toString());
-        this.optionContractDAO.deleteExtraOptionByIdContract(idContract,idOption);*/
+        this.optionContractDAO.deleteExtraOptionByIdContract(idContract,idOption);*//*
+
 
 
         return "redirect:/ecare/" + idPerson + "/contract/" + idContract + "/more";
@@ -150,15 +156,17 @@ public class PersonEcareController {
 
     @RequestMapping(value = "/ecare/{idPerson}/contract/{idContract}/tariffs", method = RequestMethod.GET)
     public ModelAndView changeTariff(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
-        Person person = personService.getPersonById(idPerson);
+        Person person = personService.getById(idPerson);
 
         ModelAndView modelAndView = new ModelAndView();
 
         //А ля security
-        /*if (!person.isOnline()) {
+        */
+/*if (!person.isOnline()) {
             modelAndView.setViewName("redirect:/signin");
             return modelAndView;
-        }*/
+        }*//*
+
 
         modelAndView.addObject("person", person);
         //Передадим контракт с подцепленным тарифом
@@ -174,14 +182,16 @@ public class PersonEcareController {
 
     @RequestMapping(value = "/ecare/{idPerson}/contract/{idContract}/extraOptions", method = RequestMethod.GET)
     public ModelAndView addExtraOptions(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
-        Person person = personService.getPersonById(idPerson);
+        Person person = personService.getById(idPerson);
         ModelAndView modelAndView = new ModelAndView();
 
         //А ля security
-        /*if (!person.isOnline()) {
+        */
+/*if (!person.isOnline()) {
             modelAndView.setViewName("redirect:/signin");
             return modelAndView;
-        }*/
+        }*//*
+
 
         modelAndView.addObject("person", person);
         //Передадим контракт с подцепленным тарифом
@@ -196,7 +206,9 @@ public class PersonEcareController {
     }
 
 
-    /*Смена тарифа в контракте*/
+    */
+/*Смена тарифа в контракте*//*
+
     @RequestMapping(value = "/ecare/{idPerson}/contract/{idContract}/changeTariff/{idTariff}")
     public String changeTariff(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract,
                                      @PathVariable("idTariff") Integer idTariff) throws DataExistenceException {
@@ -204,3 +216,4 @@ public class PersonEcareController {
         return "redirect:/ecare/" + idPerson + "/contract/" + idContract + "/more";
     }
 }
+*/

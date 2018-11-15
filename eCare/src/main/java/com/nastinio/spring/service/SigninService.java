@@ -39,7 +39,7 @@ public class SigninService {
         }
     }
 
-    @Transactional
+    /*@Transactional
     public void doOnline(Integer id) throws DataExistenceException {
         this.personDAO.doOnline(id);
     }
@@ -47,7 +47,7 @@ public class SigninService {
     @Transactional
     public void doOffline(Integer id) throws DataExistenceException {
         this.personDAO.doOffline(id);
-    }
+    }*/
 
 
     public boolean isRegisteredManager(Manager managerOuter){

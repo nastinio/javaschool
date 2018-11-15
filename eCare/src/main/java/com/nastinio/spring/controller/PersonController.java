@@ -37,7 +37,7 @@ public class PersonController {
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
     public String listPersons(Model model) {
         model.addAttribute("person", new Person());
-        model.addAttribute("listPersons", this.personService.listPersons());
+        model.addAttribute("listPersons", this.personService.getList());
         return "person/person";
     }
 
@@ -48,10 +48,10 @@ public class PersonController {
         // TODO NPE!!
         if (p.getId() == null) {
             //new person, add it
-            this.personService.addPerson(p);
+            this.personService.add(p);
         } else {
             //existing person, call update
-            this.personService.updatePerson(p);
+            this.personService.update(p);
         }
 
         return "redirect:/persons";
@@ -61,7 +61,7 @@ public class PersonController {
     @RequestMapping("/person/remove/{id}")
     public String removePerson(@PathVariable("id") Integer id) {
 
-        this.personService.removePerson(id);
+        this.personService.remove(id);
         return "redirect:/persons";
     }
 
@@ -69,8 +69,8 @@ public class PersonController {
     public ModelAndView editPerson(@PathVariable("id") Integer id, Model model) throws DataExistenceException {
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("person", this.personService.getPersonById(id));
-        modelAndView.addObject("listPersons", this.personService.listPersons());
+        modelAndView.addObject("person", this.personService.getById(id));
+        modelAndView.addObject("listPersons", this.personService.getList());
         modelAndView.setViewName("person/person");
         return modelAndView;
 
@@ -84,7 +84,7 @@ public class PersonController {
     public ModelAndView showPerson(@PathVariable("id") Integer id) {
         try {
             ModelAndView modelAndView = new ModelAndView();
-            modelAndView.addObject("person", this.personService.getPersonById(id));
+            modelAndView.addObject("person", this.personService.getById(id));
             modelAndView.setViewName("person/personEdit");
             return modelAndView;
         } catch (DataExistenceException e) {

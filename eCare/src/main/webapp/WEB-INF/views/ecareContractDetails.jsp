@@ -89,8 +89,8 @@
     <c:forEach items="${contract.tariff.optionSet}" var="optionTariff">
         <tr>
             <td>${optionTariff.name}</td>
-            <td>${optionTariff.connectionCostOption}</td>
-            <td>${optionTariff.costOption}</td>
+            <td>${optionTariff.costConnection}</td>
+            <td>${optionTariff.cost}</td>
         </tr>
     </c:forEach>
     </tbody>
@@ -111,8 +111,8 @@
     <c:forEach items="${contract.optionExtraSet}" var="optionExtra">
         <tr>
             <td>${optionExtra.name}</td>
-            <td>${optionExtra.connectionCostOption}</td>
-            <td>${optionExtra.costOption}</td>
+            <td>${optionExtra.costConnection}</td>
+            <td>${optionExtra.cost}</td>
             <td><a href="<c:url value='/ecare/${person.id}/contract/${contract.id}/disableExtraOption/${optionExtra.id}'/>"
                    class="c">Отключить</a></td>
         </tr>

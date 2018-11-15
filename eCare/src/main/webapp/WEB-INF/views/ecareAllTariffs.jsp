@@ -89,8 +89,8 @@
                     <c:forEach items="${tariff.optionSet}" var="optionTariff">
                         <tr>
                             <td>${optionTariff.name}</td>
-                            <td>${optionTariff.connectionCostOption}</td>
-                            <td>${optionTariff.costOption}</td>
+                            <td>${optionTariff.costConnection}</td>
+                            <td>${optionTariff.cost}</td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -115,8 +115,8 @@
                 <c:forEach items="${allOptionList}" var="option">
                     <tr>
                         <td>${option.name}</td>
-                        <td>${option.connectionCostOption}</td>
-                        <td>${option.costOption}</td>
+                        <td>${option.costConnection}</td>
+                        <td>${option.cost}</td>
                         <td><a href="<c:url value='#'/>" class="c">Подключить</a><br>
                         </td>
                     </tr>

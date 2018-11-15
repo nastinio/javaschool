@@ -1,3 +1,4 @@
+/*
 package com.nastinio.spring.controller;
 
 
@@ -91,12 +92,15 @@ public class OptionController {
         }
 
         return "redirect:/options";
-        /*Integer id = option.getId();
-        return "redirect:/options/option/edit{"+id+"}";*/
+        */
+/*Integer id = option.getId();
+        return "redirect:/options/option/edit{"+id+"}";*//*
+
 
     }
 
-    /*@RequestMapping("/option/edit/{id}/addJointlyOp{idJointly}")
+    */
+/*@RequestMapping("/option/edit/{id}/addJointlyOp{idJointly}")
     public void addJointlyOption(@PathVariable("id") Integer id, @PathVariable("idJointly") Integer idJointly) {
         System.out.println("Тыкнули на добавление зависимости между " + id + " и " + idJointly);
         //Добавим обязательную опцию в бд и вернем на страницу редактирования в списке обязательных
@@ -108,14 +112,18 @@ public class OptionController {
 
         editOption(id);
 
-    }*/
+    }*//*
 
-    /*@RequestMapping("/option/remove/{id}")
+
+    */
+/*@RequestMapping("/option/remove/{id}")
     public String removeOption(@PathVariable("id") Integer id) {
 
         this.optionService.remove(id);
         return "redirect:/options";
-    }*/
+    }*//*
+
 
 
 }
+*/

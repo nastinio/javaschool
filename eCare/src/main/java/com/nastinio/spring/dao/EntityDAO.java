@@ -1,14 +1,12 @@
 package com.nastinio.spring.dao;
 
 import com.nastinio.spring.exceptions.DataExistenceException;
-import com.nastinio.spring.model.OptionContract;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import sun.awt.image.IntegerComponentRaster;
 
 import java.util.List;
 
@@ -64,10 +62,17 @@ public abstract class EntityDAO<T> implements Crud<T> {
         //session.close();
     }
 
+    public void merge(T entity) {
+        System.out.println("Получили на обновление " + entity.toString());
+        Session session = this.sessionFactory.getCurrentSession();
+        session.merge(entity);
+        logger.info(nameClassHeir + " merged successfully. " + nameClassHeir + "  details=" + entity);
+    }
+
     @Override
     public List<T> getList() {
-        //Session session = this.sessionFactory.getCurrentSession();
-        Session session = this.sessionFactory.openSession();
+        Session session = this.sessionFactory.getCurrentSession();
+        //Session session = this.sessionFactory.openSession();
         logger.info("Try get list all " + nameClassHeir);
         List<T> entitiesList = session.createQuery("from "+nameClassHeir).list();//session.createQuery("from Person").list();
         logger.info("CreateQuery success");

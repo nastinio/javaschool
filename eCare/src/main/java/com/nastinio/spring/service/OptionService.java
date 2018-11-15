@@ -1,9 +1,9 @@
+/*
 package com.nastinio.spring.service;
 
 import com.nastinio.spring.dao.OptionDAO;
 import com.nastinio.spring.exceptions.DataExistenceException;
 import com.nastinio.spring.model.Option;
-import com.nastinio.spring.model.OptionRules;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +19,10 @@ public class OptionService {
     @Autowired
     OptionDAO optionDAO;
 
-    /*@Autowired
-    OptionsJointlyDAO optionsJointlyDAO;*/
+    */
+/*@Autowired
+    OptionsJointlyDAO optionsJointlyDAO;*//*
+
 
 
     @Transactional
@@ -97,12 +99,15 @@ public class OptionService {
 
         }
 
-        /*for (Option temp : optionsWithRulesSet) {
+        */
+/*for (Option temp : optionsWithRulesSet) {
             System.out.println(temp.id + " " + temp.getName() + " " + temp.getRule());
-        }*/
+        }*//*
+
 
         return optionsWithRulesSet;
     }
 
 
 }
+*/

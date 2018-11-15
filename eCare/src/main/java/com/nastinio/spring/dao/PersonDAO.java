@@ -14,7 +14,7 @@ public class PersonDAO extends EntityDAO {
     }
 
 
-    public void doOnline(Integer id) throws DataExistenceException {
+    /*public void doOnline(Integer id) throws DataExistenceException {
         Person person = (Person)getById(id);
         person.setOnline(true);
         logger.info("Get for update online-status: " + person.toString());
@@ -26,6 +26,6 @@ public class PersonDAO extends EntityDAO {
         person.setOnline(false);
         logger.info("Get for update online-status: " + person.toString());
         update(person);
-    }
+    }*/
 
 }

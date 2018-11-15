@@ -78,22 +78,22 @@
         </tr>
         <tr>
             <td>
-                <form:label path="connectionCostOption">
+                <form:label path="costConnection">
                     <spring:message text="Connection cost option"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="connectionCostOption"/>
+                <form:input path="costConnection"/>
             </td>
         </tr>
         <tr>
             <td>
-                <form:label path="costOption">
+                <form:label path="cost">
                     <spring:message text="Cost option"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="costOption"/>
+                <form:input path="cost"/>
             </td>
         </tr>
 
@@ -137,8 +137,8 @@ Add relationships between options <br>
             <tr>
                 <td>${joinOption.id}</td>
                 <td>${joinOption.name}</td>
-                <td>${joinOption.connectionCostOption}</td>
-                <td>${joinOption.costOption}</td>
+                <td>${joinOption.costConnection}</td>
+                <td>${joinOption.cost}</td>
 
                 <td><input type="checkbox" name=${joinOption.id} checked></td>
                 <td><input type="checkbox" name=${joinOption.id}></td>
@@ -150,8 +150,8 @@ Add relationships between options <br>
             <tr>
                 <td>${excludeOption.id}</td>
                 <td>${excludeOption.name}</td>
-                <td>${excludeOption.connectionCostOption}</td>
-                <td>${excludeOption.costOption}</td>
+                <td>${excludeOption.costConnection}</td>
+                <td>${excludeOption.cost}</td>
 
                 <td><input type="checkbox" name=${excludeOption.id}></td>
                 <td><input type="checkbox" name=${excludeOption.id} checked></td>
@@ -164,8 +164,8 @@ Add relationships between options <br>
             <tr>
                 <td>${optionWithoutRule.id}</td>
                 <td>${optionWithoutRule.name}</td>
-                <td>${optionWithoutRule.connectionCostOption}</td>
-                <td>${optionWithoutRule.costOption}</td>
+                <td>${optionWithoutRule.costConnection}</td>
+                <td>${optionWithoutRule.cost}</td>
 
 
                 <%--<td>
@@ -201,8 +201,8 @@ Add relationships between options <br>
             <tr>
                 <td>${optionFromListAll.id}</td>
                 <td>${optionFromListAll.name}</td>
-                <td>${optionFromListAll.connectionCostOption}</td>
-                <td>${optionFromListAll.costOption}</td>
+                <td>${optionFromListAll.costConnection}</td>
+                <td>${optionFromListAll.cost}</td>
 
                 <td><input type="checkbox" name=${optionFromListAll.id}</td>
                 <td><input type="checkbox" name=${optionFromListAll.id}</td>

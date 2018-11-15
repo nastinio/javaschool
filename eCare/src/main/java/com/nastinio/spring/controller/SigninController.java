@@ -1,3 +1,4 @@
+/*
 package com.nastinio.spring.controller;
 
 import com.nastinio.spring.exceptions.DataExistenceException;
@@ -25,8 +26,12 @@ public class SigninController {
     @Autowired
     SigninService signinService;
 
-    /*First method on start application*/
-    /*Попадаем сюда на старте приложения (см. параметры аннотации и настройки пути после деплоя) */
+    */
+/*First method on start application*//*
+
+    */
+/*Попадаем сюда на старте приложения (см. параметры аннотации и настройки пути после деплоя) *//*
+
     @RequestMapping(value = "/signin", method = RequestMethod.GET)
     public ModelAndView main() {
         ModelAndView modelAndView = new ModelAndView();
@@ -43,10 +48,12 @@ public class SigninController {
         return modelAndView;
     }
 
-    /*как только на index.jsp подтвердится форма
+    */
+/*как только на index.jsp подтвердится форма
     <spring:form method="post"  modelAttribute="userJSP" action="check-person">,
     то попадем вот сюда
-     */
+     *//*
+
     @RequestMapping(value = "/check-person", method = RequestMethod.POST)
     public ModelAndView checkPerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) throws DataExistenceException {
         ModelAndView modelAndView = new ModelAndView();
@@ -61,7 +68,8 @@ public class SigninController {
             signinService.doOnline(person.getId());
             modelAndView.setViewName("redirect:/ecare/"+person.getId()+"/info");
             return modelAndView;
-            /*try {
+            */
+/*try {
                 modelAndView.addObject("person", signinService.getPersonById(person.getId()));
                 modelAndView.setViewName("redirect:/ecare");
                 person.setOnline(true);
@@ -70,7 +78,8 @@ public class SigninController {
                 modelAndView.setViewName("signin/signinPerson");
                 //modelAndView.addObject("errorMessage","Некорректные данные для входа");
                 return modelAndView;
-            }*/
+            }*//*
+
 
         }
         modelAndView.setViewName("signin/signinPerson");
@@ -109,3 +118,4 @@ public class SigninController {
 
 
 }
+*/

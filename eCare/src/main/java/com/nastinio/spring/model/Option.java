@@ -1,3 +1,4 @@
+/*
 package com.nastinio.spring.model;
 
 import javax.persistence.*;
@@ -11,8 +12,10 @@ public class Option {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    /*@NotNull(message = "Введите логин")
-    @Pattern(regexp = "^\\d+$", message = "Неверный формат логина")*/
+    */
+/*@NotNull(message = "Введите логин")
+    @Pattern(regexp = "^\\d+$", message = "Неверный формат логина")*//*
+
     public Integer id;
 
     private String name;
@@ -65,9 +68,11 @@ public class Option {
     }
 
 
-    /* @ManyToOne
+    */
+/* @ManyToOne
     @JoinColumn(name="id_tariff", nullable=false)
-    private Tariff tariff;*/
+    private Tariff tariff;*//*
+
 
 
 
@@ -92,19 +97,19 @@ public class Option {
         this.name = name;
     }
 
-    public Float getConnectionCostOption() {
+    public Float getCostConnection() {
         return connectionCostOption;
     }
 
-    public void setConnectionCostOption(Float connectionCostOption) {
+    public void setCostConnection(Float connectionCostOption) {
         this.connectionCostOption = connectionCostOption;
     }
 
-    public Float getCostOption() {
+    public Float getCost() {
         return costOption;
     }
 
-    public void setCostOption(Float costOption) {
+    public void setCost(Float costOption) {
         this.costOption = costOption;
     }
 
@@ -139,4 +144,4 @@ public class Option {
     public void setContractSet(Set<Tariff> contractSet) {
         this.contractSet = contractSet;
     }
-}
+}*/

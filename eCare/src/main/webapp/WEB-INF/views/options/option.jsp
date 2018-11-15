@@ -63,18 +63,18 @@
     </tr>
     <tr>
         <td>
-            connectionCostOption
+            costConnection
         </td>
         <td>
-            ${option.connectionCostOption}
+            ${option.costConnection}
         </td>
     </tr>
     <tr>
         <td>
-            costOption
+            cost
         </td>
         <td>
-            ${option.costOption}
+            ${option.cost}
         </td>
     </tr>
 
@@ -118,8 +118,8 @@
             <tr>
                 <td>${option.id}</td>
                 <td>${option.name}</td>
-                <td>${option.connectionCostOption}</td>
-                <td>${option.costOption}</td>
+                <td>${option.costConnection}</td>
+                <td>${option.cost}</td>
 
                 <td><input type="checkbox" name=${option.id}</td>
                 <td><input type="checkbox" name=${option.id}></td>

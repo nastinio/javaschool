@@ -2,7 +2,6 @@ package com.nastinio.spring.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -12,19 +11,40 @@ public class Tariff {
     @Id
     @Column(name = "id_tariff")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    public Integer id;
 
+    @Column(name = "name")
     private String name;
 
-   /* @OneToMany(mappedBy="option")
-    private Set<Option> optionSet;*/
+    @Column(name = "cost")
+    private Integer cost;
 
-    // Список всех опций в тарифе
-    @ManyToMany(mappedBy = "tariffSet",fetch = FetchType.EAGER)
-    private Set<Option> optionSet = new HashSet<>();
+    @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "tariff_option",
+            joinColumns = { @JoinColumn(name = "id_tariff") },
+            inverseJoinColumns = { @JoinColumn(name = "id_option") }
+    )
+    Set<OptionCellular> optionsOnTariff = new HashSet<>();
 
-    @Transient
-    public List<Option> optionList;
+
+    @OneToMany(mappedBy="tariffInContract")
+    private Set<Contract> contracts;
+
+
+    public Tariff() {
+    }
+
+    @Override
+    public String toString() {
+        return "Tariff{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cost=" + cost +
+                ", optionsOnTariff=" + optionsOnTariff +
+                '}';
+    }
+
 
     public Integer getId() {
         return id;
@@ -42,33 +62,27 @@ public class Tariff {
         this.name = name;
     }
 
-    public Set<Option> getOptionSet() {
-        return optionSet;
+    public Integer getCost() {
+        return cost;
     }
 
-    public void setOptionSet(Set<Option> optionSet) {
-        this.optionSet = optionSet;
+    public void setCost(Integer cost) {
+        this.cost = cost;
     }
 
-
-    /*public Set<Option> getOptionSet() {
-        return optionSet;
+    public Set<OptionCellular> getOptionsOnTariff() {
+        return optionsOnTariff;
     }
 
-    public void setOptionSet(Set<Option> optionSet) {
-        this.optionSet = optionSet;
-    }*/
-
-
-    public Tariff() {
-
+    public void setOptionsOnTariff(Set<OptionCellular> optionsOnTariff) {
+        this.optionsOnTariff = optionsOnTariff;
     }
 
-    public List<Option> getOptionList() {
-        return optionList;
+    public Set<Contract> getContracts() {
+        return contracts;
     }
 
-    public void setOptionList(List<Option> optionList) {
-        this.optionList = optionList;
+    public void setContracts(Set<Contract> contracts) {
+        this.contracts = contracts;
     }
 }

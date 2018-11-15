@@ -2,10 +2,7 @@ package com.nastinio.spring.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
 import javax.validation.constraints.Pattern;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -17,7 +14,7 @@ import java.util.Set;
 public class Person {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id_person")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull(message = "Введите логин")
     @Pattern(regexp = "^\\d+$", message = "Неверный формат логина")
@@ -32,47 +29,8 @@ public class Person {
     private String address;
     private String email;
 
-    @Transient
-    private List<Contract> contractList;
-
-    public List<Contract> getContractList() {
-        return contractList;
-    }
-
-    public void setContractList(List<Contract> contractList) {
-        this.contractList = contractList;
-    }
-
-    /* @OneToMany(mappedBy = "person",fetch = FetchType.EAGER)
-    private Set<Contract> contractSet = new HashSet<>();*/
-
-
-    public Integer isOnline;
-
-    public boolean isOnline() {
-        return isOnline == 1;
-    }
-
-    public void setOnline(boolean online) {
-        if (online) {
-            isOnline = 1;
-        } else isOnline = 0;
-    }
-
-   /* public Set<Contract> getContractSet() {
-        return contractSet;
-    }
-
-    public void setContractSet(Set<Contract> contractSet) {
-        this.contractSet = contractSet;
-    }*/
-
-    //private HashMap<Integer,Contract>  listContracts;
-
-    /*public Person(Integer id, String password) {
-        this.id = id;
-        this.password = password;
-    }*/
+    @OneToMany(mappedBy="personInContract")
+    private Set<Contract> contracts;
 
     public Person() {
     }
@@ -83,8 +41,12 @@ public class Person {
 
     @Override
     public String toString() {
-        return "id = " + id + ", password = " + password + ", name = " + firstname + " " + lastname + ", dob = " +
-                dob + ", passport = " + passport + ", email = " + email + ", isOnline = " + isOnline;
+        return "Person{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", contracts=" + contracts +
+                '}';
     }
 
     public Integer getId() {
@@ -151,4 +113,11 @@ public class Person {
         this.email = email;
     }
 
+    public Set<Contract> getContracts() {
+        return contracts;
+    }
+
+    public void setContracts(Set<Contract> contracts) {
+        this.contracts = contracts;
+    }
 }

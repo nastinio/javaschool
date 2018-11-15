@@ -63,8 +63,8 @@
         <tr>
             <td>${option.id}</td>
             <td><a href="<c:url value='/option/${option.id}'/>">${option.name}</a></td>
-            <td>${option.connectionCostOption}</td>
-            <td>${option.costOption}</td>
+            <td>${option.costConnection}</td>
+            <td>${option.cost}</td>
 
         </tr>
     </c:forEach>

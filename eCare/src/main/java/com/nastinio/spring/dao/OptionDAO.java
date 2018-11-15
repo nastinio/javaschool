@@ -1,3 +1,4 @@
+/*
 package com.nastinio.spring.dao;
 
 import com.nastinio.spring.exceptions.DataExistenceException;
@@ -41,3 +42,4 @@ public class OptionDAO extends EntityDAO<Option> {
 
 
 }
+*/

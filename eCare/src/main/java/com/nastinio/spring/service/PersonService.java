@@ -15,26 +15,22 @@ public class PersonService {
     @Autowired
     private PersonDAO personDAO;
 
-    /*public void setPersonDAO(PersonDAO personDAO) {
-        this.personDAO = personDAO;
-    }*/
-
-    public void addPerson(Person p) {
+    public void add(Person p) {
         this.personDAO.add(p);
     }
 
 
-    public void updatePerson(Person p) {
+    public void update(Person p) {
         this.personDAO.update(p);
     }
 
 
-    public List<Person> listPersons() {
+    public List<Person> getList() {
         return this.personDAO.getList();
     }
 
 
-    public Person getPersonById(Integer id) throws DataExistenceException {
+    public Person getById(Integer id) throws DataExistenceException {
         try {
             return (Person)this.personDAO.getById(id);
         } catch (DataExistenceException e) {
@@ -43,7 +39,7 @@ public class PersonService {
     }
 
 
-    public void removePerson(Integer id) {
+    public void remove(Integer id) {
         this.personDAO.remove(id);
     }
 
