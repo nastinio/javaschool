@@ -22,26 +22,26 @@
     <a class="btn btn-outline-primary" href="#">Выйти</a>
 </div>
 
-<a href="/ecare/manager/option-add">Добавить опцию</a>
+<a href="/ecare/manager/tariff-add">Добавить тариф</a>
 
 <div class="container">
     <div class="card-deck mb-3 text-center">
 
-        <c:forEach items="${optionsList}" var="option">
+        <c:forEach items="${tariffsList}" var="tariff">
             <div class="row">
                 <div class="col">
                     <div class="card mb-4 shadow-sm">
                         <div class="card-header">
-                            <h4 class="my-0 font-weight-normal">${option.name}</h4>
+                            <h4 class="my-0 font-weight-normal">${tariff.name}</h4>
                         </div>
                         <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$${option.cost}
+                            <h1 class="card-title pricing-card-title">$${tariff.cost}
                                 <small class="text-muted">/ mo</small>
                             </h1>
                             <ul class="list-unstyled mt-3 mb-4">
-                                <li>$${option.costConnection} стоимость подключения</li>
+                                <li>-</li>
                             </ul>
-                            <a href="/ecare/manager/option-${option.id}-more" class="btn btn-lg btn-block btn-outline-primary" role="button" aria-disabled="true">More</a>
+                            <a href="/ecare/manager/tariff-${tariff.id}-more" class="btn btn-lg btn-block btn-outline-primary" role="button" aria-disabled="true">More</a>
                         </div>
                     </div>
                 </div>

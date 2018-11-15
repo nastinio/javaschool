@@ -2,6 +2,7 @@ package com.nastinio.spring.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -64,10 +65,26 @@ public class OptionCellular {
     public OptionCellular() {
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OptionCellular that = (OptionCellular) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(costConnection, that.costConnection) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(cost, that.cost);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, costConnection, description, cost);
+    }
+
     public OptionCellular(Integer id){
         this.id = id;
     }
-
 
     public Integer getId() {
         return id;
@@ -100,7 +117,6 @@ public class OptionCellular {
     public void setCost(Integer cost) {
         this.cost = cost;
     }
-
 
     public Set<OptionCellular> getExcludeOptions() {
         return excludeOptions;

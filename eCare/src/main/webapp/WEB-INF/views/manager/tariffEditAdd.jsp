@@ -23,14 +23,14 @@
 </div>
 
 <div class="container">
-    <spring:form method="post" action="/ecare/manager/option-update" modelAttribute="option">
+    <spring:form method="post" action="/ecare/manager/tariff-update" modelAttribute="tariff">
 
-        <c:if test="${!empty option.id}">
+        <c:if test="${!empty tariff.id}">
             <div class="form-group row">
                 <label for="inputId" class="col-sm-2 col-form-label">ID</label>
                 <div class="col-sm-10">
                     <spring:input path="id" type="text" class="form-control" id="inputId"
-                                  readonly="true" disabled="true" placeholder="${option.id}"/>
+                                  readonly="true" disabled="true" placeholder="${tariff.id}"/>
                     <spring:hidden path="id"></spring:hidden>
                 </div>
             </div>
@@ -41,37 +41,30 @@
             <label for="inputName" class="col-sm-2 col-form-label">Наименование</label>
             <div class="col-sm-10">
                 <spring:input path="name" type="text" class="form-control" id="inputName"
-                              placeholder="${option.name}"/>
+                              placeholder="${tariff.name}"/>
             </div>
         </div>
         <div class="form-group row">
             <label for="inputCost" class="col-sm-2 col-form-label">Стоимость</label>
             <div class="col-sm-10">
                 <spring:input path="cost" type="text" class="form-control" id="inputCost"
-                              placeholder="${option.cost}"/>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="inputCostConnection" class="col-sm-2 col-form-label">Стоимость подключения</label>
-            <div class="col-sm-10">
-                <spring:input path="costConnection" type="text" class="form-control" id="inputCostConnection"
-                              placeholder="${option.costConnection}"/>
+                              placeholder="${tariff.cost}"/>
             </div>
         </div>
         <div class="form-group row">
             <label for="inputDescription" class="col-sm-2 col-form-label">Описание</label>
             <div class="col-sm-10">
                 <spring:textarea path="description" type="text" class="form-control" id="inputDescription " rows="5"
-                                 placeholder="${option.description}"/>
+                                 placeholder="${tariff.description}"/>
             </div>
         </div>
 
         <div class="form-group row">
             <div class="offset-sm-2 col-sm-10">
-                <c:if test="${!empty option.id}">
+                <c:if test="${!empty tariff.id}">
                     <spring:button type="submit" class="btn btn-primary">Редактировать</spring:button>
                 </c:if>
-                <c:if test="${empty option.id}">
+                <c:if test="${empty tariff.id}">
                     <spring:button type="submit" class="btn btn-primary">Добавить</spring:button>
                 </c:if>
             </div>

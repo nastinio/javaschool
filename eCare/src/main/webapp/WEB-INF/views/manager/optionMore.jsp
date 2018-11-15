@@ -28,8 +28,8 @@
     <h5>Стоимость услуги: ${option.cost}          Стоимость подключения: ${option.costConnection}</h5>
 
     <div class="btn-group" role="group" aria-label="Basic example">
-        <a href="/ecare/manager/${option.id}-edit" class="btn btn-lg btn-block btn-outline-primary" role="button" aria-disabled="true">Edit</a>
-        <a href="/ecare/manager/${option.id}-remove" class="btn btn-lg btn-block btn-outline-primary" role="button" aria-disabled="true">Remove</a>
+        <a href="/ecare/manager/option-${option.id}-edit" class="btn btn-lg btn-block btn-outline-primary" role="button" aria-disabled="true">Edit</a>
+        <a href="/ecare/manager/option-${option.id}-remove" class="btn btn-lg btn-block btn-outline-primary" role="button" aria-disabled="true">Remove</a>
     </div>
 
 

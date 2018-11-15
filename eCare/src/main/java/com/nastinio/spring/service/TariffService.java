@@ -2,6 +2,7 @@ package com.nastinio.spring.service;
 
 import com.nastinio.spring.dao.TariffDAO;
 import com.nastinio.spring.exceptions.DataExistenceException;
+import com.nastinio.spring.model.OptionCellular;
 import com.nastinio.spring.model.Tariff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,18 +37,27 @@ public class TariffService {
         this.tariffDAO.remove(id);
     }
 
+    public void removeOptionFromTariff(Integer idTariff, Integer idOption) throws DataExistenceException {
+        Tariff tariff = this.tariffDAO.getById(idTariff);
+        Set<OptionCellular> optionSet = tariff.getOptionsOnTariff();
 
+        OptionCellular optionForRemove = new OptionCellular();
 
-    ////////////////////////////////////////
-    /*@Transactional
-    public List<Tariff> getTariffList(){
-        return tariffDAO.getList();
+        for(OptionCellular option: optionSet){
+            if(option.getId()==idOption){
+                optionForRemove = option;
+                break;
+            }
+        }
+
+        if(optionForRemove.getId()!=null){
+            optionSet.remove(optionForRemove);
+            this.update(tariff);
+        }else{
+            //TODO: пробросить исключение
+        }
+
     }
-
-    @Transactional
-    public Set<Option> getOptionsSet(Integer id) throws DataExistenceException {
-        return this.tariffDAO.getOptionSet(id);
-    }*/
 
 
 

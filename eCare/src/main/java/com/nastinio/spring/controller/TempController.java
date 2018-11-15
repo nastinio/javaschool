@@ -1,8 +1,7 @@
 package com.nastinio.spring.controller;
 
 import com.nastinio.spring.exceptions.DataExistenceException;
-import com.nastinio.spring.model.OptionCellular;
-import com.nastinio.spring.service.OptionCellularService;
+import com.nastinio.spring.model.Tariff;
 import com.nastinio.spring.service.TariffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,79 +16,79 @@ import org.springframework.web.servlet.ModelAndView;
 @ComponentScan("com.nastinio")
 public class TempController {
     @Autowired
-    OptionCellularService optionCellularService;
-
-    @Autowired
     TariffService tariffService;
-
-    /*
-     * Управление опциями
-     * */
-    @RequestMapping(value = "/ecare/manager/all-options", method = RequestMethod.GET)
-    public ModelAndView managerAllOptions() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("manager/options");
-        modelAndView.addObject("optionsList",optionCellularService.getList());
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/ecare/manager/{idOption}-more", method = RequestMethod.GET)
-    public ModelAndView managerOptionMore(@PathVariable("idOption") Integer idOption) throws DataExistenceException {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("manager/optionMore");
-        modelAndView.addObject("option",optionCellularService.getById(idOption));
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/ecare/manager/{idOption}-remove", method = RequestMethod.GET)
-    public String managerOptionRemove(@PathVariable("idOption") Integer idOption) throws DataExistenceException {
-        optionCellularService.remove(idOption);
-        return "redirect:/ecare/manager/all-options";
-    }
-
-    @RequestMapping(value = "/ecare/manager/{idOption}-edit", method = RequestMethod.GET)
-    public ModelAndView managerOptionEdit(@PathVariable("idOption") Integer idOption) throws DataExistenceException {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("manager/optionEditAdd");
-        modelAndView.addObject("option",optionCellularService.getById(idOption));
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/ecare/manager/update", method = RequestMethod.POST)
-    public String managerOptionUpdate(@ModelAttribute("option") OptionCellular option){
-        System.out.println("Получили для обновления: " + option.toString());
-        // TODO NPE!
-        if (option.getId() == null) {
-            this.optionCellularService.add(option);
-            return "redirect:/ecare/manager/all-options";
-        } else {
-            this.optionCellularService.update(option);
-        }
-        this.optionCellularService.update(option);
-
-        return "redirect:/ecare/manager/"+option.getId()+"-more";
-    }
-
-    @RequestMapping(value = "/ecare/manager/option-add", method = RequestMethod.GET)
-    public ModelAndView managerOptionAdd(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("manager/optionEditAdd");
-        modelAndView.addObject("option",new OptionCellular());
-
-        return modelAndView;
-    }
-
 
     /*
     * Управление тарифами
     * */
     @RequestMapping(value = "/ecare/manager/all-tariffs", method = RequestMethod.GET)
-    public void managerAllTariffs() {
+    public ModelAndView managerAllTariffs() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("manager/tariffs");
+        modelAndView.addObject("tariffsList",this.tariffService.getList());
 
+        return modelAndView;
     }
+
+    @RequestMapping(value = "/ecare/manager/tariff-{idTariff}-more", method = RequestMethod.GET)
+    public ModelAndView managerTariffMore(@PathVariable("idTariff") Integer idTariff) throws DataExistenceException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("manager/tariffMore");
+        modelAndView.addObject("tariff",this.tariffService.getById(idTariff));
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/ecare/manager/tariff-{idTariff}-remove", method = RequestMethod.GET)
+    public String managerTariffRemove(@PathVariable("idTariff") Integer idTariff) throws DataExistenceException {
+        this.tariffService.remove(idTariff);
+        return "redirect:/ecare/manager/all-tariffs";
+    }
+
+    @RequestMapping(value = "/ecare/manager/tariff-{idTariff}-edit", method = RequestMethod.GET)
+    public ModelAndView managerTariffEdit(@PathVariable("idTariff") Integer idTariff) throws DataExistenceException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("manager/tariffEditAdd");
+        modelAndView.addObject("tariff",this.tariffService.getById(idTariff));
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/ecare/manager/tariff-update", method = RequestMethod.POST)
+    public String managerTariffUpdate(@ModelAttribute("tariff") Tariff tariff){
+        System.out.println("Получили для обновления: " + tariff.toString());
+        // TODO NPE!
+        if (tariff.getId() == null) {
+            this.tariffService.add(tariff);
+            return "redirect:/ecare/manager/all-tariffs";
+        } else {
+            this.tariffService.update(tariff);
+        }
+        this.tariffService.update(tariff);
+
+        return "redirect:/ecare/manager/tariff-"+tariff.getId()+"-more";
+    }
+
+    @RequestMapping(value = "/ecare/manager/tariff-add", method = RequestMethod.GET)
+    public ModelAndView managerTariffAdd(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("manager/tariffEditAdd");
+        modelAndView.addObject("tariff",new Tariff());
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/ecare/manager/tariff-{idTariff}/option-{idOption}-disable", method = RequestMethod.GET)
+    public String managerTariffDisableOption(@PathVariable("idTariff") Integer idTariff,@PathVariable("idOption") Integer idOption) throws DataExistenceException {
+        this.tariffService.removeOptionFromTariff(idTariff,idOption);
+
+        return "redirect:/ecare/manager/tariff-"+idTariff+"-more";
+    }
+
+
+
+
+
 
     /*
      * Управление пользователями
