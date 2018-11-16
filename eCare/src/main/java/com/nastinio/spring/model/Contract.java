@@ -50,6 +50,7 @@ public class Contract {
                 "id=" + id +
                 ", number='" + number + '\'' +
                 ", score=" + score +
+                ", person=" + personInContract.getId() +
                 ", isBlockedByPerson=" + isBlockedByPerson +
                 ", isBlockedByManager=" + isBlockedByManager +
                 ", tariffInContract=" + tariffInContract +

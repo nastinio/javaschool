@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html lang="ru">
 <head>
-    <title>ЛК-manager</title>
+    <title>ЛК-client</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
@@ -13,23 +13,39 @@
 
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="/ecare/manager/all-options">Опции</a>
-        <a class="p-2 text-dark" href="/ecare/manager/all-tariffs">Тарифы</a>
+        <a class="p-2 text-dark" href="/ecare/person-${person.id}/contract-all">Контракты</a>
+        <a class="p-2 text-dark" href="/ecare/person-${person.id}/contract-${contract.id}/tariff-all">Тарифы</a>
+        <a class="p-2 text-dark" href="/ecare/person-${person.id}/contract-${contract.id}/option-all">Опции</a>
     </nav>
     <h5 class="my-0 mr-md-auto font-weight-normal"></h5>
-    <a class="p-2 text-dark" href="#">Manager</a>
+    <a class="p-2 text-dark" href="#">${contract.number}</a>
+    <a class="p-2 text-dark" href="#">${person.firstname} ${person.lastname}</a>
+    <a class="p-2 text-dark" href="/ecare/person-${person.id}/contract-${contract.id}/basket">Корзина</a>
     <a class="btn btn-outline-primary" href="#">Выйти</a>
 </div>
 
 <div class="container">
     <p>
-    <h2><a href="/ecare/manager/person-${contract.personInContract.id}-more">${contract.personInContract.firstname} ${contract.personInContract.lastname}</a></h2>
     <h1>${contract.number}</h1>
-    <a href="/ecare/manager/contract-${contract.id}-edit">Edit</a> <a href="/ecare/manager/contract-${contract.id}-remove">Remove</a>
+
+    <c:choose>
+        <c:when test="${contract.isBlockedByManager eq '1'}">
+            Заблокирован менеджером
+        </c:when>
+
+        <c:when test="${contract.isBlockedByPerson eq '1'}">
+            <p>Контракт заблокирован пользователем <a href="/ecare/person-${person.id}/contract-${contract.id}-unlock">Unlock</a></p>
+        </c:when>
+
+        <c:otherwise>
+            <p>Контракт активен <a href="/ecare/person-${person.id}/contract-${contract.id}-block">Block</a></p>
+        </c:otherwise>
+    </c:choose>
     </p>
 
-    <h5>Тариф: <a href="/ecare/manager/tariff-${contract.tariffInContract.id}-more">${contract.tariffInContract.name}</a></h5>
+    <h5>Тариф: <a href="/ecare/person-${person.id}/contract-${contract.id}/tariff-${contract.tariffInContract.id}-more">${contract.tariffInContract.name}</a></h5>
     <p>${contract.tariffInContract.description}</p>
+    <a href="/ecare/person-${person.id}/contract-${contract.id}/tariff-all">Сменить тариф</a></h5>
 
     <c:if test="${!empty contract.tariffInContract.optionsOnTariff}">
         <table class="table">
@@ -46,7 +62,7 @@
                     <td>${option.name}</td>
                     <td>${option.cost}</td>
                     <td>${option.costConnection}</td>
-                    <td><a href="<c:url value="/ecare/manager/option-${option.id}-more"/>">More</a></td>
+                    <td><a href="<c:url value="/ecare/person-${person.id}/contract-${contract.id}/option-${option.id}-more"/>">More</a></td>
                 </tr>
             </c:forEach>
         </table>
@@ -55,6 +71,7 @@
 
 
     <h5>Дополнительные опции</h5>
+    <a href="/ecare/person-${person.id}/contract-${contract.id}/option-all">Выбрать дополнительные опции</a></h5>
 
     <div class="container">
         <div class="card-deck mb-3 text-center">
@@ -72,8 +89,8 @@
                                 <ul class="list-unstyled mt-3 mb-4">
                                     <li>$${option.costConnection} стоимость подключения</li>
                                 </ul>
-                                <a href="/ecare/manager/contract-${contract.id}/extraoption-${option.id}-disable" class="btn btn-lg btn-block btn-outline-primary" role="button"
-                                   aria-disabled="true">Отключить</a>
+                                <a href="/ecare/person-${person.id}/contract-${contract.id}/option-${option.id}-more" class="btn btn-lg btn-block btn-outline-primary" role="button"
+                                   aria-disabled="true">More</a>
                             </div>
                         </div>
                     </div>
@@ -84,13 +101,6 @@
 
 
 </div>
-<footer class="pt-4 my-md-5 pt-md-5 border-top">
-    <div class="row">
-        <div class="col-12 col-md">
-            <small class="d-block mb-3 text-muted">nastinio-2018</small>
-        </div>
-    </div>
-</footer>
 
 </body>
 </html>

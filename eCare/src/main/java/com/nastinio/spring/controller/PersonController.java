@@ -1,3 +1,4 @@
+/*
 package com.nastinio.spring.controller;
 
 
@@ -28,11 +29,13 @@ public class PersonController {
     @Autowired
     TariffService tariffService;
 
-    /*@Autowired(required = true)
+    */
+/*@Autowired(required = true)
     @Qualifier(value = "optionService")
     public void setPersonService(PersonService ps) {
         this.optionService = ps;
-    }*/
+    }*//*
+
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
     public String listPersons(Model model) {
@@ -93,7 +96,8 @@ public class PersonController {
     }
 
 
-    /*@RequestMapping("person/${id}/addContract")
+    */
+/*@RequestMapping("person/${id}/addContract")
     public ModelAndView addContract(@PathVariable("id") Integer id) {
         try {
             ModelAndView modelAndView = new ModelAndView();
@@ -104,6 +108,8 @@ public class PersonController {
         } catch (DataExistenceException e) {
             return null;
         }
-    }*/
+    }*//*
+
 
 }
+*/

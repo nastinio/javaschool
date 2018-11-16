@@ -53,20 +53,13 @@ public abstract class EntityDAO<T> implements Crud<T> {
 
     @Override
     public void update(T entity) {
-        System.out.println("Получили на обновление " + entity.toString());
+        //System.out.println("Получили на обновление " + entity.toString());
         Session session = this.sessionFactory.getCurrentSession();
         //Session session = this.sessionFactory.openSession();
         //session.flush();
         session.update(entity);
         logger.info(nameClassHeir + " updated successfully. " + nameClassHeir + "  details=" + entity);
         //session.close();
-    }
-
-    public void merge(T entity) {
-        System.out.println("Получили на обновление " + entity.toString());
-        Session session = this.sessionFactory.getCurrentSession();
-        session.merge(entity);
-        logger.info(nameClassHeir + " merged successfully. " + nameClassHeir + "  details=" + entity);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.nastinio.spring.exceptions.DataExistenceException;
 import com.nastinio.spring.model.Contract;
 import com.nastinio.spring.model.Person;
 import com.nastinio.spring.service.ContractService;
+import com.nastinio.spring.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @ComponentScan("com.nastinio")
-public class TempController {
+public class ManagerContractController {
     @Autowired
     ContractService contractService;
+
+    @Autowired
+    PersonService personService;
 
     /*
      * Управление контрактами
@@ -50,30 +54,30 @@ public class TempController {
     public ModelAndView managerPContractEdit(@PathVariable("idContract") Integer idContract) throws DataExistenceException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("manager/contractEditAdd");
-        modelAndView.addObject("contract", this.contractService.getById(idContract));
+        Contract contract = this.contractService.getById(idContract);
+        modelAndView.addObject("contract", contract);
+        modelAndView.addObject("idPerson",contract.getId());
 
         return modelAndView;
     }
 
-    @RequestMapping(value = "/ecare/manager/contract-update", method = RequestMethod.POST)
-    public String managerContractUpdate(@ModelAttribute("contract") Contract contract) {
-        System.out.println("Получили для обновления: " + contract.toString());
+    @RequestMapping(value = "/ecare/manager/person-{idPerson}/contract-update", method = RequestMethod.POST)
+    public String managerContractUpdate(@ModelAttribute("contract") Contract contract,@PathVariable("idPerson") Integer idPerson) throws DataExistenceException {
         // TODO NPE!
         if (contract.getId() == null) {
-            this.contractService.add(contract);
-            return "redirect:/ecare/manager/all-persons";
+            this.contractService.addForPerson(contract,idPerson);
+            return "redirect:/ecare/manager/person-"+idPerson+"-more";
         } else {
             this.contractService.update(contract);
+            return "redirect:/ecare/manager/contract-" + contract.getId() + "-more";
         }
-        this.contractService.update(contract);
-
-        return "redirect:/ecare/manager/contract-" + contract.getId() + "-more";
     }
 
     @RequestMapping(value = "/ecare/manager/person-{idPerson}/contract-add", method = RequestMethod.GET)
-    public ModelAndView managerContractAdd() {
+    public ModelAndView managerContractAdd(@PathVariable("idPerson") Integer idPerson) throws DataExistenceException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("manager/contractEditAdd");
+        modelAndView.addObject("idPerson",idPerson);
         modelAndView.addObject("contract", new Contract());
 
         return modelAndView;

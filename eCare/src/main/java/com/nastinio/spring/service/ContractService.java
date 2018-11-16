@@ -4,6 +4,7 @@ import com.nastinio.spring.dao.ContractDAO;
 import com.nastinio.spring.exceptions.DataExistenceException;
 import com.nastinio.spring.model.Contract;
 import com.nastinio.spring.model.OptionCellular;
+import com.nastinio.spring.model.Person;
 import com.nastinio.spring.model.Tariff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ public class ContractService {
 
     @Autowired
     ContractDAO contractDAO;
+
+    @Autowired
+    PersonService personService;
 
     public void blockContractByPerson(Integer idContract) throws DataExistenceException {
         Contract contract = (Contract) this.contractDAO.getById(idContract);
@@ -71,5 +75,17 @@ public class ContractService {
             //TODO: пробросить исключение
         }
 
+    }
+
+    public void addForPerson(Contract contract, Integer idPerson) throws DataExistenceException {
+        Person person = this.personService.getById(idPerson);
+        contract.setPersonInContract(person);
+        this.contractDAO.add(contract);
+    }
+
+    public void updateForPerson(Contract contract, Integer idPerson) throws DataExistenceException {
+        Person person = this.personService.getById(idPerson);
+        contract.setPersonInContract(person);
+        this.contractDAO.update(contract);
     }
 }
