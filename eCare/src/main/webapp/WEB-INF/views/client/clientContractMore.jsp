@@ -45,7 +45,11 @@
 
     <h5>Тариф: <a href="/ecare/person-${person.id}/contract-${contract.id}/tariff-${contract.tariffInContract.id}-more">${contract.tariffInContract.name}</a></h5>
     <p>${contract.tariffInContract.description}</p>
-    <a href="/ecare/person-${person.id}/contract-${contract.id}/tariff-all">Сменить тариф</a></h5>
+
+    <%--Ссылка активна, если контракт незаблокирован--%>
+    <c:if test="${contract.isBlockedByManager eq '0' && contract.isBlockedByPerson eq '0'}">
+        <a href="/ecare/person-${person.id}/contract-${contract.id}/tariff-all">Сменить тариф</a></h5>
+    </c:if>
 
     <c:if test="${!empty contract.tariffInContract.optionsOnTariff}">
         <table class="table">
@@ -68,10 +72,12 @@
         </table>
     </c:if>
 
-
-
     <h5>Дополнительные опции</h5>
-    <a href="/ecare/person-${person.id}/contract-${contract.id}/option-all">Выбрать дополнительные опции</a></h5>
+    <%--Ссылка активна, если контракт незаблокирован--%>
+    <c:if test="${contract.isBlockedByManager eq '0' && contract.isBlockedByPerson eq '0'}">
+        <a href="/ecare/person-${person.id}/contract-${contract.id}/option-all">Выбрать дополнительные опции</a></h5>
+    </c:if>
+
 
     <div class="container">
         <div class="card-deck mb-3 text-center">
@@ -91,6 +97,8 @@
                                 </ul>
                                 <a href="/ecare/person-${person.id}/contract-${contract.id}/option-${option.id}-more" class="btn btn-lg btn-block btn-outline-primary" role="button"
                                    aria-disabled="true">More</a>
+                                <a href="/ecare/manager/person-${person.id}/contract-${contract.id}/extraoption-${option.id}-disable" class="btn btn-lg btn-block btn-outline-primary" role="button"
+                                   aria-disabled="true">Отключить</a>
                             </div>
                         </div>
                     </div>

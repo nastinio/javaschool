@@ -42,8 +42,7 @@ public class PersonController {
      * /ecare/person-{idPerson}/contract-{idContract}/tariff-change
      * /ecare/person-{idPerson}/contract-{idContract}/tariff-{idTariff}-more                    done
      * /ecare/person-{idPerson}/contract-{idContract}/option-{idOption}-more                    done
-     * /ecare/person-{idPerson}/contract-{idContract}/extraoption-add
-     * /ecare/manager/person-{idPerson}/contract-{idContract}/extraoption-{idOption}-disable
+     * /ecare/manager/person-{idPerson}/contract-{idContract}/extraoption-{idOption}-disable    done
      *
      * /ecare/person-{idPerson}/contract-{idContract}/option-all                                 done
      * /ecare/person-{idPerson}/contract-{idContract}/tariff-all                                 done
@@ -88,13 +87,8 @@ public class PersonController {
         return modelAndView;
     }
 
-    //ecare/person-{idPerson}/contract-{idContract}-unlock
 
-
-    //ecare/person-{idPerson}/contract-{idContract}-block
-
-
-    //ecare/person-{idPerson}/contract-{idContract}/tariff-all
+    //УПРАВЛЕНИЕ ОБЩЕЙ ИНФОРМАЦИЕЙ ОБ ОПЦИЯХ И ТАРИФАХ
     @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/tariff-all", method = RequestMethod.GET)
     public ModelAndView clientAllTariffs(@PathVariable Integer idPerson, @PathVariable Integer idContract) throws DataExistenceException {
         ModelAndView modelAndView = new ModelAndView();
@@ -107,7 +101,6 @@ public class PersonController {
         return modelAndView;
     }
 
-    //ecare/person-{idPerson}/contract-{idContract}/tariff-{idTariff}-more
     @RequestMapping(value = "ecare/person-{idPerson}/contract-{idContract}/tariff-{idTariff}-more", method = RequestMethod.GET)
     public ModelAndView clientTariffMore(@PathVariable Integer idPerson, @PathVariable Integer idContract, @PathVariable("idTariff") Integer idTariff) throws DataExistenceException {
         ModelAndView modelAndView = new ModelAndView();
@@ -131,8 +124,7 @@ public class PersonController {
 
         return modelAndView;
     }
-    
-    //ecare/person-{idPerson}/contract-{idContract}/option-{idOption}-more
+
     @RequestMapping(value = "ecare/person-{idPerson}/contract-{idContract}/option-{idOption}-more", method = RequestMethod.GET)
     public ModelAndView managerOptionMore(@PathVariable Integer idPerson, @PathVariable Integer idContract, @PathVariable("idOption") Integer idOption) throws DataExistenceException {
         ModelAndView modelAndView = new ModelAndView();
@@ -144,5 +136,32 @@ public class PersonController {
 
         return modelAndView;
     }
+
+
+
+    //УДАЛЕНИЕ ДОПОЛНИТЕЛЬНОЙ ОПЦИИ ИЗ ТАРИФА
+    @RequestMapping(value = "/ecare/manager/person-{idPerson}/contract-{idContract}/extraoption-{idOption}-disable", method = RequestMethod.GET)
+    public String clientContractDisableOption(@PathVariable Integer idPerson, @PathVariable Integer idContract, @PathVariable("idOption") Integer idOption) throws DataExistenceException {
+        this.contractService.removeExtraOptionFromContract(idContract,idOption);
+
+        return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"-more";
+    }
+
+
+
+    //БЛОКИРОВКА
+    @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}-block", method = RequestMethod.GET)
+    public String blockContract(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
+        this.contractService.blockContractByPerson(idContract);
+        return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"-more";
+    }
+
+    @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}-unlock", method = RequestMethod.GET)
+    public String unlockContract(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
+        this.contractService.unlockContractByPerson(idContract);
+        return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"-more";
+    }
+
+
 }
 

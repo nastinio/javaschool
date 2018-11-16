@@ -20,10 +20,10 @@ public class Contract {
     private Integer score;
 
     @Column(name = "is_blocked_person")
-    public int isBlockedByPerson;
+    public Integer isBlockedByPerson;
 
     @Column(name = "is_blocked_manager")
-    public int isBlockedByManager;
+    public Integer isBlockedByManager;
 
     @ManyToOne
     @JoinColumn(name="id_tariff", nullable=false)
@@ -82,22 +82,6 @@ public class Contract {
         this.score = score;
     }
 
-    public int getIsBlockedByPerson() {
-        return isBlockedByPerson;
-    }
-
-    public void setIsBlockedByPerson(int isBlockedByPerson) {
-        this.isBlockedByPerson = isBlockedByPerson;
-    }
-
-    public int getIsBlockedByManager() {
-        return isBlockedByManager;
-    }
-
-    public void setIsBlockedByManager(int isBlockedByManager) {
-        this.isBlockedByManager = isBlockedByManager;
-    }
-
     public Tariff getTariffInContract() {
         return tariffInContract;
     }
@@ -120,5 +104,21 @@ public class Contract {
 
     public void setPersonInContract(Person personInContract) {
         this.personInContract = personInContract;
+    }
+
+    public Integer getIsBlockedByPerson() {
+        return isBlockedByPerson;
+    }
+
+    public void setIsBlockedByPerson(Integer isBlockedByPerson) {
+        this.isBlockedByPerson = isBlockedByPerson;
+    }
+
+    public Integer getIsBlockedByManager() {
+        return isBlockedByManager;
+    }
+
+    public void setIsBlockedByManager(Integer isBlockedByManager) {
+        this.isBlockedByManager = isBlockedByManager;
     }
 }
