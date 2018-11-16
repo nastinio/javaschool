@@ -32,14 +32,61 @@
     <p><b>Стоимость услуги: </b> ${option.cost}</p>
     <p><b>Стоимость подключения:</b> ${option.costConnection}</p>
 
+    <a href="/ecare/manager/option-${option.id}-edit-correlation">Настроить взаимосвязь с другими опциями</a>
+
+    <c:if test="${empty listAllJointlyOptions}">
+        <h5>Нет необходимых для подключения опций</h5>
+    </c:if>
+    <c:if test="${!empty listAllJointlyOptions}">
+        <h5>Необходимые для подключения опции</h5>
+        <table class="table">
+            <tr>
+                <th width="80">ID</th>
+                <th width="180">Название</th>
+                <th width="120">Стоимость</th>
+                <th width="280">Стоимость подключения</th>
+                <th width="60"></th>
+            </tr>
+            <c:forEach items="${listAllJointlyOptions}" var="option">
+                <tr>
+                    <td>${option.id}</td>
+                    <td>${option.name}</td>
+                    <td>${option.cost}</td>
+                    <td>${option.costConnection}</td>
+                    <td><a href="<c:url value="/ecare/manager/option-${option.id}-more"/>">More</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:if>
+
+    <c:if test="${empty listAllExcludeOptions}">
+        <h5>Нет несовместимых опций</h5>
+    </c:if>
+    <c:if test="${!empty listAllExcludeOptions}">
+        <h5>Несовместимые опции</h5>
+        <table class="table">
+            <tr>
+                <th width="80">ID</th>
+                <th width="180">Название</th>
+                <th width="120">Стоимость</th>
+                <th width="280">Стоимость подключения</th>
+                <th width="60"></th>
+            </tr>
+            <c:forEach items="${listAllExcludeOptions}" var="option">
+                <tr>
+                    <td>${option.id}</td>
+                    <td>${option.name}</td>
+                    <td>${option.cost}</td>
+                    <td>${option.costConnection}</td>
+                    <td><a href="<c:url value="/ecare/manager/option-${option.id}-more"/>">More</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:if>
+
+
 </div>
-<footer class="pt-4 my-md-5 pt-md-5 border-top">
-    <div class="row">
-        <div class="col-12 col-md">
-            <small class="d-block mb-3 text-muted">nastinio-2018</small>
-        </div>
-    </div>
-</footer>
+
 
 </body>
 </html>

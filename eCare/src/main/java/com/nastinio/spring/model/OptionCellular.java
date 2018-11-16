@@ -1,5 +1,7 @@
 package com.nastinio.spring.model;
 
+import com.nastinio.spring.enums.CorrelationType;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
@@ -25,6 +27,12 @@ public class OptionCellular {
     @Column(name = "cost")
     private Integer cost;
 
+    @Transient
+    private CorrelationType correlation;
+
+    @Transient
+    private String include;
+
     @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
     @JoinTable(
             name = "option_jointly",
@@ -33,13 +41,26 @@ public class OptionCellular {
     )
     Set<OptionCellular> jointlyOptions = new HashSet<>();
 
+/////////////////////////////////////////////////////////
+
     @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "option_exclude",
+    @JoinTable(name = "option_exclude",
             joinColumns = { @JoinColumn(name = "id_option1") },
             inverseJoinColumns = { @JoinColumn(name = "id_option2") }
     )
-    Set<OptionCellular> excludeOptions = new HashSet<>();
+    Set<OptionCellular> excludeLeftOptions = new HashSet<>();
+
+    /*Исключающие опции справа*/
+    @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "option_exclude",
+            joinColumns = { @JoinColumn(name = "id_option2") },
+            inverseJoinColumns = { @JoinColumn(name = "id_option1") }
+    )
+    Set<OptionCellular> excludeRightOptions = new HashSet<>();
+/////////////////////////////////////////////////////////
+
+
 
     /*Список тарифов, в которые включена опция*/
     @ManyToMany(mappedBy = "optionsOnTariff")
@@ -57,8 +78,9 @@ public class OptionCellular {
                 ", description=" + description +
                 ", cost=" + cost +
                 ", costConnection=" + costConnection +
-                ", jointlyOptions=" + jointlyOptions +
-                ", excludeOptions=" + excludeOptions +
+                //", jointlyOptions=" + jointlyOptions +
+                /*", excludeLeftOptions=" + excludeLeftOptions +
+                ", excludeRightOptions=" + excludeRightOptions +*/
                 '}';
     }
 
@@ -118,12 +140,12 @@ public class OptionCellular {
         this.cost = cost;
     }
 
-    public Set<OptionCellular> getExcludeOptions() {
-        return excludeOptions;
+    public Set<OptionCellular> getExcludeLeftOptions() {
+        return excludeLeftOptions;
     }
 
-    public void setExcludeOptions(Set<OptionCellular> excludeOptions) {
-        this.excludeOptions = excludeOptions;
+    public void setExcludeLeftOptions(Set<OptionCellular> excludeLeftOptions) {
+        this.excludeLeftOptions = excludeLeftOptions;
     }
 
     public Set<OptionCellular> getJointlyOptions() {
@@ -156,5 +178,30 @@ public class OptionCellular {
 
     public void setContracts(Set<Contract> contracts) {
         this.contracts = contracts;
+    }
+
+    public Set<OptionCellular> getExcludeRightOptions() {
+        return excludeRightOptions;
+    }
+
+    public void setExcludeRightOptions(Set<OptionCellular> excludeRightOptions) {
+        this.excludeRightOptions = excludeRightOptions;
+    }
+
+    public CorrelationType getCorrelation() {
+        return correlation;
+    }
+
+    public void setCorrelation(CorrelationType correlation) {
+        this.correlation = correlation;
+    }
+
+
+    public String getInclude() {
+        return include;
+    }
+
+    public void setInclude(String include) {
+        this.include = include;
     }
 }

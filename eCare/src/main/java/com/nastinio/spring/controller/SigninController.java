@@ -26,12 +26,6 @@ public class SigninController {
     @Autowired
     SigninService signinService;
 
-    */
-/*First method on start application*//*
-
-    */
-/*Попадаем сюда на старте приложения (см. параметры аннотации и настройки пути после деплоя) *//*
-
     @RequestMapping(value = "/signin", method = RequestMethod.GET)
     public ModelAndView main() {
         ModelAndView modelAndView = new ModelAndView();
@@ -48,11 +42,6 @@ public class SigninController {
         return modelAndView;
     }
 
-    */
-/*как только на index.jsp подтвердится форма
-    <spring:form method="post"  modelAttribute="userJSP" action="check-person">,
-    то попадем вот сюда
-     *//*
 
     @RequestMapping(value = "/check-person", method = RequestMethod.POST)
     public ModelAndView checkPerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) throws DataExistenceException {
@@ -65,11 +54,10 @@ public class SigninController {
             return modelAndView;
         }
         if (signinService.isRegisteredPerson(person)) {
-            signinService.doOnline(person.getId());
-            modelAndView.setViewName("redirect:/ecare/"+person.getId()+"/info");
+            //signinService.doOnline(person.getId());
+            modelAndView.setViewName("redirect:/ecare/" + person.getId() + "/info");
             return modelAndView;
-            */
-/*try {
+            try {
                 modelAndView.addObject("person", signinService.getPersonById(person.getId()));
                 modelAndView.setViewName("redirect:/ecare");
                 person.setOnline(true);
@@ -78,7 +66,7 @@ public class SigninController {
                 modelAndView.setViewName("signin/signinPerson");
                 //modelAndView.addObject("errorMessage","Некорректные данные для входа");
                 return modelAndView;
-            }*//*
+            }
 
 
         }
@@ -111,7 +99,7 @@ public class SigninController {
 
     @RequestMapping(value = "/ecare/{id}/logout")
     public String logout(@PathVariable("id") Integer id) throws DataExistenceException {
-        signinService.doOffline(id);
+        //signinService.doOffline(id);
         return "redirect:/signin";
 
     }

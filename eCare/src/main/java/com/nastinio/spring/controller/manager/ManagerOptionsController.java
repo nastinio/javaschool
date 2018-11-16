@@ -3,7 +3,6 @@ package com.nastinio.spring.controller.manager;
 import com.nastinio.spring.exceptions.DataExistenceException;
 import com.nastinio.spring.model.OptionCellular;
 import com.nastinio.spring.service.OptionCellularService;
-import com.nastinio.spring.service.TariffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -35,7 +34,12 @@ public class ManagerOptionsController {
     public ModelAndView managerOptionMore(@PathVariable("idOption") Integer idOption) throws DataExistenceException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("manager/optionMore");
-        modelAndView.addObject("option",optionCellularService.getById(idOption));
+
+        OptionCellular option = this.optionCellularService.getById(idOption);
+        modelAndView.addObject("option",option);
+
+        modelAndView.addObject("listAllJointlyOptions",this.optionCellularService.getAllJointlyOptions(option));
+        modelAndView.addObject("listAllExcludeOptions",this.optionCellularService.getAllExcludeOptions(option));
 
         return modelAndView;
     }
@@ -77,5 +81,29 @@ public class ManagerOptionsController {
         modelAndView.addObject("option",new OptionCellular());
 
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/ecare/manager/option-{idOption}-edit-correlation", method = RequestMethod.GET)
+    public ModelAndView managerOptionEditCorrelation(@PathVariable Integer idOption) throws DataExistenceException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("manager/optionCorrelation");
+        OptionCellular option = this.optionCellularService.getById(idOption);
+        modelAndView.addObject("option",option);
+        modelAndView.addObject("outputOption",option);
+        modelAndView.addObject("listOptions",this.optionCellularService.getOptionsWitCorrelation(option));
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/ecare/manager/option-{idOption}-update-correlation", method = RequestMethod.POST)
+    public void managerOptionUpdateCorrelation(@PathVariable Integer idOption,@ModelAttribute("outputOption") OptionCellular option){
+        System.out.println(option.toString());
+        System.out.println(option.getInclude());
+
+        /*ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("manager/optionCorrelation");
+        modelAndView.addObject("option",new OptionCellular());*/
+
+        //return "redirect:/ecare/manager/option-"+idOption+"-more";
     }
 }

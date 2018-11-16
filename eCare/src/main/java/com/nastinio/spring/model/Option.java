@@ -40,7 +40,7 @@ public class Option {
             joinColumns = { @JoinColumn(name = "op1_exclude_id") },
             inverseJoinColumns = { @JoinColumn(name = "op2_exclude_id") }
     )
-    Set<Option> excludeOptions = new HashSet<>();
+    Set<Option> excludeLeftOptions = new HashSet<>();
 
 
     @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
@@ -121,12 +121,12 @@ public class Option {
         this.jointlyOptions = jointlyOptions;
     }
 
-    public Set<Option> getExcludeOptions() {
-        return excludeOptions;
+    public Set<Option> getExcludeLeftOptions() {
+        return excludeLeftOptions;
     }
 
-    public void setExcludeOptions(Set<Option> excludeOptions) {
-        this.excludeOptions = excludeOptions;
+    public void setExcludeLeftOptions(Set<Option> excludeLeftOptions) {
+        this.excludeLeftOptions = excludeLeftOptions;
     }
 
     public OptionRules getRule() {

@@ -31,6 +31,11 @@ public class PersonController {
     @Autowired
     OptionCellularService optionCellularService;
 
+    @RequestMapping("/")
+    public String home(){
+        return "hello";
+    }
+
     /*
      *
      * /ecare/person-{idPerson}/contract-all                                                    done

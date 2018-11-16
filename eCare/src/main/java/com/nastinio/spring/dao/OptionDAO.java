@@ -32,7 +32,7 @@ public class OptionDAO extends EntityDAO<Option> {
         //Session session = this.sessionFactory.getCurrentSession();
         try {
             Option option = getById(id);
-            Set<Option> excludeOptionsSet = option.getExcludeOptions();
+            Set<Option> excludeOptionsSet = option.getExcludeLeftOptions();
             return excludeOptionsSet;
         } catch (DataExistenceException e) {
             super.logger.info("Option with id = " + id + " doesn't exist");
