@@ -1,5 +1,6 @@
 package com.nastinio.spring.controller.manager;
 
+import com.nastinio.spring.enums.CorrelationType;
 import com.nastinio.spring.exceptions.DataExistenceException;
 import com.nastinio.spring.model.OptionCellular;
 import com.nastinio.spring.service.OptionCellularService;
@@ -95,15 +96,12 @@ public class ManagerOptionsController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/ecare/manager/option-{idOption}-update-correlation", method = RequestMethod.POST)
-    public void managerOptionUpdateCorrelation(@PathVariable Integer idOption,@ModelAttribute("outputOption") OptionCellular option){
-        System.out.println(option.toString());
-        System.out.println(option.getInclude());
+    @RequestMapping(value = "/ecare/manager/option-{idMainOption}/childoption-{idChildOption}-update-correlation", method = RequestMethod.POST)
+    public String managerOptionUpdateCorrelation(@ModelAttribute("outputOption") OptionCellular option, @PathVariable Integer idMainOption, @PathVariable Integer idChildOption) throws DataExistenceException {
+        System.out.println("idMain: "+idMainOption+ " idChild:"+idChildOption+" correlation:"+option.getInclude());
 
-        /*ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("manager/optionCorrelation");
-        modelAndView.addObject("option",new OptionCellular());*/
-
-        //return "redirect:/ecare/manager/option-"+idOption+"-more";
+        this.optionCellularService.setCorrelation(idMainOption,idChildOption,option.getInclude());
+        
+        return "redirect:/ecare/manager/option-"+idMainOption+"-edit-correlation";
     }
 }

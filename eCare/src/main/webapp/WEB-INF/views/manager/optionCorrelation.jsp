@@ -24,6 +24,7 @@
 </div>
 
 <div class="container">
+    <c:set var = "idMainOption" value = "${option.id}"/>
     <p>
     <h2>${option.name}</h2>
     </p>
@@ -45,7 +46,7 @@
         </tr>
         <c:forEach items="${listOptions}" var="option">
             <tr>
-                <spring:form method="post" action="/ecare/manager/option-${option.id}-update-correlation"
+                <spring:form method="post" action="/ecare/manager/option-${idMainOption}/childoption-${option.id}-update-correlation"
                              modelAttribute="outputOption">
                     <td>${option.id}</td>
                     <td>${option.name}</td>

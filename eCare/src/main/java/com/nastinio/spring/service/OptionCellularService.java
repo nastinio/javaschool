@@ -84,26 +84,78 @@ public class OptionCellularService {
     //Отдать список опций с просталенными взаимосвязями для конкретной опции
     //и без самой опции
     public List<OptionCellular> getOptionsWitCorrelation(OptionCellular option) {
-        Set<OptionCellular> allExcludeOptions = getAllExcludeOptions(option);
-        Set<OptionCellular> allJointlyOptions = getAllJointlyOptions(option);
-
         List<OptionCellular> optionsWithCorrelation = this.optionCellularDAO.getList();
         //Исключим саму опцию
         optionsWithCorrelation.remove(option);
 
         //Проставим зависимости
         for(OptionCellular current:optionsWithCorrelation){
-            if(allExcludeOptions.contains(current)){
-                current.setCorrelation(CorrelationType.EXCLUDE);
-            }else{
-                if(allJointlyOptions.contains(current)){
-                    current.setCorrelation(CorrelationType.JOINTLY);
-                }else{
-                    current.setCorrelation(CorrelationType.NONE);
-                }
-            }
+            current.setCorrelation(typeCorrelationOfMainOnChild(option,current));
         }
         return optionsWithCorrelation;
+
+    }
+
+    //Проставить взаимосвязь между двумя опциями
+    public CorrelationType typeCorrelationOfMainOnChild(OptionCellular optionMain,OptionCellular optionChild){
+        Set<OptionCellular> allExcludeOptions = getAllExcludeOptions(optionMain);
+        Set<OptionCellular> allJointlyOptions = getAllJointlyOptions(optionMain);
+
+        if(allExcludeOptions.contains(optionChild)){
+           return CorrelationType.EXCLUDE;
+        }else{
+            if(allJointlyOptions.contains(optionChild)){
+                //Т.е. для подключения optionMain необходимо подключить optionChild
+               return CorrelationType.JOINTLY;
+            }else{
+                return CorrelationType.NONE;
+            }
+        }
+    }
+    //Установить взаимосвязь в бд
+    public void setCorrelation(Integer idMainOption, Integer idChildOption, String include) throws DataExistenceException {
+        //Проверить, какая связь была
+        OptionCellular optionMain = this.optionCellularDAO.getById(idMainOption);
+        OptionCellular optionChild = this.optionCellularDAO.getById(idChildOption);
+
+        CorrelationType oldCorrelation = typeCorrelationOfMainOnChild(optionMain,optionChild);
+
+        if(!oldCorrelation.getValue().equals(include)){
+            //Связь изменилась
+            //Удалим старую связь из бд
+            switch (oldCorrelation.getValue()){
+                case "none":
+                    break;
+                case "jointly":
+                    optionMain.getJointlyOptions().remove(optionChild);
+                    break;
+                case "exclude":
+                    if(optionMain.getExcludeLeftOptions().contains(optionChild)){
+                        optionMain.getExcludeLeftOptions().remove(optionChild);
+                    }else{
+                        optionMain.getExcludeRightOptions().remove(optionChild);
+                    }
+                    break;
+            }
+            //Добавим новую
+            switch (include){
+                case "none":
+                    break;
+                case "jointly":
+                    optionMain.getJointlyOptions().add(optionChild);
+                    break;
+                case "exclude":
+                    optionMain.getExcludeLeftOptions().add(optionChild);
+                    break;
+            }
+            this.optionCellularDAO.update(optionMain);
+
+        }
+
+
+
+
+
 
     }
 
@@ -128,6 +180,5 @@ public class OptionCellularService {
     public void remove(Integer id) {
         this.optionCellularDAO.remove(id);
     }
-
 
 }
