@@ -101,7 +101,7 @@ public class ManagerOptionsController {
         System.out.println("idMain: "+idMainOption+ " idChild:"+idChildOption+" correlation:"+option.getInclude());
 
         this.optionCellularService.setCorrelation(idMainOption,idChildOption,option.getInclude());
-        
+
         return "redirect:/ecare/manager/option-"+idMainOption+"-edit-correlation";
     }
 }

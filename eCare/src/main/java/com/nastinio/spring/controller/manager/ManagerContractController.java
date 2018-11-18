@@ -5,6 +5,7 @@ import com.nastinio.spring.model.Contract;
 import com.nastinio.spring.model.Person;
 import com.nastinio.spring.service.ContractService;
 import com.nastinio.spring.service.PersonService;
+import com.nastinio.spring.service.TariffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,9 @@ public class ManagerContractController {
 
     @Autowired
     PersonService personService;
+
+    @Autowired
+    TariffService tariffService;
 
     /*
      * Управление контрактами
@@ -56,7 +60,8 @@ public class ManagerContractController {
         modelAndView.setViewName("manager/contractEditAdd");
         Contract contract = this.contractService.getById(idContract);
         modelAndView.addObject("contract", contract);
-        modelAndView.addObject("idPerson",contract.getId());
+        modelAndView.addObject("idPerson",contract.getPersonInContract().getId());
+        modelAndView.addObject("tariffs", this.tariffService.getList());
 
         return modelAndView;
     }
@@ -64,11 +69,13 @@ public class ManagerContractController {
     @RequestMapping(value = "/ecare/manager/person-{idPerson}/contract-update", method = RequestMethod.POST)
     public String managerContractUpdate(@ModelAttribute("contract") Contract contract,@PathVariable("idPerson") Integer idPerson) throws DataExistenceException {
         // TODO NPE!
+        System.out.println("Получили контракт: "+contract.getId()+" "+contract.getNumber()+" "+contract.getIdTariff());
+
         if (contract.getId() == null) {
             this.contractService.addForPerson(contract,idPerson);
             return "redirect:/ecare/manager/person-"+idPerson+"-more";
         } else {
-            this.contractService.update(contract);
+            this.contractService.updateWithTariff(contract,idPerson);
             return "redirect:/ecare/manager/contract-" + contract.getId() + "-more";
         }
     }
@@ -79,6 +86,7 @@ public class ManagerContractController {
         modelAndView.setViewName("manager/contractEditAdd");
         modelAndView.addObject("idPerson",idPerson);
         modelAndView.addObject("contract", new Contract());
+        modelAndView.addObject("tariffs", this.tariffService.getList());
 
         return modelAndView;
     }

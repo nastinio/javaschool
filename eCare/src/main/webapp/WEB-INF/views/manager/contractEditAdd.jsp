@@ -25,9 +25,7 @@
 
 <div class="container">
     <spring:form method="post" action="/ecare/manager/person-${idPerson}/contract-update" modelAttribute="contract">
-
         ${idPerson}
-
         <c:if test="${!empty contract.id}">
             <div class="form-group row">
                 <label for="inputId" class="col-sm-2 col-form-label">ID</label>
@@ -39,7 +37,6 @@
             </div>
         </c:if>
 
-
         <div class="form-group row">
             <label for="inputNumber" class="col-sm-2 col-form-label">Номер</label>
             <div class="col-sm-10">
@@ -47,6 +44,50 @@
                               placeholder="${contract.number}"/>
             </div>
         </div>
+
+        <h5>Тарифы</h5>
+        <table class="table">
+            <tr>
+                <th width="100">ID</th>
+                <th width="180">Название</th>
+                <th width="260">Выбрать тариф</th>
+                <th width="60"></th>
+            </tr>
+            <c:forEach items="${tariffs}" var="tariff">
+                <tr>
+                    <td>${tariff.id}</td>
+                    <td>${tariff.name}</td>
+                    <td>
+                        <c:if test="${!empty contract.id}">
+                            <c:if test="${contract.tariffInContract.id eq tariff.id}">
+                                <div class="form-check form-check-inline">
+                                    <spring:radiobutton path="idTariff" class="form-check-input"
+                                                        name="inlineRadioOptions" checked="checked"
+                                                        id="inlineRadio1" value="${tariff.id}"></spring:radiobutton>
+                                </div>
+                            </c:if>
+                            <c:if test="${!(contract.tariffInContract.id eq tariff.id)}">
+                                <div class="form-check form-check-inline">
+                                    <spring:radiobutton path="idTariff" class="form-check-input"
+                                                        name="inlineRadioOptions"
+                                                        id="inlineRadio1" value="${tariff.id}"></spring:radiobutton>
+                                </div>
+                            </c:if>
+                        </c:if>
+                        <c:if test="${empty contract.id}">
+                            <div class="form-check form-check-inline">
+                                <spring:radiobutton path="idTariff" class="form-check-input"
+                                                    name="inlineRadioOptions" checked="checked"
+                                                    id="inlineRadio1" value="${tariff.id}"></spring:radiobutton>
+                            </div>
+                        </c:if>
+                    </td>
+
+                    <td><a href="<c:url value="/ecare/manager/tariff-${tariff.id}-more"/>">More</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+
 
         <div class="form-group row">
             <div class="offset-sm-2 col-sm-10">
@@ -58,7 +99,6 @@
                 </c:if>
             </div>
         </div>
-
 
 
     </spring:form>

@@ -23,6 +23,9 @@ public class ContractService {
     @Autowired
     PersonService personService;
 
+    @Autowired
+    TariffService tariffService;
+
     public void blockContractByPerson(Integer idContract) throws DataExistenceException {
         Contract contract = (Contract) this.contractDAO.getById(idContract);
         contract.setIsBlockedByPerson(1);
@@ -80,12 +83,21 @@ public class ContractService {
     public void addForPerson(Contract contract, Integer idPerson) throws DataExistenceException {
         Person person = this.personService.getById(idPerson);
         contract.setPersonInContract(person);
+
+        Tariff tariff = this.tariffService.getById(contract.getIdTariff());
+        contract.setTariffInContract(tariff);
+
         this.contractDAO.add(contract);
     }
 
-    public void updateForPerson(Contract contract, Integer idPerson) throws DataExistenceException {
+
+    public void updateWithTariff(Contract contract, Integer idPerson) throws DataExistenceException {
         Person person = this.personService.getById(idPerson);
         contract.setPersonInContract(person);
+
+        Tariff tariff = this.tariffService.getById(contract.getIdTariff());
+        contract.setTariffInContract(tariff);
+
         this.contractDAO.update(contract);
     }
 }

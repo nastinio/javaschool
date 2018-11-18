@@ -29,6 +29,9 @@ public class Contract {
     @JoinColumn(name="id_tariff", nullable=false)
     private Tariff tariffInContract;
 
+    @Transient
+    private Integer idTariff;
+
     @ManyToOne
     @JoinColumn(name="id_person", nullable=false)
     private Person personInContract;
@@ -42,20 +45,6 @@ public class Contract {
     Set<OptionCellular> optionsOnContract = new HashSet<>();
 
     public Contract() {
-    }
-
-    @Override
-    public String toString() {
-        return "Contract{" +
-                "id=" + id +
-                ", number='" + number + '\'' +
-                ", score=" + score +
-                ", person=" + personInContract.getId() +
-                ", isBlockedByPerson=" + isBlockedByPerson +
-                ", isBlockedByManager=" + isBlockedByManager +
-                ", tariffInContract=" + tariffInContract +
-                ", optionsOnContract=" + optionsOnContract +
-                '}';
     }
 
     public Integer getId() {
@@ -120,5 +109,13 @@ public class Contract {
 
     public void setIsBlockedByManager(Integer isBlockedByManager) {
         this.isBlockedByManager = isBlockedByManager;
+    }
+
+    public Integer getIdTariff() {
+        return idTariff;
+    }
+
+    public void setIdTariff(Integer idTariff) {
+        this.idTariff = idTariff;
     }
 }
