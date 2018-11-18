@@ -1,7 +1,9 @@
 package com.nastinio.spring.dao;
 
 import com.nastinio.spring.exceptions.DataExistenceException;
+import com.nastinio.spring.model.Contract;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -105,5 +107,15 @@ public abstract class EntityDAO<T> implements Crud<T> {
     }
 
 
+    public List<Contract> searchContract(String target){
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Contract> entitiesList = session.createSQLQuery("select * from Contract where number LIKE '%"+target+"%'").addEntity(Contract.class).list();
+        logger.info("CreateSQLQuery success");
+        for (Contract currentEntity : entitiesList) {
+            logger.info("List::" + currentEntity.getNumber());
+        }
+        return entitiesList;
+
+    }
 
 }

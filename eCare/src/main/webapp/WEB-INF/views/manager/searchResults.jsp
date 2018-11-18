@@ -13,11 +13,14 @@
 
 <%@include file="navbar.jsp" %>
 
-
 <div class="container">
     <div class="card-deck mb-3 text-center">
 
-        <c:if test="${!empty contractsList}">
+        <h5>Результаты поиска:</h5>
+        <c:if test="${empty listContracts}">
+            Контракты не найдены
+        </c:if>
+        <c:if test="${!empty listContracts}">
             <table class="table">
                 <tr>
                     <th width="80">ID</th>
@@ -27,13 +30,17 @@
                     <th width="180">Владелец</th>
                     <th width="60"></th>
                 </tr>
-                <c:forEach items="${contractsList}" var="contract">
+                <c:forEach items="${listContracts}" var="contract">
                     <tr>
                         <td>${contract.id}</td>
                         <td>${contract.number}</td>
                         <td>${contract.score}</td>
-                        <td><a href="<c:url value="/ecare/manager/tariff-${contract.tariffInContract.id}-more"/>">${contract.tariffInContract.name}</a></td>
-                        <td><a href="<c:url value="/ecare/manager/person-${contract.personInContract.id}-more"/>">${contract.personInContract.firstname} ${contract.personInContract.lastname}</a></td>
+                        <td>
+                            <a href="<c:url value="/ecare/manager/tariff-${contract.tariffInContract.id}-more"/>">${contract.tariffInContract.name}</a>
+                        </td>
+                        <td>
+                            <a href="<c:url value="/ecare/manager/person-${contract.personInContract.id}-more"/>">${contract.personInContract.firstname} ${contract.personInContract.lastname}</a>
+                        </td>
                         <td><a href="<c:url value="/ecare/manager/contract-${contract.id}-more"/>">More</a></td>
                     </tr>
                 </c:forEach>
@@ -41,8 +48,6 @@
         </c:if>
 
     </div>
-
-
 </div>
 
 </body>

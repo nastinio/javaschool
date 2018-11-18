@@ -39,7 +39,10 @@ public class ManagerTariffController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("manager/tariffMore");
         modelAndView.addObject("tariff",this.tariffService.getById(idTariff));
-        modelAndView.addObject("listOptions",this.optionCellularService.getList());
+
+
+        modelAndView.addObject("listOptions",this.tariffService.getListAvailableOptionsForAdd(idTariff));
+        //modelAndView.addObject("listOptions",this.optionCellularService.getList());
 
         return modelAndView;
     }

@@ -77,16 +77,17 @@ public class TariffService {
 
     }
 
-    /*public List<OptionCellular> getListAvailableOptionsForAdd(Integer idTariff) throws DataExistenceException {
+    public List<OptionCellular> getListAvailableOptionsForAdd(Integer idTariff) throws DataExistenceException {
         Tariff tariff = this.tariffDAO.getById(idTariff);
-        Set<OptionCellular> optionSet = tariff.getOptionsOnTariff();
 
-        List<OptionCellular> listAllOptions = this.optionCellularService.getList();
-        for (OptionCellular option:listAllOptions){
+        Set<OptionCellular> optionsOnTariff = tariff.getOptionsOnTariff();
+        List<OptionCellular> optionsAll = this.optionCellularService.getList();
 
-        }
+        optionsAll.removeAll(optionsOnTariff);
 
-    }*/
+        return optionsAll;
+
+    }
 
 
 

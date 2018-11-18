@@ -38,6 +38,22 @@ public class ContractService {
         this.contractDAO.update(contract);
     }
 
+    public void blockContractByManager(Integer idContract) throws DataExistenceException {
+        Contract contract = (Contract) this.contractDAO.getById(idContract);
+        contract.setIsBlockedByManager(1);
+        this.contractDAO.update(contract);
+    }
+
+    public void unlockContractByManager(Integer idContract) throws DataExistenceException {
+        Contract contract = (Contract) this.contractDAO.getById(idContract);
+        contract.setIsBlockedByManager(0);
+        this.contractDAO.update(contract);
+    }
+
+
+
+
+
     public Contract getById(Integer id) throws DataExistenceException {
         return (Contract) this.contractDAO.getById(id);
     }
@@ -52,6 +68,11 @@ public class ContractService {
 
     public List<Contract> getList(){
         return this.contractDAO.getList();
+    }
+
+    public List<Contract> getSearchList(String target){
+
+        return this.contractDAO.searchContract(target);
     }
 
     public void remove(Integer id){
