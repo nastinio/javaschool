@@ -63,13 +63,15 @@ public class ManagerTariffController {
     }
 
     @RequestMapping(value = "/ecare/manager/tariff-update", method = RequestMethod.POST)
-    public String managerTariffUpdate(@ModelAttribute("tariff") Tariff tariff){
+    public String managerTariffUpdate(@ModelAttribute("tariff") Tariff tariff) throws DataExistenceException {
         System.out.println("Получили для обновления: " + tariff.toString());
         // TODO NPE!
         if (tariff.getId() == null) {
             this.tariffService.add(tariff);
             return "redirect:/ecare/manager/all-tariffs";
         } else {
+            Tariff temp = this.tariffService.getById(tariff.getId());
+            tariff.setOptionsOnTariff(temp.getOptionsOnTariff());
             this.tariffService.update(tariff);
         }
         this.tariffService.update(tariff);

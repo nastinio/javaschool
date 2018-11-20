@@ -33,7 +33,57 @@
     <p><b>Стоимость услуги: </b> ${option.cost}</p>
     <p><b>Стоимость подключения:</b> ${option.costConnection}</p>
 
+    <c:if test="${empty listAllJointlyOptions}">
+        <h5>Нет необходимых для подключения опций</h5>
+    </c:if>
+    <c:if test="${!empty listAllJointlyOptions}">
+        <h5>Необходимые для подключения опции</h5>
+        <table class="table">
+            <tr>
+                <th width="80">ID</th>
+                <th width="180">Название</th>
+                <th width="120">Стоимость</th>
+                <th width="280">Стоимость подключения</th>
+                <th width="60"></th>
+            </tr>
+            <c:forEach items="${listAllJointlyOptions}" var="optionJoin">
+                <tr>
+                    <td>${optionJoin.id}</td>
+                    <td>${optionJoin.name}</td>
+                    <td>${optionJoin.cost}</td>
+                    <td>${optionJoin.costConnection}</td>
+                    <td><a href="<c:url value="/ecare/person-${person.id}/contract-${contract.id}/option-${optionJoin.id}-more"/>">More</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:if>
+
+    <c:if test="${empty listAllExcludeOptions}">
+        <h5>Нет несовместимых опций</h5>
+    </c:if>
+    <c:if test="${!empty listAllExcludeOptions}">
+        <h5>Несовместимые опции</h5>
+        <table class="table">
+            <tr>
+                <th width="80">ID</th>
+                <th width="180">Название</th>
+                <th width="120">Стоимость</th>
+                <th width="280">Стоимость подключения</th>
+                <th width="60"></th>
+            </tr>
+            <c:forEach items="${listAllExcludeOptions}" var="optionExclude">
+                <tr>
+                    <td>${optionExclude.id}</td>
+                    <td>${optionExclude.name}</td>
+                    <td>${optionExclude.cost}</td>
+                    <td>${optionExclude.costConnection}</td>
+                    <td><a href="<c:url value="/ecare/person-${person.id}/contract-${contract.id}/option-${optionExclude.id}-more"/>">More</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:if>
 </div>
+
 
 </body>
 </html>

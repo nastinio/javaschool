@@ -26,6 +26,9 @@ public class ContractService {
     @Autowired
     TariffService tariffService;
 
+    @Autowired
+    OptionCellularService optionCellularService;
+
     public void blockContractByPerson(Integer idContract) throws DataExistenceException {
         Contract contract = (Contract) this.contractDAO.getById(idContract);
         contract.setIsBlockedByPerson(1);
@@ -51,31 +54,32 @@ public class ContractService {
     }
 
 
-
-
-
     public Contract getById(Integer id) throws DataExistenceException {
         return (Contract) this.contractDAO.getById(id);
     }
 
-    public void add(Contract contract){
+    public void add(Contract contract) {
         this.contractDAO.add(contract);
     }
 
-    public void update(Contract contract){
+    public void update(Contract contract) {
         this.contractDAO.update(contract);
     }
 
-    public List<Contract> getList(){
+    public void merge(Contract contract) {
+        this.contractDAO.merge(contract);
+    }
+
+    public List<Contract> getList() {
         return this.contractDAO.getList();
     }
 
-    public List<Contract> getSearchList(String target){
+    public List<Contract> getSearchList(String target) {
 
         return this.contractDAO.searchContract(target);
     }
 
-    public void remove(Integer id){
+    public void remove(Integer id) {
         this.contractDAO.remove(id);
     }
 
@@ -85,17 +89,17 @@ public class ContractService {
 
         OptionCellular optionForRemove = new OptionCellular();
 
-        for(OptionCellular option: optionSet){
-            if(option.getId()==idOption){
+        for (OptionCellular option : optionSet) {
+            if (option.getId() == idOption) {
                 optionForRemove = option;
                 break;
             }
         }
 
-        if(optionForRemove.getId()!=null){
+        if (optionForRemove.getId() != null) {
             optionSet.remove(optionForRemove);
             this.update(contract);
-        }else{
+        } else {
             //TODO: пробросить исключение
         }
 
@@ -113,11 +117,45 @@ public class ContractService {
 
 
     public void updateWithTariff(Contract contract, Integer idPerson) throws DataExistenceException {
+        //Contract contract = (Contract) this.contractDAO.getById(idContract);
         Person person = this.personService.getById(idPerson);
         contract.setPersonInContract(person);
 
         Tariff tariff = this.tariffService.getById(contract.getIdTariff());
         contract.setTariffInContract(tariff);
+
+        this.contractDAO.update(contract);
+    }
+
+    //Проставить зависимости в дополнительных опциях контракта
+    public Contract getContractWithDependenciesOnOptions(Integer idContract) throws DataExistenceException {
+        Contract contract = getById(idContract);
+        for (OptionCellular option : contract.getOptionsOnContract()) {
+            option.setAllJointlyOptions(this.optionCellularService.getAllJointlyOptions(option));
+            option.setAllJointlyOptions(this.optionCellularService.getAllExcludeOptions(option));
+        }
+        return contract;
+
+    }
+
+    public void addExtraOptionToContract(Integer idContract, Integer idOption) throws DataExistenceException {
+        Contract contract = (Contract) this.contractDAO.getById(idContract);
+        OptionCellular option = this.optionCellularService.getById(idOption);
+
+        Set<OptionCellular> options = contract.getOptionsOnContract();
+        options.add(option);
+        contract.setOptionsOnContract(options);
+
+        this.contractDAO.update(contract);
+
+    }
+
+
+    public void disableExtraOptionToContract(Integer idContract, Integer idOption) throws DataExistenceException {
+        Contract contract = getById(idContract);
+        OptionCellular option = this.optionCellularService.getById(idOption);
+
+        contract.getOptionsOnContract().remove(option);
 
         this.contractDAO.update(contract);
     }

@@ -1,3 +1,4 @@
+/*
 package com.nastinio.spring.model;
 
 import com.nastinio.spring.enums.RoleType;
@@ -48,3 +49,4 @@ public class Role {
         this.persons = persons;
     }
 }
+*/

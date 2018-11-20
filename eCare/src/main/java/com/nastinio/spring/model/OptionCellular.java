@@ -33,6 +33,19 @@ public class OptionCellular {
     @Transient
     private String include;
 
+    @Transient
+    private Set<OptionCellular> allJointlyOptions = new HashSet<>();
+
+    @Transient
+    private Set<OptionCellular> allExcludeOptions = new HashSet<>();
+
+    @Transient
+    private Boolean canBeAdded = false;
+
+    @Transient
+    private Boolean canBeDisabled;
+
+
     @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
     @JoinTable(
             name = "option_jointly",
@@ -203,5 +216,38 @@ public class OptionCellular {
 
     public void setInclude(String include) {
         this.include = include;
+    }
+
+    public Set<OptionCellular> getAllJointlyOptions() {
+        return allJointlyOptions;
+    }
+
+    public void setAllJointlyOptions(Set<OptionCellular> allJointlyOptions) {
+        this.allJointlyOptions = allJointlyOptions;
+    }
+
+    public Set<OptionCellular> getAllExcludeOptions() {
+        return allExcludeOptions;
+    }
+
+    public void setAllExcludeOptions(Set<OptionCellular> allExcludeOptions) {
+        this.allExcludeOptions = allExcludeOptions;
+    }
+
+    public Boolean getCanBeAdded() {
+        return canBeAdded;
+    }
+
+    public void setCanBeAdded(Boolean canBeAdded) {
+        this.canBeAdded = canBeAdded;
+    }
+
+
+    public Boolean getCanBeDisabled() {
+        return canBeDisabled;
+    }
+
+    public void setCanBeDisabled(Boolean canBeDisabled) {
+        this.canBeDisabled = canBeDisabled;
     }
 }

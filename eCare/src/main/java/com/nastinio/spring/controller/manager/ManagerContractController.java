@@ -2,8 +2,11 @@ package com.nastinio.spring.controller.manager;
 
 import com.nastinio.spring.exceptions.DataExistenceException;
 import com.nastinio.spring.model.Contract;
+import com.nastinio.spring.model.OptionCellular;
 import com.nastinio.spring.model.Person;
+import com.nastinio.spring.model.Tariff;
 import com.nastinio.spring.service.ContractService;
+import com.nastinio.spring.service.OptionCellularService;
 import com.nastinio.spring.service.PersonService;
 import com.nastinio.spring.service.TariffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Set;
 
 @Controller
 @ComponentScan("com.nastinio")
@@ -26,6 +31,9 @@ public class ManagerContractController {
 
     @Autowired
     TariffService tariffService;
+
+    @Autowired
+    OptionCellularService optionCellularService;
 
     /*
      * Управление контрактами
@@ -75,7 +83,12 @@ public class ManagerContractController {
             this.contractService.addForPerson(contract, idPerson);
             return "redirect:/ecare/manager/person-" + idPerson + "-more";
         } else {
-            this.contractService.updateWithTariff(contract, idPerson);
+            Person person = this.personService.getById(idPerson);
+            Tariff tariff = this.tariffService.getById(contract.getIdTariff());
+            contract.setPersonInContract(person);
+            contract.setTariffInContract(tariff);
+            this.contractService.update(contract);
+            //this.contractService.updateWithTariff(contract, idPerson);
             return "redirect:/ecare/manager/contract-" + contract.getId() + "-more";
         }
     }
@@ -118,5 +131,38 @@ public class ManagerContractController {
         modelAndView.setViewName("manager/searchResults");
         modelAndView.addObject("listContracts", this.contractService.getSearchList(number));
         return modelAndView;
+    }
+
+    @RequestMapping(value = "ecare/manager/contract-{idContract}-exrtaoptions-add", method = RequestMethod.GET)
+    public ModelAndView addExtraOptionsContract(@PathVariable Integer idContract) throws DataExistenceException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("manager/contractAddExtraOptions");
+
+        //Проставить зависимости в дополнительных опциях контракта
+        Contract contract = this.contractService.getContractWithDependenciesOnOptions(idContract);
+        modelAndView.addObject("contract", this.contractService.getById(idContract));
+
+        //Список всех подключенных доп. опций с зависимостями и информацией, можно ли ее отключить
+        modelAndView.addObject("optionsOnContract",this.optionCellularService.getExtraOptionsListForDisabled(idContract));
+        //Список всех опций невключенных в тариф или неподключенных как дополнительные с проставленными зависимостями
+        modelAndView.addObject("extraOptionsList",this.optionCellularService.getExtraOptionsListForAdded(idContract));
+
+
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value = "ecare/manager/contract-{idContract}-exrtaoptions-add/option-{idOption}", method = RequestMethod.GET)
+    public String addExtraOptionContract(@PathVariable Integer idContract,@PathVariable Integer idOption) throws DataExistenceException {
+        this.contractService.addExtraOptionToContract(idContract,idOption);
+        return "redirect:/ecare/manager/contract-"+idContract+"-exrtaoptions-add";
+
+    }
+
+    @RequestMapping(value = "ecare/manager/contract-{idContract}-exrtaoptions-delete/option-{idOption}", method = RequestMethod.GET)
+    public String deleteExtraOptionContract(@PathVariable Integer idContract,@PathVariable Integer idOption) throws DataExistenceException {
+        System.out.println("Отключить опцию "+idOption+" от контракта "+idContract);
+        this.contractService.disableExtraOptionToContract(idContract,idOption);
+        return "redirect:/ecare/manager/contract-"+idContract+"-exrtaoptions-add";
     }
 }

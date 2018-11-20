@@ -33,9 +33,6 @@ public class Person {
     @OneToMany(mappedBy="personInContract")
     private Set<Contract> contracts = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn(name = "id_role")
-    private Role role;
 
     public Person() {
     }
@@ -126,11 +123,4 @@ public class Person {
         this.contracts = contracts;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 }

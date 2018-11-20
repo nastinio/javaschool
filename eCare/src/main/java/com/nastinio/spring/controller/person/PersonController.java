@@ -2,6 +2,7 @@ package com.nastinio.spring.controller.person;
 
 import com.nastinio.spring.exceptions.DataExistenceException;
 import com.nastinio.spring.model.Contract;
+import com.nastinio.spring.model.OptionCellular;
 import com.nastinio.spring.model.Person;
 import com.nastinio.spring.service.ContractService;
 import com.nastinio.spring.service.OptionCellularService;
@@ -139,18 +140,22 @@ public class PersonController {
         modelAndView.addObject("contract", this.contractService.getById(idContract));
         modelAndView.addObject("option",this.optionCellularService.getById(idOption));
 
+        OptionCellular option = this.optionCellularService.getById(idOption);
+        modelAndView.addObject("listAllJointlyOptions",this.optionCellularService.getAllJointlyOptions(option));
+        modelAndView.addObject("listAllExcludeOptions",this.optionCellularService.getAllExcludeOptions(option));
+
         return modelAndView;
     }
 
 
 
     //УДАЛЕНИЕ ДОПОЛНИТЕЛЬНОЙ ОПЦИИ ИЗ ТАРИФА
-    @RequestMapping(value = "/ecare/manager/person-{idPerson}/contract-{idContract}/extraoption-{idOption}-disable", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/ecare/manager/person-{idPerson}/contract-{idContract}/extraoption-{idOption}-disable", method = RequestMethod.GET)
     public String clientContractDisableOption(@PathVariable Integer idPerson, @PathVariable Integer idContract, @PathVariable("idOption") Integer idOption) throws DataExistenceException {
         this.contractService.removeExtraOptionFromContract(idContract,idOption);
 
         return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"-more";
-    }
+    }*/
 
 
 

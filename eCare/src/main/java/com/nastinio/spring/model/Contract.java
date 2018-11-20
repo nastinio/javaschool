@@ -47,6 +47,15 @@ public class Contract {
     public Contract() {
     }
 
+    @Override
+    public String toString() {
+        return "Contract{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", options=" + optionsOnContract +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

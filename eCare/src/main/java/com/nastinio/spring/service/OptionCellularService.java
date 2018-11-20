@@ -3,6 +3,7 @@ package com.nastinio.spring.service;
 import com.nastinio.spring.dao.OptionCellularDAO;
 import com.nastinio.spring.enums.CorrelationType;
 import com.nastinio.spring.exceptions.DataExistenceException;
+import com.nastinio.spring.model.Contract;
 import com.nastinio.spring.model.OptionCellular;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -18,6 +20,9 @@ import java.util.Set;
 public class OptionCellularService {
     @Autowired
     OptionCellularDAO optionCellularDAO;
+
+    @Autowired
+    ContractService contractService;
 
     //Методы для получения всех взаимосвязей на опции
     //Получение необходимых опций
@@ -70,7 +75,7 @@ public class OptionCellularService {
     }
 
     //Получение несовместимых опций
-    public Set<OptionCellular> getAllExcludeOptions(OptionCellular option){
+    public Set<OptionCellular> getAllExcludeOptions(OptionCellular option) {
         Set<OptionCellular> rightOptions = option.getExcludeRightOptions();
         Set<OptionCellular> leftOptions = option.getExcludeLeftOptions();
 
@@ -89,56 +94,57 @@ public class OptionCellularService {
         optionsWithCorrelation.remove(option);
 
         //Проставим зависимости
-        for(OptionCellular current:optionsWithCorrelation){
-            current.setCorrelation(typeCorrelationOfMainOnChild(option,current));
+        for (OptionCellular current : optionsWithCorrelation) {
+            current.setCorrelation(typeCorrelationOfMainOnChild(option, current));
         }
         return optionsWithCorrelation;
 
     }
 
     //Проставить взаимосвязь между двумя опциями
-    public CorrelationType typeCorrelationOfMainOnChild(OptionCellular optionMain,OptionCellular optionChild){
+    public CorrelationType typeCorrelationOfMainOnChild(OptionCellular optionMain, OptionCellular optionChild) {
         Set<OptionCellular> allExcludeOptions = getAllExcludeOptions(optionMain);
         Set<OptionCellular> allJointlyOptions = getAllJointlyOptions(optionMain);
 
-        if(allExcludeOptions.contains(optionChild)){
-           return CorrelationType.EXCLUDE;
-        }else{
-            if(allJointlyOptions.contains(optionChild)){
+        if (allExcludeOptions.contains(optionChild)) {
+            return CorrelationType.EXCLUDE;
+        } else {
+            if (allJointlyOptions.contains(optionChild)) {
                 //Т.е. для подключения optionMain необходимо подключить optionChild
-               return CorrelationType.JOINTLY;
-            }else{
+                return CorrelationType.JOINTLY;
+            } else {
                 return CorrelationType.NONE;
             }
         }
     }
+
     //Установить взаимосвязь в бд
     public void setCorrelation(Integer idMainOption, Integer idChildOption, String include) throws DataExistenceException {
         //Проверить, какая связь была
         OptionCellular optionMain = this.optionCellularDAO.getById(idMainOption);
         OptionCellular optionChild = this.optionCellularDAO.getById(idChildOption);
 
-        CorrelationType oldCorrelation = typeCorrelationOfMainOnChild(optionMain,optionChild);
+        CorrelationType oldCorrelation = typeCorrelationOfMainOnChild(optionMain, optionChild);
 
-        if(!oldCorrelation.getValue().equals(include)){
+        if (!oldCorrelation.getValue().equals(include)) {
             //Связь изменилась
             //Удалим старую связь из бд
-            switch (oldCorrelation.getValue()){
+            switch (oldCorrelation.getValue()) {
                 case "none":
                     break;
                 case "jointly":
                     optionMain.getJointlyOptions().remove(optionChild);
                     break;
                 case "exclude":
-                    if(optionMain.getExcludeLeftOptions().contains(optionChild)){
+                    if (optionMain.getExcludeLeftOptions().contains(optionChild)) {
                         optionMain.getExcludeLeftOptions().remove(optionChild);
-                    }else{
+                    } else {
                         optionMain.getExcludeRightOptions().remove(optionChild);
                     }
                     break;
             }
             //Добавим новую
-            switch (include){
+            switch (include) {
                 case "none":
                     break;
                 case "jointly":
@@ -151,10 +157,6 @@ public class OptionCellularService {
             this.optionCellularDAO.update(optionMain);
 
         }
-
-
-
-
 
 
     }
@@ -181,4 +183,99 @@ public class OptionCellularService {
         this.optionCellularDAO.remove(id);
     }
 
+    //Список всех опций невключенных в тариф или неподключенных как дополнительные с проставленными зависимостями
+    //Используется при подключении дополнительных опций к контракту
+    public List<OptionCellular> getExtraOptionsListForAdded(Integer idContract) throws DataExistenceException {
+        //Все опции в базе
+        List<OptionCellular> options = getList();
+        //Исключим опции, которые уже есть в контракте как дополнительные и опции, которые уже есть в тарифе
+        Contract contract = this.contractService.getById(idContract);
+        Set<OptionCellular> extraOptionsOnContract = contract.getOptionsOnContract();
+        Set<OptionCellular> optionsOnTariff = contract.getTariffInContract().getOptionsOnTariff();
+
+        options.removeAll(extraOptionsOnContract);
+        options.removeAll(optionsOnTariff);
+
+        //Теперь проставим зависимости для каждой опции
+        for (OptionCellular option : options) {
+            option.setAllJointlyOptions(getAllJointlyOptions(option));
+            option.setAllExcludeOptions(getAllExcludeOptions(option));
+
+            //Проставим флаги: можно ли подключать
+            //Если в контракте нет всех необходимых или есть несовместимые - проставим false
+            option.setCanBeAdded(checkCanBeOptionAddedOnContract(option, idContract));
+
+        }
+        return options;
+    }
+
+    public Set<OptionCellular> getExtraOptionsListForDisabled(Integer idContract) throws DataExistenceException {
+        Contract contract = this.contractService.getById(idContract);
+        //Все опции в контракте
+        Set<OptionCellular> preOptions = contract.getOptionsOnContract();
+
+        //Вспомогательный
+        Set<OptionCellular> options = new HashSet<>();
+
+        //Теперь проставим зависимости для каждой опции
+        for (OptionCellular option : preOptions) {
+
+            OptionCellular tempOption = option;
+
+            tempOption.setAllJointlyOptions(getAllJointlyOptions(tempOption));
+            tempOption.setAllExcludeOptions(getAllExcludeOptions(tempOption));
+
+            //TODO: Проставим флаги: можно ли отключить
+            //tempOption.setCanBeDisabled(checkCanBeOptionDisabledOnContract(tempOption, idContract));
+            tempOption.setCanBeDisabled(true);
+
+            options.add(tempOption);
+
+        }
+
+        return options;
+    }
+
+    private Boolean checkCanBeOptionAddedOnContract(OptionCellular option, Integer idContract) throws DataExistenceException {
+        //Проверим можно ли подключать
+        //Если в контракте нет всех необходимых или есть несовместимые - проставим false
+        Contract contract = this.contractService.getById(idContract);
+        Set<OptionCellular> extraOptionsOnContract = contract.getOptionsOnContract();
+        Set<OptionCellular> optionsOnTariff = contract.getTariffInContract().getOptionsOnTariff();
+
+        Set<OptionCellular> allJointly = getAllJointlyOptions(option);
+        Set<OptionCellular> allExclude = getAllExcludeOptions(option);
+
+        if (allJointly.isEmpty() && allExclude.isEmpty()) {
+            return true;
+        }
+        //Проверим, чтобы нигде не были подключены несовместимые
+        for (OptionCellular optionExclude : allExclude) {
+            if (optionsOnTariff.contains(optionExclude) || extraOptionsOnContract.contains(optionExclude)) {
+                return false;
+            }
+        }
+        //Проверим, чтобы были подключены все необходимые
+        for (OptionCellular optionJointly : allJointly) {
+            if (!optionsOnTariff.contains(optionJointly) && !extraOptionsOnContract.contains(optionJointly)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private Boolean checkCanBeOptionDisabledOnContract(OptionCellular option, Integer idContract) throws DataExistenceException {
+        //Можем отключить, если другие опции в контракте не нуждаются в ней
+        Contract contract = this.contractService.getById(idContract);
+        Set<OptionCellular> optionsOnContract = contract.getOptionsOnContract();
+        optionsOnContract.remove(option);
+
+        for (OptionCellular optionOnContract : optionsOnContract) {
+            if (optionOnContract.getJointlyOptions().contains(option)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

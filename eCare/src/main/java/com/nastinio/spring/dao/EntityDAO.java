@@ -26,10 +26,9 @@ public abstract class EntityDAO<T> implements Crud<T> {
         this.sessionFactory = sf;
     }*/
 
-    protected Session getSession(){
+    protected Session getSession() {
         return sessionFactory.getCurrentSession();
     }
-
 
 
     private Class nameClass;
@@ -55,13 +54,23 @@ public abstract class EntityDAO<T> implements Crud<T> {
 
     @Override
     public void update(T entity) {
-        //System.out.println("Получили на обновление " + entity.toString());
+        System.out.println("Получили на обновление " + entity.toString());
         Session session = this.sessionFactory.getCurrentSession();
         //Session session = this.sessionFactory.openSession();
         //session.flush();
         session.update(entity);
         logger.info(nameClassHeir + " updated successfully. " + nameClassHeir + "  details=" + entity);
-        //session.close();
+
+    }
+
+    public void merge(T entity) {
+        System.out.println("Получили на обновление " + entity.toString());
+        Session session = this.sessionFactory.getCurrentSession();
+        //Session session = this.sessionFactory.openSession();
+        //session.flush();
+        session.merge(entity);
+        logger.info(nameClassHeir + " updated successfully. " + nameClassHeir + "  details=" + entity);
+
     }
 
     @Override
@@ -69,7 +78,7 @@ public abstract class EntityDAO<T> implements Crud<T> {
         Session session = this.sessionFactory.getCurrentSession();
         //Session session = this.sessionFactory.openSession();
         logger.info("Try get list all " + nameClassHeir);
-        List<T> entitiesList = session.createQuery("from "+nameClassHeir).list();//session.createQuery("from Person").list();
+        List<T> entitiesList = session.createQuery("from " + nameClassHeir).list();//session.createQuery("from Person").list();
         logger.info("CreateQuery success");
         for (T currentEntity : entitiesList) {
             logger.info("List::" + currentEntity);
@@ -80,19 +89,19 @@ public abstract class EntityDAO<T> implements Crud<T> {
 
     //@Override
     public T getById(Integer id) throws DataExistenceException {
-        //Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.getCurrentSession();
         logger.info("Зашли в EntityDAO для поиска по id = " + id);
-        Session session = this.sessionFactory.openSession();
+        //Session session = this.sessionFactory.openSession();
         try {
             T entity = (T) session.load(nameClass, id);      //load(T.class, id);
-            logger.info(nameClassHeir + " loaded successfully, " + nameClassHeir + " details=" + entity);
+            logger.info(nameClassHeir + " loaded successfully, " + nameClassHeir + " details=" + entity.toString());
             return entity;
         } catch (ObjectNotFoundException e) {
             logger.info("Person #" + id + "doesn't exist");
             throw new DataExistenceException();
-        } finally {
+        } /*finally {
             session.close();
-        }
+        }*/
 
     }
 
@@ -107,9 +116,9 @@ public abstract class EntityDAO<T> implements Crud<T> {
     }
 
 
-    public List<Contract> searchContract(String target){
+    public List<Contract> searchContract(String target) {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Contract> entitiesList = session.createSQLQuery("select * from Contract where number LIKE '%"+target+"%'").addEntity(Contract.class).list();
+        List<Contract> entitiesList = session.createSQLQuery("select * from Contract where number LIKE '%" + target + "%'").addEntity(Contract.class).list();
         logger.info("CreateSQLQuery success");
         for (Contract currentEntity : entitiesList) {
             logger.info("List::" + currentEntity.getNumber());
@@ -117,5 +126,15 @@ public abstract class EntityDAO<T> implements Crud<T> {
         return entitiesList;
 
     }
+
+    /*//Костыль
+    public void addExtraOption(Integer idContract,Integer idOption) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.createSQLQuery("INSERT INTO `ecaredb`.`contract_option` (`id_contract`, `id_option`) VALUES ('"+idContract+"', '"+idOption+"')");
+        logger.info("CreateSQLQuery success");
+
+
+    }*/
+
 
 }

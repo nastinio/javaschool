@@ -62,7 +62,7 @@
 
 
     <h5>Дополнительные опции</h5>
-
+    <a href="<c:url value="/ecare/manager/contract-${contract.id}-exrtaoptions-add"/>">Добавить дополнительные опции</a>
     <div class="container">
         <div class="card-deck mb-3 text-center">
             <c:forEach items="${contract.optionsOnContract}" var="option">
@@ -91,13 +91,6 @@
 
 
 </div>
-<footer class="pt-4 my-md-5 pt-md-5 border-top">
-    <div class="row">
-        <div class="col-12 col-md">
-            <small class="d-block mb-3 text-muted">nastinio-2018</small>
-        </div>
-    </div>
-</footer>
 
 </body>
 </html>
