@@ -84,10 +84,10 @@ public class OptionCellular {
     private Set<Contract> contracts = new HashSet<>();
 
     @ManyToMany(mappedBy = "optionsForAdd")
-    private Set<Basket> basketsForAdd = new HashSet<>();
+    private Set<Contract> contractsForAdd = new HashSet<>();
 
     @ManyToMany(mappedBy = "optionsForRemove")
-    private Set<Basket> basketsForRemove = new HashSet<>();
+    private Set<Contract> contractsForRemove = new HashSet<>();
 
     @Override
     public String toString() {
@@ -257,19 +257,19 @@ public class OptionCellular {
         this.canBeDisabled = canBeDisabled;
     }
 
-    public Set<Basket> getBasketsForAdd() {
-        return basketsForAdd;
+    public Set<Contract> getContractsForAdd() {
+        return contractsForAdd;
     }
 
-    public void setBasketsForAdd(Set<Basket> basketsForAdd) {
-        this.basketsForAdd = basketsForAdd;
+    public void setContractsForAdd(Set<Contract> contractsForAdd) {
+        this.contractsForAdd = contractsForAdd;
     }
 
-    public Set<Basket> getBasketsForRemove() {
-        return basketsForRemove;
+    public Set<Contract> getContractsForRemove() {
+        return contractsForRemove;
     }
 
-    public void setBasketsForRemove(Set<Basket> basketsForRemove) {
-        this.basketsForRemove = basketsForRemove;
+    public void setContractsForRemove(Set<Contract> contractsForRemove) {
+        this.contractsForRemove = contractsForRemove;
     }
 }

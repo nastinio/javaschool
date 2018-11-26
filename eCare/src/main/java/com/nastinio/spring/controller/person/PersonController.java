@@ -1,7 +1,6 @@
 package com.nastinio.spring.controller.person;
 
 import com.nastinio.spring.exceptions.DataExistenceException;
-import com.nastinio.spring.model.Basket;
 import com.nastinio.spring.model.Contract;
 import com.nastinio.spring.model.OptionCellular;
 import com.nastinio.spring.model.Person;
@@ -29,9 +28,6 @@ public class PersonController {
 
     @Autowired
     OptionCellularService optionCellularService;
-
-    @Autowired
-    BasketService basketService;
 
     @RequestMapping("/")
     public String home(){
@@ -182,10 +178,8 @@ public class PersonController {
     @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/tariff-{idTariff}/basket-add", method = RequestMethod.GET)
     public String changeTariff(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract, @PathVariable("idTariff") Integer idTariff) throws DataExistenceException {
         Contract contract= this.contractService.getById(idContract);
-        Basket basket = contract.getBasket();
-        basket.setTariffInBasket(this.tariffService.getById(idTariff));
-        System.out.println("Теперь в козине тариф: "+basket.getTariffInBasket().getName());
-        this.basketService.update(basket);
+        contract.setTariffInContractForChange(this.tariffService.getById(idTariff));
+        this.contractService.update(contract);
 
         //this.contractService.changeTariff(idContract,idTariff);
 
@@ -200,24 +194,32 @@ public class PersonController {
 
         Contract contract = this.contractService.getById(idContract);
         modelAndView.addObject("contract",contract);
-        modelAndView.addObject("basket",contract.getBasket());
 
         return modelAndView;
     }
 
     @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/update",method = RequestMethod.GET)
     public String updateContract(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
-        this.contractService.updateFromBasket(idContract);
+        this.contractService.updateTariffByPerson(idContract);
 
         return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"-more";
     }
 
     @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/basket-reset",method = RequestMethod.GET)
     public String resetBasket(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
-        this.basketService.reset(idContract);
+        this.contractService.resetTariffChange(idContract);
 
         return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"/basket";
     }
 
+    //ДОБАВЛЕНИЕ ОПЦИЙ ЧЕРЕЗ КОРЗИНУ
+    @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/option-{idOption}/basket-add", method = RequestMethod.GET)
+    public String addOptionToBasket(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract, @PathVariable("idTariff") Integer idTariff) throws DataExistenceException {
+
+
+        //this.contractService.changeTariff(idContract,idTariff);
+
+        return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"/basket";
+    }
 }
 

@@ -1,3 +1,4 @@
+/*
 package com.nastinio.spring.dao;
 
 import com.nastinio.spring.model.Basket;
@@ -9,3 +10,4 @@ public class BasketDAO extends EntityDAO{
     BasketDAO(){super(Basket.class);}
 }
 
+*/

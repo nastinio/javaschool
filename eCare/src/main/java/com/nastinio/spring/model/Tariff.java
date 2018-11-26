@@ -35,8 +35,8 @@ public class Tariff {
     @OneToMany(mappedBy="tariffInContract")
     private Set<Contract> contracts;
 
-    @OneToMany(mappedBy="tariffInBasket")
-    private Set<Basket> baskets;
+    @OneToMany(mappedBy="tariffInContractForChange")
+    private Set<Contract> contractsWithChangeTariff;
 
 
     public Tariff() {
@@ -113,5 +113,13 @@ public class Tariff {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
+    }
+
+    public Set<Contract> getContractsWithChangeTariff() {
+        return contractsWithChangeTariff;
+    }
+
+    public void setContractsWithChangeTariff(Set<Contract> contractsWithChangeTariff) {
+        this.contractsWithChangeTariff = contractsWithChangeTariff;
     }
 }

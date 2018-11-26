@@ -1,9 +1,6 @@
 package com.nastinio.spring.controller;
 
 import com.nastinio.spring.exceptions.DataExistenceException;
-import com.nastinio.spring.model.Basket;
-import com.nastinio.spring.model.Contract;
-import com.nastinio.spring.model.OptionCellular;
 import com.nastinio.spring.service.ContractService;
 import com.nastinio.spring.service.OptionCellularService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +21,5 @@ public class TempController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public void main() throws DataExistenceException {
-        Contract contract = this.contractService.getById(1);
-        System.out.println("Есть контракт "+contract.getId()+" "+contract.getNumber());
-
-        Basket basket = contract.getBasket();
-        System.out.println("Корзина: "+ basket.getOptionsForAdd()+"\n"+basket.getOptionsForRemove());
     }
 }

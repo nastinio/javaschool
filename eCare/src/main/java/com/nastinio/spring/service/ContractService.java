@@ -157,11 +157,22 @@ public class ContractService {
         this.contractDAO.update(contract);
     }
 
-    public void updateFromBasket(Integer idContract) throws DataExistenceException {
-        Contract contract = this.getById(idContract);
-        Basket basket = contract.getBasket();
-        contract.setTariffInContract(basket.getTariffInBasket());
 
+    public void updateTariffByPerson(Integer idContract) throws DataExistenceException {
+        Contract contract = this.getById(idContract);
+        if(contract.getTariffInContractForChange()==null || contract.getTariffInContractForChange().getId()== contract.getTariffInContract().getId()){
+            return;
+        }
+        contract.setTariffInContract(contract.getTariffInContractForChange());
         this.update(contract);
+    }
+
+    public void resetTariffChange(Integer idContract) throws DataExistenceException {
+        Contract contract = this.getById(idContract);
+        if(contract.getTariffInContractForChange()==null || contract.getTariffInContractForChange().getId()== contract.getTariffInContract().getId()){
+            return;
+        }else{
+            contract.setTariffInContractForChange(contract.getTariffInContract());
+        }
     }
 }

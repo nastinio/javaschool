@@ -5,10 +5,7 @@ import com.nastinio.spring.model.Contract;
 import com.nastinio.spring.model.OptionCellular;
 import com.nastinio.spring.model.Person;
 import com.nastinio.spring.model.Tariff;
-import com.nastinio.spring.service.ContractService;
-import com.nastinio.spring.service.OptionCellularService;
-import com.nastinio.spring.service.PersonService;
-import com.nastinio.spring.service.TariffService;
+import com.nastinio.spring.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -34,6 +31,7 @@ public class ManagerContractController {
 
     @Autowired
     OptionCellularService optionCellularService;
+
 
     /*
      * Управление контрактами

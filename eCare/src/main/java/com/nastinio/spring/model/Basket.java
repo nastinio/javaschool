@@ -1,3 +1,4 @@
+/*
 package com.nastinio.spring.model;
 
 import javax.persistence.*;
@@ -79,3 +80,4 @@ public class Basket {
         this.optionsForRemove = optionsForRemove;
     }
 }
+*/

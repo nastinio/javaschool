@@ -32,6 +32,10 @@ public class Contract {
     @JoinColumn(name="id_tariff", nullable=false)
     private Tariff tariffInContract;
 
+    @ManyToOne
+    @JoinColumn(name="id_tariff_change")
+    private Tariff tariffInContractForChange;
+
     @Transient
     private Integer idTariff;
 
@@ -47,11 +51,25 @@ public class Contract {
     )
     Set<OptionCellular> optionsOnContract = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    /*@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_basket")
-    private Basket basket;
-    /*@OneToOne(mappedBy = "contract")
     private Basket basket;*/
+
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "contract_option_add",
+            joinColumns = {@JoinColumn(name = "id_contract_add")},
+            inverseJoinColumns = {@JoinColumn(name = "id_option_add")}
+    )
+    private Set<OptionCellular> optionsForAdd = new HashSet<>();
+
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "contract_option_remove",
+            joinColumns = {@JoinColumn(name = "id_contract_remove")},
+            inverseJoinColumns = {@JoinColumn(name = "id_option_remove")}
+    )
+    private Set<OptionCellular> optionsForRemove = new HashSet<>();
 
     public Contract() {
     }
@@ -137,11 +155,30 @@ public class Contract {
         this.idTariff = idTariff;
     }
 
-    public Basket getBasket() {
-        return basket;
+
+    public Tariff getTariffInContractForChange() {
+        return tariffInContractForChange;
     }
 
-    public void setBasket(Basket basket) {
-        this.basket = basket;
+    public void setTariffInContractForChange(Tariff tariffInContractForChange) {
+        this.tariffInContractForChange = tariffInContractForChange;
     }
+
+    public Set<OptionCellular> getOptionsForAdd() {
+        return optionsForAdd;
+    }
+
+    public void setOptionsForAdd(Set<OptionCellular> optionsForAdd) {
+        this.optionsForAdd = optionsForAdd;
+    }
+
+    public Set<OptionCellular> getOptionsForRemove() {
+        return optionsForRemove;
+    }
+
+    public void setOptionsForRemove(Set<OptionCellular> optionsForRemove) {
+        this.optionsForRemove = optionsForRemove;
+    }
+
+
 }

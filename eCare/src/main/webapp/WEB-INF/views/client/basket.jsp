@@ -60,14 +60,14 @@
         </div>
     </spring:form>--%>
 
-        <c:if test="${contract.tariffInContract eq basket.tariffInBasket}">
+        <c:if test="${contract.tariffInContract eq contract.tariffInContractForChange}">
             <h5>Новый тариф не был выбран</h5>
         </c:if>
-        <c:if test="${!(contract.tariffInContract eq basket.tariffInBasket)}">
-            <h5>Выбран новый тариф: <a href="/ecare/person-${person.id}/contract-${contract.id}/tariff-${basket.tariffInBasket.id}-more">${basket.tariffInBasket.name}</a></h5>
+        <c:if test="${!(contract.tariffInContract eq contract.tariffInContractForChange)}">
+            <h5>Выбран новый тариф: <a href="/ecare/person-${person.id}/contract-${contract.id}/tariff-${contract.tariffInContractForChange.id}-more">${contract.tariffInContractForChange.name}</a></h5>
             <p>${basket.tariffInBasket.description}</p>
 
-            <c:if test="${!empty basket.tariffInBasket.optionsOnTariff}">
+            <c:if test="${!empty contract.tariffInContractForChange.optionsOnTariff}">
                 <table class="table">
                     <tr>
                         <th width="80">ID</th>
@@ -76,7 +76,7 @@
                         <th width="280">Стоимость подключения</th>
                         <th width="60"></th>
                     </tr>
-                    <c:forEach items="${basket.tariffInBasket.optionsOnTariff}" var="option">
+                    <c:forEach items="${contract.tariffInContractForChange.optionsOnTariff}" var="option">
                         <tr>
                             <td>${option.id}</td>
                             <td>${option.name}</td>
