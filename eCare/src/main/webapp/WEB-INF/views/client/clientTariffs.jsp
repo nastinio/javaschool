@@ -41,9 +41,6 @@
                             <ul class="list-unstyled mt-3 mb-4">
                                 <li>-</li>
                             </ul>
-                            <a href="/ecare/person-${person.id}/contract-${contract.id}/tariff-${tariff.id}/basket-add"
-                               class="btn btn-lg btn-block btn-outline-primary" role="button" aria-disabled="true">Добавить
-                                в корзину</a>
                             <a href="/ecare/person-${person.id}/contract-${contract.id}/tariff-${tariff.id}-more"
                                class="btn btn-lg btn-block btn-outline-primary" role="button"
                                aria-disabled="true">More</a>

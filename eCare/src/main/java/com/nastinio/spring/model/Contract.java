@@ -25,6 +25,9 @@ public class Contract {
     @Column(name = "is_blocked_manager")
     public Integer isBlockedByManager;
 
+    /*@Transient
+    private Boolean isActive = (isBlockedByManager==0 && isBlockedByPerson==0);*/
+
     @ManyToOne
     @JoinColumn(name="id_tariff", nullable=false)
     private Tariff tariffInContract;
@@ -43,6 +46,12 @@ public class Contract {
             inverseJoinColumns = { @JoinColumn(name = "id_option") }
     )
     Set<OptionCellular> optionsOnContract = new HashSet<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_basket")
+    private Basket basket;
+    /*@OneToOne(mappedBy = "contract")
+    private Basket basket;*/
 
     public Contract() {
     }
@@ -126,5 +135,13 @@ public class Contract {
 
     public void setIdTariff(Integer idTariff) {
         this.idTariff = idTariff;
+    }
+
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public void setBasket(Basket basket) {
+        this.basket = basket;
     }
 }

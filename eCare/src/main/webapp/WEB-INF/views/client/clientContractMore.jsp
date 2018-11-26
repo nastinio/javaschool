@@ -46,11 +46,6 @@
     <h5>Тариф: <a href="/ecare/person-${person.id}/contract-${contract.id}/tariff-${contract.tariffInContract.id}-more">${contract.tariffInContract.name}</a></h5>
     <p>${contract.tariffInContract.description}</p>
 
-    <%--Ссылка активна, если контракт незаблокирован--%>
-    <c:if test="${contract.isBlockedByManager eq '0' && contract.isBlockedByPerson eq '0'}">
-        <a href="/ecare/person-${person.id}/contract-${contract.id}/tariff-all">Сменить тариф</a></h5>
-    </c:if>
-
     <c:if test="${!empty contract.tariffInContract.optionsOnTariff}">
         <table class="table">
             <tr>
@@ -75,7 +70,7 @@
     <h5>Дополнительные опции</h5>
     <%--Ссылка активна, если контракт незаблокирован--%>
     <c:if test="${contract.isBlockedByManager eq '0' && contract.isBlockedByPerson eq '0'}">
-        <a href="/ecare/person-${person.id}/contract-${contract.id}/option-all">Выбрать дополнительные опции</a></h5>
+        <a href="/ecare/person-${person.id}/contract-${contract.id}-exrtaoptions-add">Выбрать дополнительные опции</a></h5>
     </c:if>
 
 

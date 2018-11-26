@@ -2,10 +2,7 @@ package com.nastinio.spring.service;
 
 import com.nastinio.spring.dao.ContractDAO;
 import com.nastinio.spring.exceptions.DataExistenceException;
-import com.nastinio.spring.model.Contract;
-import com.nastinio.spring.model.OptionCellular;
-import com.nastinio.spring.model.Person;
-import com.nastinio.spring.model.Tariff;
+import com.nastinio.spring.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -158,5 +155,13 @@ public class ContractService {
         contract.getOptionsOnContract().remove(option);
 
         this.contractDAO.update(contract);
+    }
+
+    public void updateFromBasket(Integer idContract) throws DataExistenceException {
+        Contract contract = this.getById(idContract);
+        Basket basket = contract.getBasket();
+        contract.setTariffInContract(basket.getTariffInBasket());
+
+        this.update(contract);
     }
 }

@@ -2,6 +2,7 @@ package com.nastinio.spring.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -33,6 +34,9 @@ public class Tariff {
 
     @OneToMany(mappedBy="tariffInContract")
     private Set<Contract> contracts;
+
+    @OneToMany(mappedBy="tariffInBasket")
+    private Set<Basket> baskets;
 
 
     public Tariff() {
@@ -95,5 +99,19 @@ public class Tariff {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tariff tariff = (Tariff) o;
+        return Objects.equals(id, tariff.id) &&
+                Objects.equals(name, tariff.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }

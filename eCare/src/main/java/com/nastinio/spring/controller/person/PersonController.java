@@ -1,13 +1,11 @@
 package com.nastinio.spring.controller.person;
 
 import com.nastinio.spring.exceptions.DataExistenceException;
+import com.nastinio.spring.model.Basket;
 import com.nastinio.spring.model.Contract;
 import com.nastinio.spring.model.OptionCellular;
 import com.nastinio.spring.model.Person;
-import com.nastinio.spring.service.ContractService;
-import com.nastinio.spring.service.OptionCellularService;
-import com.nastinio.spring.service.PersonService;
-import com.nastinio.spring.service.TariffService;
+import com.nastinio.spring.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -31,6 +29,9 @@ public class PersonController {
 
     @Autowired
     OptionCellularService optionCellularService;
+
+    @Autowired
+    BasketService basketService;
 
     @RequestMapping("/")
     public String home(){
@@ -172,6 +173,51 @@ public class PersonController {
         return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"-more";
     }
 
+
+    //ПОДКЛЮЧЕНИЕ И ОТКЛЮЧЕНИЕ ДОПОЛНИТЕЛЬНЫХ ОПЦИЙ
+    //ecare/person-${person.id}/contract-${contract.id}-exrtaoptions-add
+
+
+    //СМЕНА ТАРИФА ЧЕРЕЗ КОРЗИНУ
+    @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/tariff-{idTariff}/basket-add", method = RequestMethod.GET)
+    public String changeTariff(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract, @PathVariable("idTariff") Integer idTariff) throws DataExistenceException {
+        Contract contract= this.contractService.getById(idContract);
+        Basket basket = contract.getBasket();
+        basket.setTariffInBasket(this.tariffService.getById(idTariff));
+        System.out.println("Теперь в козине тариф: "+basket.getTariffInBasket().getName());
+        this.basketService.update(basket);
+
+        //this.contractService.changeTariff(idContract,idTariff);
+
+        return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"/basket";
+    }
+
+    @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/basket", method = RequestMethod.GET)
+    public ModelAndView showBasket(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("client/basket");
+        modelAndView.addObject("person",this.personService.getById(idPerson));
+
+        Contract contract = this.contractService.getById(idContract);
+        modelAndView.addObject("contract",contract);
+        modelAndView.addObject("basket",contract.getBasket());
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/update",method = RequestMethod.GET)
+    public String updateContract(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
+        this.contractService.updateFromBasket(idContract);
+
+        return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"-more";
+    }
+
+    @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/basket-reset",method = RequestMethod.GET)
+    public String resetBasket(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
+        this.basketService.reset(idContract);
+
+        return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"/basket";
+    }
 
 }
 
