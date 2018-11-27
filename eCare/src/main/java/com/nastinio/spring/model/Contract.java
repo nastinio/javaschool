@@ -29,25 +29,25 @@ public class Contract {
     private Boolean isActive = (isBlockedByManager==0 && isBlockedByPerson==0);*/
 
     @ManyToOne
-    @JoinColumn(name="id_tariff", nullable=false)
+    @JoinColumn(name = "id_tariff", nullable = false)
     private Tariff tariffInContract;
 
     @ManyToOne
-    @JoinColumn(name="id_tariff_change")
+    @JoinColumn(name = "id_tariff_change")
     private Tariff tariffInContractForChange;
 
     @Transient
     private Integer idTariff;
 
     @ManyToOne
-    @JoinColumn(name="id_person", nullable=false)
+    @JoinColumn(name = "id_person", nullable = false)
     private Person personInContract;
 
-    @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "contract_option",
-            joinColumns = { @JoinColumn(name = "id_contract") },
-            inverseJoinColumns = { @JoinColumn(name = "id_option") }
+            joinColumns = {@JoinColumn(name = "id_contract")},
+            inverseJoinColumns = {@JoinColumn(name = "id_option")}
     )
     Set<OptionCellular> optionsOnContract = new HashSet<>();
 
@@ -55,7 +55,7 @@ public class Contract {
     @JoinColumn(name = "id_basket")
     private Basket basket;*/
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "contract_option_add",
             joinColumns = {@JoinColumn(name = "id_contract_add")},
@@ -63,7 +63,7 @@ public class Contract {
     )
     private Set<OptionCellular> optionsForAdd = new HashSet<>();
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "contract_option_remove",
             joinColumns = {@JoinColumn(name = "id_contract_remove")},

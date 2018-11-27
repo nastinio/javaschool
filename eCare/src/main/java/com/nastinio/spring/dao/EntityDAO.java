@@ -69,9 +69,18 @@ public abstract class EntityDAO<T> implements Crud<T> {
         //Session session = this.sessionFactory.openSession();
         //session.flush();
         session.merge(entity);
-        logger.info(nameClassHeir + " updated successfully. " + nameClassHeir + "  details=" + entity);
+        logger.info(nameClassHeir + " merged successfully. " + nameClassHeir + "  details=" + entity);
 
     }
+
+   /* public void save(T entity){
+        System.out.println("Получили на обновление " + entity.toString());
+        Session session = this.sessionFactory.getCurrentSession();
+        //Session session = this.sessionFactory.openSession();
+        session.flush();
+        session.update(entity);
+        logger.info(nameClassHeir + " saved successfully. " + nameClassHeir + "  details=" + entity);
+    }*/
 
     @Override
     public List<T> getList() {
@@ -126,6 +135,8 @@ public abstract class EntityDAO<T> implements Crud<T> {
         return entitiesList;
 
     }
+
+
 
     /*//Костыль
     public void addExtraOption(Integer idContract,Integer idOption) {

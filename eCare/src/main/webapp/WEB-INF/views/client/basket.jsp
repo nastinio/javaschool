@@ -18,16 +18,17 @@
         <a class="p-2 text-dark" href="/ecare/person-${person.id}/contract-${contract.id}/option-all">Опции</a>
     </nav>
     <h5 class="my-0 mr-md-auto font-weight-normal"></h5>
-    <a class="p-2 text-dark" href="#">${contract.number}</a>
-    <a class="p-2 text-dark" href="#">${person.firstname} ${person.lastname}</a>
+    <a class="p-2 text-dark" href="/ecare/person-${person.id}/contract-${contract.id}-more">${contract.number}</a>
+    <a class="p-2 text-dark" href="/ecare/person-${person.id}/contract-all">${person.firstname} ${person.lastname}</a>
     <a class="btn btn-outline-primary" href="#">Выйти</a>
 </div>
 
 <div class="container">
     <p>
     <h1>Корзина для <a href="/ecare/person-${person.id}/contract-${contract.id}-more">${contract.number}</a></h1>
-
+    <a href="/ecare/person-${person.id}/contract-${contract.id}/basket-reset">Очистить корзину</a>
     </p>
+
 
     <%--<spring:form method="post" action="/ecare/person-${person.id}/info-update" modelAttribute="basket">
 
@@ -60,14 +61,15 @@
         </div>
     </spring:form>--%>
 
-        <c:if test="${contract.tariffInContract eq contract.tariffInContractForChange}">
+        <c:if test="${(contract.tariffInContract eq contract.tariffInContractForChange) || contract.tariffInContractForChange eq null}">
             <h5>Новый тариф не был выбран</h5>
         </c:if>
-        <c:if test="${!(contract.tariffInContract eq contract.tariffInContractForChange)}">
+        <c:if test="${!(contract.tariffInContract eq contract.tariffInContractForChange) && !(contract.tariffInContractForChange eq null)}">
             <h5>Выбран новый тариф: <a href="/ecare/person-${person.id}/contract-${contract.id}/tariff-${contract.tariffInContractForChange.id}-more">${contract.tariffInContractForChange.name}</a></h5>
             <p>${basket.tariffInBasket.description}</p>
 
-            <c:if test="${!empty contract.tariffInContractForChange.optionsOnTariff}">
+            <a href="/ecare/person-${person.id}/contract-${contract.id}/basket-reset-tariff">Удалить тариф из корзины</a>
+            <%--<c:if test="${!empty contract.tariffInContractForChange.optionsOnTariff}">
                 <table class="table">
                     <tr>
                         <th width="80">ID</th>
@@ -86,14 +88,66 @@
                         </tr>
                     </c:forEach>
                 </table>
-            </c:if>
+            </c:if>--%>
 
-            <a href="/ecare/person-${person.id}/contract-${contract.id}/update">Редактировать</a>
-            <a href="/ecare/person-${person.id}/contract-${contract.id}/basket-reset">Отменить изменения</a>
-
+           <%-- <a href="/ecare/person-${person.id}/contract-${contract.id}/update">Редактировать</a>--%>
 
         </c:if>
 
+    <%--Опции--%>
+    <c:if test="${empty optionsForAdd}">
+        <h5>Нет опций для подключения</h5>
+    </c:if>
+    <c:if test="${!empty optionsForAdd}">
+        <h5>Опции для подключения</h5>
+        <table class="table">
+            <tr>
+                <th width="80">ID</th>
+                <th width="180">Название</th>
+                <th width="120">Стоимость</th>
+                <th width="280">Стоимость подключения</th>
+                <th width="60"></th>
+                <th width="260"></th>
+            </tr>
+            <c:forEach items="${optionsForAdd}" var="option">
+                <tr>
+                    <td>${option.id}</td>
+                    <td>${option.name}</td>
+                    <td>${option.cost}</td>
+                    <td>${option.costConnection}</td>
+                    <td><a href="<c:url value="/ecare/manager/option-${option.id}-more"/>">More</a></td>
+                    <td><a href="/ecare/person-${person.id}/contract-${contract.id}/basket-reset-option-add-${option.id}">Удалить из корзины</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:if>
+
+    <c:if test="${empty optionsForRemove}">
+        <h5>Нет опций для отключения</h5>
+    </c:if>
+    <c:if test="${!empty optionsForRemove}">
+        <h5>Опции для отключения</h5>
+        <table class="table">
+            <tr>
+                <th width="80">ID</th>
+                <th width="180">Название</th>
+                <th width="120">Стоимость</th>
+                <th width="280">Стоимость подключения</th>
+                <th width="60"></th>
+                <th width="260"></th>
+            </tr>
+            <c:forEach items="${optionsForRemove}" var="option">
+                <tr>
+                    <td>${option.id}</td>
+                    <td>${option.name}</td>
+                    <td>${option.cost}</td>
+                    <td>${option.costConnection}</td>
+                    <td><a href="<c:url value="/ecare/manager/option-${option.id}-more"/>">More</a></td>
+                    <td><a href="/ecare/person-${person.id}/contract-${contract.id}/basket-reset-option-remove-${option.id}">Удалить из корзины</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:if>
 
 
 

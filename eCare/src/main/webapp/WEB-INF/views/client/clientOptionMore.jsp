@@ -27,7 +27,19 @@
 <div class="container">
     <p>
     <h2>${option.name}</h2>
-    <a href="/ecare/person-${person.id}/contract-${contract.id}/option-${option.id}/basket-add">Добавить в корзину</a>
+
+
+    <%--/ecare/person-${person.id}/contract-${contract.id}/option-${option.id}/basket-disable--%>
+
+
+    <p>Статус опции: ${option.status}</p>
+    <c:if test="${option.canBeConnectedByPerson}">
+        <a href="/ecare/person-${person.id}/contract-${contract.id}/option-${option.id}/basket-add">Добавить в корзину</a>
+    </c:if>
+    <c:if test="${!option.canBeConnectedByPerson}">
+        <p>Невозможно подключить, т.к. не все необходимые опции подключены или подключены несоместимые опции</p>
+    </c:if>
+
     </p>
     <p>${option.description}</p>
     <p><b>Стоимость услуги: </b> ${option.cost}</p>
@@ -44,15 +56,17 @@
                 <th width="180">Название</th>
                 <th width="120">Стоимость</th>
                 <th width="280">Стоимость подключения</th>
+                <th width="60">Статус подключения</th>
                 <th width="60"></th>
             </tr>
-            <c:forEach items="${listAllJointlyOptions}" var="optionJoin">
+            <c:forEach items="${listAllJointlyOptions}" var="option">
                 <tr>
-                    <td>${optionJoin.id}</td>
-                    <td>${optionJoin.name}</td>
-                    <td>${optionJoin.cost}</td>
-                    <td>${optionJoin.costConnection}</td>
-                    <td><a href="<c:url value="/ecare/person-${person.id}/contract-${contract.id}/option-${optionJoin.id}-more"/>">More</a></td>
+                    <td>${option.id}</td>
+                    <td>${option.name}</td>
+                    <td>${option.cost}</td>
+                    <td>${option.costConnection}</td>
+                    <td>${option.status}</td>
+                    <td><a href="<c:url value="/ecare/person-${person.id}/contract-${contract.id}/option-${option.id}-more"/>">More</a></td>
                 </tr>
             </c:forEach>
         </table>
@@ -69,19 +83,23 @@
                 <th width="180">Название</th>
                 <th width="120">Стоимость</th>
                 <th width="280">Стоимость подключения</th>
+                <th width="60">Статус подключения</th>
                 <th width="60"></th>
             </tr>
-            <c:forEach items="${listAllExcludeOptions}" var="optionExclude">
+            <c:forEach items="${listAllExcludeOptions}" var="option">
                 <tr>
-                    <td>${optionExclude.id}</td>
-                    <td>${optionExclude.name}</td>
-                    <td>${optionExclude.cost}</td>
-                    <td>${optionExclude.costConnection}</td>
-                    <td><a href="<c:url value="/ecare/person-${person.id}/contract-${contract.id}/option-${optionExclude.id}-more"/>">More</a></td>
+                    <td>${option.id}</td>
+                    <td>${option.name}</td>
+                    <td>${option.cost}</td>
+                    <td>${option.costConnection}</td>
+                    <td>${option.status}</td>
+                    <td><a href="<c:url value="/ecare/person-${person.id}/contract-${contract.id}/option-${option.id}-more"/>">More</a></td>
                 </tr>
             </c:forEach>
         </table>
     </c:if>
+
+
 </div>
 
 

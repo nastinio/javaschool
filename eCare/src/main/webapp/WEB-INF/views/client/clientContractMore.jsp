@@ -70,13 +70,13 @@
     <h5>Дополнительные опции</h5>
     <%--Ссылка активна, если контракт незаблокирован--%>
     <c:if test="${contract.isBlockedByManager eq '0' && contract.isBlockedByPerson eq '0'}">
-        <a href="/ecare/person-${person.id}/contract-${contract.id}-exrtaoptions-add">Выбрать дополнительные опции</a></h5>
+        <a href="ecare/person-${person.id}/contract-${contract.id}/option-all">Выбрать дополнительные опции</a></h5>
     </c:if>
 
 
     <div class="container">
         <div class="card-deck mb-3 text-center">
-            <c:forEach items="${contract.optionsOnContract}" var="option">
+            <c:forEach items="${optionsOnContract}" var="option">
                 <div class="row">
                     <div class="col">
                         <div class="card mb-4 shadow-sm">
@@ -92,8 +92,16 @@
                                 </ul>
                                 <a href="/ecare/person-${person.id}/contract-${contract.id}/option-${option.id}-more" class="btn btn-lg btn-block btn-outline-primary" role="button"
                                    aria-disabled="true">More</a>
-                                <a href="/ecare/manager/person-${person.id}/contract-${contract.id}/extraoption-${option.id}-disable" class="btn btn-lg btn-block btn-outline-primary" role="button"
-                                   aria-disabled="true">Отключить</a>
+
+                                <c:if test="${option.canBeDisabledByPerson}">
+                                    <a href="/ecare/person-${person.id}/contract-${contract.id}/option-${option.id}/basket-disable" class="btn btn-lg btn-block btn-outline-primary" role="button"
+                                       aria-disabled="true">Отключить</a>
+                                </c:if>
+                                <c:if test="${!option.canBeDisabledByPerson}">
+                                    Не может быть отключена. Т.к. подключены опции (или находятся в корзине для подключения), которым данная опция необходима
+                                </c:if>
+
+
                             </div>
                         </div>
                     </div>

@@ -2,6 +2,7 @@ package com.nastinio.spring.service;
 
 import com.nastinio.spring.dao.OptionCellularDAO;
 import com.nastinio.spring.enums.CorrelationType;
+import com.nastinio.spring.enums.ExtraOptionStatus;
 import com.nastinio.spring.exceptions.DataExistenceException;
 import com.nastinio.spring.model.Contract;
 import com.nastinio.spring.model.OptionCellular;
@@ -23,6 +24,8 @@ public class OptionCellularService {
 
     @Autowired
     ContractService contractService;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Методы для получения всех взаимосвязей на опции
     //Получение необходимых опций
@@ -183,6 +186,8 @@ public class OptionCellularService {
         this.optionCellularDAO.remove(id);
     }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     //Список всех опций невключенных в тариф или неподключенных как дополнительные с проставленными зависимостями
     //Используется при подключении дополнительных опций к контракту
     public List<OptionCellular> getExtraOptionsListForAdded(Integer idContract) throws DataExistenceException {
@@ -276,6 +281,107 @@ public class OptionCellularService {
             }
         }
 
+        return true;
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    //Подготовка опций для добавления в корзину клиентом
+    public Set<OptionCellular> getJointlyOptionsWithStatus(OptionCellular option, Contract contract) {
+        //Список всех необходимых для подключения опций
+        Set<OptionCellular> allJointlyForCurrentOption = getAllJointlyOptions(option);
+
+        Set<OptionCellular> allJointly = new HashSet<>();
+
+        for (OptionCellular tempOption : allJointlyForCurrentOption) {
+            tempOption.setStatus(checkStatus(option,contract));
+            allJointly.add(tempOption);
+        }
+
+        return allJointly;
+    }
+
+    public Set<OptionCellular> getExcludeOptionsWithStatus(OptionCellular option, Contract contract) {
+        //Список всех необходимых для подключения опций
+        Set<OptionCellular> allExcludeForCurrentOption = getAllExcludeOptions(option);
+
+        Set<OptionCellular> allExclude = new HashSet<>();
+
+        for (OptionCellular tempOption : allExcludeForCurrentOption) {
+            tempOption.setStatus(checkStatus(option,contract));
+            allExclude.add(tempOption);
+        }
+
+        return allExclude;
+    }
+
+    public ExtraOptionStatus checkStatus(OptionCellular option, Contract contract) {
+        //Все контейнеры с опциями у контракта
+        Set<OptionCellular> optionsOnContract = contract.getOptionsOnContract();
+        Set<OptionCellular> optionsOnBasketForAdd = contract.getOptionsForAdd();
+        Set<OptionCellular> optionsOnBasketForRemove = contract.getOptionsForRemove();
+
+        if (optionsOnContract.contains(option)) {
+            return ExtraOptionStatus.CONNECTED;
+        } else {
+            if (optionsOnBasketForAdd.contains(option)) {
+                return ExtraOptionStatus.IN_BASKET_ON;
+            } else {
+                if (optionsOnBasketForRemove.contains(option)) {
+                    return ExtraOptionStatus.IN_BASKET_OFF;
+                } else {
+                    return ExtraOptionStatus.NONE;
+                }
+            }
+        }
+    }
+
+    public Boolean checkCanBeAddInBasketForAdd(OptionCellular option, Contract contract) {
+        //Списки всех необходимых и несовместимых для подключения опций
+        Set<OptionCellular> allJointly = getAllJointlyOptions(option);
+        Set<OptionCellular> allExclude = getAllExcludeOptions(option);
+
+        //Все контейнеры с опциями у контракта
+        Set<OptionCellular> optionsOnContract = contract.getOptionsOnContract();
+        Set<OptionCellular> optionsOnBasketForAdd = contract.getOptionsForAdd();
+        Set<OptionCellular> optionsOnBasketForRemove = contract.getOptionsForRemove();
+
+        for (OptionCellular tempOption : allJointly) {
+            if (!(optionsOnContract.contains(tempOption) || optionsOnBasketForAdd.contains(tempOption))) {
+                return false;
+            }
+        }
+        for (OptionCellular tempOption : allExclude) {
+            if ((optionsOnContract.contains(tempOption) || optionsOnBasketForAdd.contains(tempOption))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    //Может ли опция быть добавлена на удаление в корзину
+    public Boolean checkCanBeAddInBasketForRemove(OptionCellular option, Contract contract) {
+        //Списки всех необходимых и несовместимых для подключения опций
+        Set<OptionCellular> allJointly = getAllJointlyOptions(option);
+        Set<OptionCellular> allExclude = getAllExcludeOptions(option);
+
+        //Все контейнеры с опциями у контракта
+        Set<OptionCellular> optionsOnContract = contract.getOptionsOnContract();
+        Set<OptionCellular> optionsOnBasketForAdd = contract.getOptionsForAdd();
+        Set<OptionCellular> optionsOnBasketForRemove = contract.getOptionsForRemove();
+
+        //Можно удалить, если в контракте или в корзине на подклюсение нет опций, которым она необходима для подключения
+        for(OptionCellular tempOption:optionsOnContract){
+            if(tempOption.getJointlyOptions().contains(option)){
+                return false;
+            }
+        }
+        for(OptionCellular tempOption:optionsOnBasketForAdd){
+            if(tempOption.getJointlyOptions().contains(option)){
+                return false;
+            }
+        }
         return true;
     }
 }

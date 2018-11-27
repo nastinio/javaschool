@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -26,6 +27,9 @@ public class ContractService {
     @Autowired
     OptionCellularService optionCellularService;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Блокировка/разблокировка
     public void blockContractByPerson(Integer idContract) throws DataExistenceException {
         Contract contract = (Contract) this.contractDAO.getById(idContract);
         contract.setIsBlockedByPerson(1);
@@ -50,6 +54,7 @@ public class ContractService {
         this.contractDAO.update(contract);
     }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public Contract getById(Integer id) throws DataExistenceException {
         return (Contract) this.contractDAO.getById(id);
@@ -71,15 +76,20 @@ public class ContractService {
         return this.contractDAO.getList();
     }
 
-    public List<Contract> getSearchList(String target) {
-
-        return this.contractDAO.searchContract(target);
-    }
-
     public void remove(Integer id) {
         this.contractDAO.remove(id);
     }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Поиск контракта по номеру
+    public List<Contract> getSearchList(String target) {
+        return this.contractDAO.searchContract(target);
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Удаление/добавление опций в контракт менеджером
     public void removeExtraOptionFromContract(Integer idContract, Integer idOption) throws DataExistenceException {
         Contract contract = (Contract) this.contractDAO.getById(idContract);
         Set<OptionCellular> optionSet = contract.getOptionsOnContract();
@@ -111,7 +121,6 @@ public class ContractService {
 
         this.contractDAO.add(contract);
     }
-
 
     public void updateWithTariff(Contract contract, Integer idPerson) throws DataExistenceException {
         //Contract contract = (Contract) this.contractDAO.getById(idContract);
@@ -147,7 +156,6 @@ public class ContractService {
 
     }
 
-
     public void disableExtraOptionToContract(Integer idContract, Integer idOption) throws DataExistenceException {
         Contract contract = getById(idContract);
         OptionCellular option = this.optionCellularService.getById(idOption);
@@ -157,22 +165,95 @@ public class ContractService {
         this.contractDAO.update(contract);
     }
 
-
     public void updateTariffByPerson(Integer idContract) throws DataExistenceException {
         Contract contract = this.getById(idContract);
-        if(contract.getTariffInContractForChange()==null || contract.getTariffInContractForChange().getId()== contract.getTariffInContract().getId()){
+        if (contract.getTariffInContractForChange() == null || contract.getTariffInContractForChange().getId() == contract.getTariffInContract().getId()) {
             return;
         }
         contract.setTariffInContract(contract.getTariffInContractForChange());
         this.update(contract);
     }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Сброс корзины
     public void resetTariffChange(Integer idContract) throws DataExistenceException {
         Contract contract = this.getById(idContract);
-        if(contract.getTariffInContractForChange()==null || contract.getTariffInContractForChange().getId()== contract.getTariffInContract().getId()){
+        if (contract.getTariffInContractForChange() == null || contract.getTariffInContractForChange().getId() == contract.getTariffInContract().getId()) {
             return;
-        }else{
+        } else {
             contract.setTariffInContractForChange(contract.getTariffInContract());
+            this.update(contract);
         }
     }
+
+    public void resetOptionForAdd(Integer idContract, Integer idOption) throws DataExistenceException {
+        Contract contract = this.getById(idContract);
+        OptionCellular option = this.optionCellularService.getById(idOption);
+
+        Set<OptionCellular> optionsForAdd = contract.getOptionsForAdd();
+        optionsForAdd.remove(option);
+        contract.setOptionsForAdd(optionsForAdd);
+
+        this.update(contract);
+
+    }
+
+    public void resetOptionForRemove(Integer idContract, Integer idOption)throws DataExistenceException  {
+        Contract contract = this.getById(idContract);
+        OptionCellular option = this.optionCellularService.getById(idOption);
+
+        Set<OptionCellular> optionsForRemove = contract.getOptionsForRemove();
+        optionsForRemove.remove(option);
+        contract.setOptionsForRemove(optionsForRemove);
+
+        this.update(contract);
+    }
+
+    public void resetBasketAll(Integer idContract)throws DataExistenceException  {
+        Contract contract = this.getById(idContract);
+        resetTariffChange(idContract);
+        contract.setOptionsForAdd(new HashSet<OptionCellular>());
+        contract.setOptionsForRemove(new HashSet<OptionCellular>());
+        this.update(contract);
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Добавим в корзину, чтобы подключить
+    public void addOptionInBasket(Contract contract, OptionCellular option) {
+        Set<OptionCellular> optionsForAdd = contract.getOptionsForAdd();
+        optionsForAdd.add(option);
+        contract.setOptionsForAdd(optionsForAdd);
+
+        this.contractDAO.update(contract);
+    }
+
+    //Добавим в корзину, чтобы отключить
+    public void addOptionInBasketForRemove(Contract contract, OptionCellular option) {
+        Set<OptionCellular> optionsForRemove = contract.getOptionsForRemove();
+        optionsForRemove.add(option);
+        contract.setOptionsForRemove(optionsForRemove);
+
+        this.contractDAO.update(contract);
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Проставим CanBeDisabledByPerson для отображения кнопки 'Отключить' в контракте пользователем
+    public Object getOptionsOnContractWithDisableStatus(Integer idContract) throws DataExistenceException {
+        Contract contract = this.getById(idContract);
+
+        Set<OptionCellular> options = new HashSet<>();
+
+        for(OptionCellular option:contract.getOptionsOnContract()){
+            option.setCanBeDisabledByPerson(this.optionCellularService.checkCanBeAddInBasketForRemove(option, contract));
+            //option.setStatus(this.optionCellularService.checkStatus(option, contract));
+            options.add(option);
+        }
+
+        return options;
+    }
+
+
 }

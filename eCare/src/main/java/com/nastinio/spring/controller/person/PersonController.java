@@ -30,7 +30,7 @@ public class PersonController {
     OptionCellularService optionCellularService;
 
     @RequestMapping("/")
-    public String home(){
+    public String home() {
         return "hello";
     }
 
@@ -84,8 +84,12 @@ public class PersonController {
     public ModelAndView clientContractMore(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("client/clientContractMore");
+
         modelAndView.addObject("person", this.personService.getById(idPerson));
         modelAndView.addObject("contract", this.contractService.getById(idContract));
+
+        //Нужно передать список опций в контракте с проставленным полем о возможности удаления
+        modelAndView.addObject("optionsOnContract",this.contractService.getOptionsOnContractWithDisableStatus(idContract));
 
         return modelAndView;
     }
@@ -123,7 +127,7 @@ public class PersonController {
 
         modelAndView.addObject("person", this.personService.getById(idPerson));
         modelAndView.addObject("contract", this.contractService.getById(idContract));
-        modelAndView.addObject("optionsList",this.optionCellularService.getList());
+        modelAndView.addObject("optionsList", this.optionCellularService.getList());
 
         return modelAndView;
     }
@@ -133,17 +137,22 @@ public class PersonController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("client/clientOptionMore");
 
-        modelAndView.addObject("person", this.personService.getById(idPerson));
-        modelAndView.addObject("contract", this.contractService.getById(idContract));
-        modelAndView.addObject("option",this.optionCellularService.getById(idOption));
-
         OptionCellular option = this.optionCellularService.getById(idOption);
-        modelAndView.addObject("listAllJointlyOptions",this.optionCellularService.getAllJointlyOptions(option));
-        modelAndView.addObject("listAllExcludeOptions",this.optionCellularService.getAllExcludeOptions(option));
+        Contract contract = this.contractService.getById(idContract);
+
+        option.setCanBeConnectedByPerson(this.optionCellularService.checkCanBeAddInBasketForAdd(option, contract));
+        option.setStatus(this.optionCellularService.checkStatus(option, contract));
+
+        modelAndView.addObject("person", this.personService.getById(idPerson));
+        modelAndView.addObject("contract", contract);
+        modelAndView.addObject("option", option);
+
+        //modelAndView.addObject("listAllJointlyOptions",this.optionCellularService.getAllJointlyOptions(option));
+        modelAndView.addObject("listAllJointlyOptions", this.optionCellularService.getJointlyOptionsWithStatus(option, contract));
+        modelAndView.addObject("listAllExcludeOptions", this.optionCellularService.getExcludeOptionsWithStatus(option, contract));
 
         return modelAndView;
     }
-
 
 
     //УДАЛЕНИЕ ДОПОЛНИТЕЛЬНОЙ ОПЦИИ ИЗ ТАРИФА
@@ -155,71 +164,99 @@ public class PersonController {
     }*/
 
 
-
     //БЛОКИРОВКА
     @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}-block", method = RequestMethod.GET)
     public String blockContract(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
         this.contractService.blockContractByPerson(idContract);
-        return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"-more";
+        return "redirect:/ecare/person-" + idPerson + "/contract-" + idContract + "-more";
     }
 
     @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}-unlock", method = RequestMethod.GET)
     public String unlockContract(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
         this.contractService.unlockContractByPerson(idContract);
-        return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"-more";
+        return "redirect:/ecare/person-" + idPerson + "/contract-" + idContract + "-more";
     }
-
-
-    //ПОДКЛЮЧЕНИЕ И ОТКЛЮЧЕНИЕ ДОПОЛНИТЕЛЬНЫХ ОПЦИЙ
-    //ecare/person-${person.id}/contract-${contract.id}-exrtaoptions-add
 
 
     //СМЕНА ТАРИФА ЧЕРЕЗ КОРЗИНУ
     @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/tariff-{idTariff}/basket-add", method = RequestMethod.GET)
     public String changeTariff(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract, @PathVariable("idTariff") Integer idTariff) throws DataExistenceException {
-        Contract contract= this.contractService.getById(idContract);
+        Contract contract = this.contractService.getById(idContract);
         contract.setTariffInContractForChange(this.tariffService.getById(idTariff));
         this.contractService.update(contract);
 
         //this.contractService.changeTariff(idContract,idTariff);
 
-        return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"/basket";
+        return "redirect:/ecare/person-" + idPerson + "/contract-" + idContract + "/basket";
     }
 
     @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/basket", method = RequestMethod.GET)
     public ModelAndView showBasket(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("client/basket");
-        modelAndView.addObject("person",this.personService.getById(idPerson));
+        modelAndView.addObject("person", this.personService.getById(idPerson));
 
         Contract contract = this.contractService.getById(idContract);
-        modelAndView.addObject("contract",contract);
+        modelAndView.addObject("contract", contract);
+
+        modelAndView.addObject("optionsForAdd", contract.getOptionsForAdd());
+        modelAndView.addObject("optionsForRemove", contract.getOptionsForRemove());
 
         return modelAndView;
     }
 
-    @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/update",method = RequestMethod.GET)
+    @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/update", method = RequestMethod.GET)
     public String updateContract(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
         this.contractService.updateTariffByPerson(idContract);
 
-        return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"-more";
+        return "redirect:/ecare/person-" + idPerson + "/contract-" + idContract + "-more";
     }
 
-    @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/basket-reset",method = RequestMethod.GET)
-    public String resetBasket(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Сброс корзины
+    @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/basket-reset-tariff", method = RequestMethod.GET)
+    public String resetBasketTariff(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
         this.contractService.resetTariffChange(idContract);
-
-        return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"/basket";
+        return "redirect:/ecare/person-" + idPerson + "/contract-" + idContract + "/basket";
     }
 
+    @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/basket-reset-option-add-{idOption}", method = RequestMethod.GET)
+    public String resetBasketOptionAdd(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract, @PathVariable("idOption") Integer idOption) throws DataExistenceException {
+        this.contractService.resetOptionForAdd(idContract, idOption);
+        return "redirect:/ecare/person-" + idPerson + "/contract-" + idContract + "/basket";
+    }
+
+    @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/basket-reset-option-remove-{idOption}", method = RequestMethod.GET)
+    public String resetBasketOptionRemove(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract, @PathVariable("idOption") Integer idOption) throws DataExistenceException {
+        this.contractService.resetOptionForRemove(idContract, idOption);
+        return "redirect:/ecare/person-" + idPerson + "/contract-" + idContract + "/basket";
+    }
+
+    @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/basket-reset", method = RequestMethod.GET)
+    public String resetBasket(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
+        this.contractService.resetBasketAll(idContract);
+        return "redirect:/ecare/person-" + idPerson + "/contract-" + idContract + "/basket";
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //ДОБАВЛЕНИЕ ОПЦИЙ ЧЕРЕЗ КОРЗИНУ
     @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/option-{idOption}/basket-add", method = RequestMethod.GET)
-    public String addOptionToBasket(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract, @PathVariable("idTariff") Integer idTariff) throws DataExistenceException {
+    public String addOptionToBasket(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract, @PathVariable("idOption") Integer idOption) throws DataExistenceException {
+        Contract contract = this.contractService.getById(idContract);
+        OptionCellular option = this.optionCellularService.getById(idOption);
 
+        this.contractService.addOptionInBasket(contract, option);
 
-        //this.contractService.changeTariff(idContract,idTariff);
+        return "redirect:/ecare/person-" + idPerson + "/contract-" + idContract + "/basket";
+    }
 
-        return "redirect:/ecare/person-"+idPerson+"/contract-"+idContract+"/basket";
+    @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/option-{idOption}/basket-disable", method = RequestMethod.GET)
+    public String addOptionToBasketForRemove(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract, @PathVariable("idOption") Integer idOption) throws DataExistenceException {
+        Contract contract = this.contractService.getById(idContract);
+        OptionCellular option = this.optionCellularService.getById(idOption);
+
+        this.contractService.addOptionInBasketForRemove(contract, option);
+
+        return "redirect:/ecare/person-" + idPerson + "/contract-" + idContract + "/basket";
     }
 }
 

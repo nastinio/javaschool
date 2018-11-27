@@ -1,6 +1,7 @@
 package com.nastinio.spring.model;
 
 import com.nastinio.spring.enums.CorrelationType;
+import com.nastinio.spring.enums.ExtraOptionStatus;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -45,34 +46,44 @@ public class OptionCellular {
     @Transient
     private Boolean canBeDisabled;
 
+    ////////////////////////////////////////////////////
+    @Transient
+    private Boolean canBeConnectedByPerson;
 
-    @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
+    @Transient
+    private Boolean canBeDisabledByPerson;
+
+    @Transient
+    private ExtraOptionStatus status;
+    ////////////////////////////////////////////////////
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "option_jointly",
-            joinColumns = { @JoinColumn(name = "id_option_jointly_1") },
-            inverseJoinColumns = { @JoinColumn(name = "id_option_jointly_2") }
+            joinColumns = {@JoinColumn(name = "id_option_jointly_1")},
+            inverseJoinColumns = {@JoinColumn(name = "id_option_jointly_2")}
     )
     Set<OptionCellular> jointlyOptions = new HashSet<>();
 
 /////////////////////////////////////////////////////////
 
-    @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "option_exclude",
-            joinColumns = { @JoinColumn(name = "id_option1") },
-            inverseJoinColumns = { @JoinColumn(name = "id_option2") }
+            joinColumns = {@JoinColumn(name = "id_option1")},
+            inverseJoinColumns = {@JoinColumn(name = "id_option2")}
     )
     Set<OptionCellular> excludeLeftOptions = new HashSet<>();
 
     /*Исключающие опции справа*/
-    @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "option_exclude",
-            joinColumns = { @JoinColumn(name = "id_option2") },
-            inverseJoinColumns = { @JoinColumn(name = "id_option1") }
+            joinColumns = {@JoinColumn(name = "id_option2")},
+            inverseJoinColumns = {@JoinColumn(name = "id_option1")}
     )
     Set<OptionCellular> excludeRightOptions = new HashSet<>();
 /////////////////////////////////////////////////////////
-
 
 
     /*Список тарифов, в которые включена опция*/
@@ -94,9 +105,6 @@ public class OptionCellular {
         return "OptionCellular{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", description=" + description +
-                ", cost=" + cost +
-                ", costConnection=" + costConnection +
                 //", jointlyOptions=" + jointlyOptions +
                 /*", excludeLeftOptions=" + excludeLeftOptions +
                 ", excludeRightOptions=" + excludeRightOptions +*/
@@ -123,7 +131,7 @@ public class OptionCellular {
         return Objects.hash(id, name, costConnection, description, cost);
     }
 
-    public OptionCellular(Integer id){
+    public OptionCellular(Integer id) {
         this.id = id;
     }
 
@@ -271,5 +279,29 @@ public class OptionCellular {
 
     public void setContractsForRemove(Set<Contract> contractsForRemove) {
         this.contractsForRemove = contractsForRemove;
+    }
+
+    public Boolean getCanBeConnectedByPerson() {
+        return canBeConnectedByPerson;
+    }
+
+    public void setCanBeConnectedByPerson(Boolean canBeConnectedByPerson) {
+        this.canBeConnectedByPerson = canBeConnectedByPerson;
+    }
+
+    public Boolean getCanBeDisabledByPerson() {
+        return canBeDisabledByPerson;
+    }
+
+    public void setCanBeDisabledByPerson(Boolean canBeDisabledByPerson) {
+        this.canBeDisabledByPerson = canBeDisabledByPerson;
+    }
+
+    public ExtraOptionStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ExtraOptionStatus status) {
+        this.status = status;
     }
 }
