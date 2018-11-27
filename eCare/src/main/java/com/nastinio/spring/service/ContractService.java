@@ -255,5 +255,64 @@ public class ContractService {
         return options;
     }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //Проверяет все содержимое корзины на возможность переноса в базу
+    public Boolean checkValidityChangesFromBasket(Contract contract) {
+        Set<OptionCellular> optionsOnContract = contract.getOptionsOnContract();
+        Set<OptionCellular> optionsForAdd = contract.getOptionsForAdd();
+        Set<OptionCellular> optionsForRemove = contract.getOptionsForRemove();
+
+        //Проверим опции для добавления
+        //Все необходимые для их подключения опции должны быть либо подключены, либо лежать в корзине для добавления
+        //И не должны находиться в опциях на удаление
+        for(OptionCellular option:optionsForAdd){
+            for(OptionCellular joinOption:option.getJointlyOptions()){
+                if(!((optionsOnContract.contains(joinOption) || optionsForAdd.contains(joinOption)) && !optionsForRemove.contains(joinOption)) ){
+                    return false;
+                }
+            }
+        }
+
+        //Несовместимые
+        //Опции в контракте или на добавление не содержат несовместимые опции
+        Set<OptionCellular> optionsOnContractWithoutOptionsForRemove = optionsOnContract;
+        optionsOnContractWithoutOptionsForRemove.removeAll(optionsForRemove);
+
+        for(OptionCellular option:optionsForAdd){
+            for(OptionCellular excludeOption:option.getExcludeLeftOptions()){
+                if((optionsForAdd.contains(excludeOption)) || optionsOnContractWithoutOptionsForRemove.contains(excludeOption) ){
+                    return false;
+                }
+            }
+        }
+
+        //Все опции в контракте, за исключением удаляемых, имеют необходимые им опциии либо в подключаемых, либо в самом контракте
+        for(OptionCellular option:optionsOnContractWithoutOptionsForRemove){
+            for(OptionCellular joinOption:option.getJointlyOptions()){
+                if(!((optionsOnContract.contains(joinOption) || optionsForAdd.contains(joinOption)) && !optionsForRemove.contains(joinOption)) ){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    //Перекидываем все опции их корзины в контракт
+    public void moveOptionsFromBasketToContract(Contract contract) {
+        Set<OptionCellular> optionsOnContract = contract.getOptionsOnContract();
+        Set<OptionCellular> optionsForAdd = contract.getOptionsForAdd();
+        Set<OptionCellular> optionsForRemove = contract.getOptionsForRemove();
+
+        optionsOnContract.removeAll(optionsForRemove);
+        optionsOnContract.addAll(optionsForAdd);
+
+        contract.setOptionsForAdd(new HashSet<OptionCellular>());
+        contract.setOptionsForRemove(new HashSet<OptionCellular>());
+
+        this.update(contract);
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

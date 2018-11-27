@@ -197,6 +197,9 @@ public class PersonController {
         modelAndView.addObject("person", this.personService.getById(idPerson));
 
         Contract contract = this.contractService.getById(idContract);
+        //Проверить все опции в корзине: нет ли конфликтов и можно ли их добавлять/удалять
+        contract.setCanApplyChangesFromBasket(this.contractService.checkValidityChangesFromBasket(contract));
+
         modelAndView.addObject("contract", contract);
 
         modelAndView.addObject("optionsForAdd", contract.getOptionsForAdd());
@@ -208,6 +211,9 @@ public class PersonController {
     @RequestMapping(value = "/ecare/person-{idPerson}/contract-{idContract}/update", method = RequestMethod.GET)
     public String updateContract(@PathVariable("idPerson") Integer idPerson, @PathVariable("idContract") Integer idContract) throws DataExistenceException {
         this.contractService.updateTariffByPerson(idContract);
+
+        Contract contract = this.contractService.getById(idContract);
+        this.contractService.moveOptionsFromBasketToContract(contract);
 
         return "redirect:/ecare/person-" + idPerson + "/contract-" + idContract + "-more";
     }

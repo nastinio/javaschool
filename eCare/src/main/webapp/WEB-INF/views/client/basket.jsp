@@ -29,6 +29,14 @@
     <a href="/ecare/person-${person.id}/contract-${contract.id}/basket-reset">Очистить корзину</a>
     </p>
 
+    <c:if test="${contract.canApplyChangesFromBasket}">
+        Все ок. Содержимое корзины ничего не сломает
+         <a href="/ecare/person-${person.id}/contract-${contract.id}/update">Применить изменения</a>
+        <br>
+    </c:if>
+    <c:if test="${!contract.canApplyChangesFromBasket}">
+        Все очень не ок. Содержимое корзины где-то что-то ломает
+    </c:if>
 
     <%--<spring:form method="post" action="/ecare/person-${person.id}/info-update" modelAttribute="basket">
 
@@ -90,7 +98,7 @@
                 </table>
             </c:if>--%>
 
-           <%-- <a href="/ecare/person-${person.id}/contract-${contract.id}/update">Редактировать</a>--%>
+
 
         </c:if>
 

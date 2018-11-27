@@ -25,8 +25,9 @@ public class Contract {
     @Column(name = "is_blocked_manager")
     public Integer isBlockedByManager;
 
-    /*@Transient
-    private Boolean isActive = (isBlockedByManager==0 && isBlockedByPerson==0);*/
+    //Не конфликтуют ли между собой опции в корзине
+    @Transient
+    private Boolean canApplyChangesFromBasket;
 
     @ManyToOne
     @JoinColumn(name = "id_tariff", nullable = false)
@@ -180,5 +181,11 @@ public class Contract {
         this.optionsForRemove = optionsForRemove;
     }
 
+    public Boolean getCanApplyChangesFromBasket() {
+        return canApplyChangesFromBasket;
+    }
 
+    public void setCanApplyChangesFromBasket(Boolean canApplyChangesFromBasket) {
+        this.canApplyChangesFromBasket = canApplyChangesFromBasket;
+    }
 }

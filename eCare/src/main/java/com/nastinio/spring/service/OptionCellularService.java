@@ -285,7 +285,7 @@ public class OptionCellularService {
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
     //Подготовка опций для добавления в корзину клиентом
     public Set<OptionCellular> getJointlyOptionsWithStatus(OptionCellular option, Contract contract) {
         //Список всех необходимых для подключения опций
